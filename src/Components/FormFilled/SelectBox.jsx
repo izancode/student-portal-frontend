@@ -44,6 +44,6 @@ SelectBox.propTypes = {
   handleChange: PropTypes.func,
   handleBlur: PropTypes.func,
   error: PropTypes.string,
-  touched: PropTypes.string,
+  touched: PropTypes.bool,
 };
 export default SelectBox;

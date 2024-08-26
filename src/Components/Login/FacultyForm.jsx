@@ -2,7 +2,7 @@ import ArrayFacultyForm from "./StudentArrayField/ArrayFacultyForm";
 import InputField from "../FormFilled/InputField";
 import SelectBox from "../FormFilled/SelectBox";
 import ChooseFile from "../FormFilled/ChooseFile";
-import Textarea from "../FormFilled/Textarea";
+// import Textarea from "../FormFilled/Textarea";
 import MutlipleField from "../FormFilled/MutlipleField";
 
 const FacultyForm = () => {

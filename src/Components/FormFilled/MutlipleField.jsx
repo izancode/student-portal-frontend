@@ -45,10 +45,10 @@ MultipleField.propTypes = {
       inputClass: PropTypes.string,
     })
   ).isRequired,
+  error: PropTypes.string,
   values: PropTypes.string,
   handleChange: PropTypes.func,
   handleBlur: PropTypes.func,
-  error: PropTypes.string,
-  touched: PropTypes.string,
+  touched: PropTypes.bool,
 };
 export default MultipleField;

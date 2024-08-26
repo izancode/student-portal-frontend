@@ -36,10 +36,12 @@ ChooseFile.propTypes = {
   fieldClassName: PropTypes.string,
   buttonClassName: PropTypes.string,
   values: PropTypes.string,
+  error: PropTypes.string,
   handleChange: PropTypes.func,
   handleBlur: PropTypes.func,
-  error: PropTypes.string,
-  touched: PropTypes.string,
+  touched: PropTypes.bool,
+
+
 };
 
 export default ChooseFile;

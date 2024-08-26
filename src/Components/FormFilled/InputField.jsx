@@ -43,9 +43,10 @@ InputField.propTypes = {
   fieldClassName: PropTypes.string,
   inputType: PropTypes.string,
   labelClassName: PropTypes.string,
-  values: PropTypes.string,
+  values: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   error: PropTypes.string,
-  touched: PropTypes.string,
+  touched: PropTypes.bool,
+
   handleChange: PropTypes.func, // Add handleChange here
   handleBlur: PropTypes.func, // Add handleBlur here
 };

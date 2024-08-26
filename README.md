@@ -18,3 +18,7 @@ Parent Portal: This feature provides parents with access to their children's aca
 Communication Tools: This feature offers messaging functionality for direct communication between teachers, students, and parents, as well as group messaging for announcements and notifications.
 Resource Management: This feature allows administrators to manage school resources, such as classrooms, labs, and equipment, and track their usage and availability.
 Dashboard and Reporting: This feature provides users with personalized dashboards and generates various reports to help monitor performance and make data-driven decisions.
+
+# Error & Warning To Solve
+
+1. react_jsx-dev-runtime.js?v=be7a7dcb:64 Warning: Each child in a list should have a unique "key" prop.

@@ -43,6 +43,6 @@ Textarea.propTypes = {
   handleChange: PropTypes.func, // Add handleChange here
   handleBlur: PropTypes.func, // Add handleBlur here
   error: PropTypes.string,
-  touched: PropTypes.string,
+  touched: PropTypes.bool,
 };
 export default Textarea;
