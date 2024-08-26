@@ -50,7 +50,7 @@ const FacultyForm = () => {
                     </div>
                   ) : field.type === "textarea" ? (
                     <div className={field.divclassName} key={fieldIndex}>
-                      <Textarea allfield={field} />
+                      {/* <Textarea allfield={field} /> */}
                     </div>
                   ) : field.type === "multiple" ? (
                     <div className={field.divclassName} key={fieldIndex}>
