@@ -25,7 +25,7 @@ const ChooseFile = ({
         />
         <div className={buttonClassName}>{profileImage}</div>
       </div>
-      {error && touched ? <p>{error}</p> : null}
+      {error && touched ? <p className="text-red-500">{error}</p> : null}
     </div>
   );
 };
@@ -40,8 +40,6 @@ ChooseFile.propTypes = {
   handleChange: PropTypes.func,
   handleBlur: PropTypes.func,
   touched: PropTypes.bool,
-
-
 };
 
 export default ChooseFile;

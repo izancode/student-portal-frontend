@@ -28,7 +28,7 @@ const MultipleField = ({
             <label htmlFor={filled.key} className={filled.labelClassName}>
               {filled.name}
             </label>
-            {error && touched ? <p>{error}</p> : null}
+            {error && touched ? <p className="text-red-500">{error}</p> : null}
           </div>
         );
       })}

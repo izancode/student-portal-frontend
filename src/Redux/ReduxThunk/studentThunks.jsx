@@ -13,14 +13,10 @@ export const studentPostData = createAsyncThunk(
       console.log("Response received:", response.data);
       return response.data;
     } catch (error) {
-      console.error("Error in POST request:", error);
-      console.error(
-        "Error response:",
-        error.response ? error.response.data : "No response"
-      );
-      return thunkAPI.rejectWithValue(
-        error.response ? error.response.data : error.message
-      );
+      const errorMessage = error.response
+        ? error.response.data
+        : { message: error.message };
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );

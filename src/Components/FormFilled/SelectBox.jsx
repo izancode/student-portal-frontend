@@ -31,7 +31,7 @@ const SelectBox = (props) => {
           </option>
         ))}
       </select>
-      {error && touched ? <p>{error}</p> : null}
+      {error && touched ? <p className="text-red-500">{error}</p> : null}
     </div>
   );
 };

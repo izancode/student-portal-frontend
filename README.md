@@ -21,4 +21,19 @@ Dashboard and Reporting: This feature provides users with personalized dashboard
 
 # Error & Warning To Solve
 
-1. react_jsx-dev-runtime.js?v=be7a7dcb:64 Warning: Each child in a list should have a unique "key" prop.
+1. react_jsx-dev-runtime.js?v=be7a7dcb:64 Warning: Each child in a list should have a unique "key" prop. Solved Now ✔
+
+# Created Page Feauture Function
+
+1. Login Page Ui
+2. Signup Page
+   - Student
+     - Use Redux to store Signup Data in a Store
+     - Using Redux Updated data on MongoDB Atlas Thru API - Student Form
+   - Faculty
+
+- Backend Error Show on Frontend
+  With the help of nodejs Api i extract the error message in redux thunk then and also with help
+  of unwrapResult function i used that error in from in formik and also set error in formik schema with setFieldError 
+- Image Will Goes To cloudinary and that url comes into backend data
+- Faculty Form backend + Backend
