@@ -6,12 +6,17 @@ const ChooseFile = ({
   type,
   fieldClassName,
   buttonClassName,
-  values,
-  handleChange,
+
   handleBlur,
   error,
   touched,
+  setFieldValue,
 }) => {
+  const handleFileChange = (event) => {
+    const file = event.currentTarget.files[0];
+    console.log(name, file);
+    setFieldValue(name, file);
+  };
   return (
     <div className="relative mb-5">
       <div className="font-bold relative ">
@@ -19,8 +24,7 @@ const ChooseFile = ({
           type={type}
           name={name}
           className={fieldClassName}
-          value={values}
-          onChange={handleChange}
+          onChange={handleFileChange}
           onBlur={handleBlur}
         />
         <div className={buttonClassName}>{profileImage}</div>
@@ -35,9 +39,9 @@ ChooseFile.propTypes = {
   type: PropTypes.string,
   fieldClassName: PropTypes.string,
   buttonClassName: PropTypes.string,
-  values: PropTypes.string,
+
   error: PropTypes.string,
-  handleChange: PropTypes.func,
+  setFieldValue: PropTypes.func,
   handleBlur: PropTypes.func,
   touched: PropTypes.bool,
 };

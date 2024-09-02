@@ -3,16 +3,22 @@ import axios from "axios";
 
 export const studentPostData = createAsyncThunk(
   "student/postStudentData",
-  async (studentData, thunkAPI) => {
+  async (formData, thunkAPI) => {
     try {
-      console.log("Starting POST request with data:", studentData);
+      console.log("Starting POST request with data:", formData);
       const response = await axios.post(
         "https://student-portal-api.vercel.app/api/v1/studentusers",
-        studentData
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       console.log("Response received:", response.data);
       return response.data;
     } catch (error) {
+      console.log(error);
       const errorMessage = error.response
         ? error.response.data
         : { message: error.message };

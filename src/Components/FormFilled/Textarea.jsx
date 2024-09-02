@@ -21,7 +21,7 @@ const Textarea = ({
         rows={rows}
         className={fieldClassName}
         placeholder=" "
-        value={values.name}
+        value={values}
         onChange={handleChange}
         onBlur={handleBlur}
       ></textarea>

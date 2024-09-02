@@ -34,6 +34,16 @@ Dashboard and Reporting: This feature provides users with personalized dashboard
 
 - Backend Error Show on Frontend
   With the help of nodejs Api i extract the error message in redux thunk then and also with help
-  of unwrapResult function i used that error in from in formik and also set error in formik schema with setFieldError 
+  of unwrapResult function i used that error in from in formik and also set error in formik schema with setFieldError
 - Image Will Goes To cloudinary and that url comes into backend data
+- after cloudinary part in backend i have to upload student image from frontend
+- Error - Date of birthdate future date also
 - Faculty Form backend + Backend
+- Upload File from frontend to backend with formik to formdata 
+challenges : For choose file making custom onchange to get file object and with the help of formdata and 
+headers: {
+            "Content-Type": "multipart/form-data",
+          },
+upload image from frontend
+- Created Custom Hooks name useFormikCustomHooks.js to code more optimize and readable
+
