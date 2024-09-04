@@ -41,17 +41,12 @@ const useFormikCustomHook = (signUpSchema, initialValues, postData) => {
         unwrapResult(actionResult);
         //after This Successfull Sigin Want to success alert and success mail and redirect to login component
       } catch (error) {
-        console.error(error.message);
-
         const backendError = error.message;
         const errorCode = backendError.code;
         const errorKey = Object.keys(error.message.keyValue)[0];
         const errorValue = error.message.keyValue[errorKey];
-        console.log(errorCode);
+
         if (errorCode === 11000) {
-          console.log("error code", errorCode);
-          console.log("key", errorKey);
-          console.log("value", errorValue);
           setFieldError(errorKey, `This ${errorValue} is already exists`);
         }
       }

@@ -18,7 +18,6 @@ export const facultyPostData = createAsyncThunk(
       console.log("Response received:", response.data);
       return response.data;
     } catch (error) {
-      console.log(error);
       const errorMessage = error.response
         ? error.response.data
         : { message: error.message };
