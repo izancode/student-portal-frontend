@@ -6,6 +6,10 @@ export const studentPostData = createAsyncThunk(
   async (formData, thunkAPI) => {
     try {
       console.log("Starting POST request with data:", formData);
+      console.log(
+        "student page thunk",
+        import.meta.env.VITE_STUDENT_THUNKS_POST_API
+      );
       const response = await axios.post(
         import.meta.env.VITE_STUDENT_THUNKS_POST_API,
         formData,
