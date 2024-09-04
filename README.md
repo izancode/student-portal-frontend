@@ -38,12 +38,14 @@ Dashboard and Reporting: This feature provides users with personalized dashboard
 - Image Will Goes To cloudinary and that url comes into backend data
 - after cloudinary part in backend i have to upload student image from frontend
 - Error - Date of birthdate future date also
-- Faculty Form backend + Backend
-- Upload File from frontend to backend with formik to formdata 
-challenges : For choose file making custom onchange to get file object and with the help of formdata and 
-headers: {
-            "Content-Type": "multipart/form-data",
-          },
-upload image from frontend
+- Upload File from frontend to backend with formik to formdata
+  challenges : For choose file making custom onchange to get file object and with the help of formdata and
+  headers: {
+  "Content-Type": "multipart/form-data",
+  },
+  upload image from frontend
 - Created Custom Hooks name useFormikCustomHooks.js to code more optimize and readable
+- Faculty Form Frontend + Backend same as student signin form
+- All the Api Credential want to add in Env file
+- Student and Faculty Field make perfect and valid Data in SelectBox
 

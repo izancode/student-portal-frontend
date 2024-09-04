@@ -13,9 +13,11 @@ const studentField = [
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
     options: [
-      "ATLAS | ISDI - School of Design & Innovation",
-      "ATLAS | ISME - School of Management & Entrepreneurship",
-      "ATLAS | uGDX School of Technology",
+      "Greenwood High School",
+      "Springfield Academy",
+      "Riverside Secondary School",
+      "Oakwood International School",
+      "Hillcrest High School",
     ],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
@@ -26,7 +28,13 @@ const studentField = [
     placeholder: "Programs",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
-    options: ["Under Graduate Degree", "Post Graduate Degree"],
+    options: [
+      "Computer Science",
+      "Business Administration",
+      "Mechanical Engineering",
+      "Graphic Design",
+      "Biotechnology",
+    ],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
   },
@@ -36,7 +44,13 @@ const studentField = [
     placeholder: "Degree",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
-    options: ["MBA", "M.Des", "bacit", "b.bom"],
+    options: [
+      "Bachelor of Science (B.Sc.)",
+      "Bachelor of Arts (B.A.)",
+      "Bachelor of Engineering (B.Eng.)",
+      "Master of Business Administration (MBA)",
+      "Doctor of Philosophy (Ph.D.)",
+    ],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
   },
@@ -57,9 +71,11 @@ const studentField = [
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
     options: [
-      "College Fair / School Visit",
-      "College Reference Guide",
-      "Counselor / Teacher / Coaching Centre",
+      "Word of Mouth",
+      "Social Media",
+      "Online Advertisement",
+      "Educational Fair",
+      "Referral from a Friend",
     ],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
@@ -124,7 +140,7 @@ const studentField = [
     placeholder: "Nationality",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
-    options: ["Indian", "Turkish", "China"],
+    options: ["Indian", "American", "Canadian", "British", "Australian"],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
   },
@@ -158,7 +174,13 @@ const studentField = [
     placeholder: "Country",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
-    options: ["India", "Turky", "China", "Japan"],
+    options: [
+      "India",
+      "United States",
+      "Canada",
+      "United Kingdom",
+      "Australia",
+    ],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
   },
@@ -168,7 +190,7 @@ const studentField = [
     placeholder: "State",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
-    options: ["Andhra Pradesh", "Assam", "Madhya Pradesh", "Maharashtra"],
+    options: ["Maharashtra", "Delhi", "Gujarat", "Karnataka"],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
   },
@@ -178,7 +200,7 @@ const studentField = [
     placeholder: "City",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
-    options: ["Mumbai ", "Delhi ", "Bengaluru ", "Chennai "],
+    options: ["Bengaluru ", "Mumbai ", "Chennai ", "Hyderabad", "Kolkata"],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
   },
@@ -266,7 +288,13 @@ const studentField = [
     placeholder: "Gender",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
-    options: ["Male", "Female", "Others"],
+    options: [
+      "Male",
+      "Female",
+      "Non-Binary",
+      "Transgender",
+      "Prefer Not to Say",
+    ],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
   },
@@ -276,7 +304,7 @@ const studentField = [
     placeholder: "Student Blood Group",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
-    options: ["a", "b", "c"],
+    options: ["A+", "B-", "O+", "AB-", "O-"],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
   },
@@ -286,7 +314,15 @@ const studentField = [
     placeholder: "Caste Category",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
-    options: ["SC", "BC", "NT(A)", "NT(C)", "NT(D)", "VJ/DT", "ST", "GENERAL"],
+    options: [
+      "General",
+      "OBC (Other Backward Classes)",
+      "SC (Scheduled Caste)",
+      "NT(C)",
+      "ST (Scheduled Tribe)",
+      "VJ/DT",
+      "EWS (Economically Weaker Sections)",
+    ],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
   },
@@ -375,7 +411,7 @@ const studentField = [
     placeholder: "Academic Year",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
-    options: ["201-18", "2018-19", "2019-20", "2020-21"],
+    options: ["2022-2023", "2021-2022", "2020-2021", "2019-2020", "2018-2019"],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
   },
@@ -386,9 +422,11 @@ const studentField = [
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
     options: [
-      " (CBSE) Central Board of Secondary Education  ",
-      " (ICSE) Indian Certificate of Secondary Education  ",
-      " (IGCSE) International General Certificate of Secondary Education  ",
+      " CBSE (Central Board of Secondary Education) ",
+      " ICSE (Indian Certificate of Secondary Education)  ",
+      " State Board of Maharashtra",
+      " State Board of Tamil Nadu",
+      " NIOS (National Institute of Open Schooling)",
     ],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
@@ -399,7 +437,13 @@ const studentField = [
     placeholder: "State",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
-    options: ["Maharastra ", "UK ", "Uttar Pradesh ", "Bhopal "],
+    options: [
+      "Maharashtra ",
+      "Karnataka ",
+      "Tamil Nadu ",
+      "Uttar Pradesh ",
+      "West Bengal",
+    ],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
   },
@@ -409,7 +453,7 @@ const studentField = [
     placeholder: "City",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
-    options: ["Mumbai ", "Delhi ", "Bengaluru ", "Chennai "],
+    options: ["Mumbai ", "Bengaluru ", "Chennai ", "Pune ", "Delhi"],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
   },
@@ -420,10 +464,11 @@ const studentField = [
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
     options: [
-      "Vivekananda Kendra Vidyalaya",
-      "Vifvvfvvekananda Kendra Vidyalaya",
-      "Vivekvfvfananda Kendra Vidyalaya",
-      "Vvfvfivekananda Kendra Vidyalaya",
+      "St. Xavier's College, Mumbai",
+      "Delhi Public School, Bengaluru",
+      "Kendriya Vidyalaya, Chennai",
+      "Modern School, Delhi",
+      "The International School, Pune",
     ],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
@@ -576,8 +621,8 @@ const studentField = [
   },
   {
     type: "button",
-    name: "get_otp",
-    btnname: "Get OTP",
+    name: "student_submit",
+    btnname: "Submit",
     btnType: "submit",
     className: "w-full lg:w-1/4 lg:px-4",
   },

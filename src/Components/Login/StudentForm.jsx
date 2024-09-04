@@ -7,6 +7,9 @@ import Textarea from "../FormFilled/Textarea";
 import MutlipleField from "../FormFilled/MutlipleField";
 import CustomButton from "../Button/CustomButton";
 import useFormikCustomHook from "../../customHooks/useFormikCustomHook";
+import { signUpSchema } from "./FormikFile/student/signUpSchemaFormik";
+import { initialValues } from "./FormikFile/student/initialValues";
+import { studentPostData } from "../../Redux/ReduxThunk/studentThunks";
 const StudentForm = () => {
   const {
     values,
@@ -16,7 +19,7 @@ const StudentForm = () => {
     handleChange,
     handleSubmit,
     setFieldValue,
-  } = useFormikCustomHook();
+  } = useFormikCustomHook(signUpSchema,  initialValues, studentPostData);
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex flex-wrap">

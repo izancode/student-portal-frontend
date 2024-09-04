@@ -1,72 +1,117 @@
+import React from "react";
 import ArrayFacultyForm from "./StudentArrayField/ArrayFacultyForm";
 import InputField from "../FormFilled/InputField";
 import SelectBox from "../FormFilled/SelectBox";
 import ChooseFile from "../FormFilled/ChooseFile";
-// import Textarea from "../FormFilled/Textarea";
+import Textarea from "../FormFilled/Textarea";
 import MutlipleField from "../FormFilled/MutlipleField";
+import CustomButton from "../Button/CustomButton";
+import useFormikCustomHook from "../../customHooks/useFormikCustomHook";
+import { signUpSchema } from "./FormikFile/faculty/signUpSchemaFormik";
+import { facultyPostData } from "../../Redux/ReduxThunk/facultyThunks";
 
+import { initialValues } from "./FormikFile/faculty/initialValues";
 const FacultyForm = () => {
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldValue,
+  } = useFormikCustomHook(signUpSchema, initialValues, facultyPostData);
   return (
-    <form>
-      {ArrayFacultyForm.map((section, sectionIndex) => {
-        return (
-          <div className="flex flex-wrap" key={sectionIndex}>
-            {section.fields.map((field, fieldIndex) => {
-              return (
-                <>
-                  {field.type === "heading" ? (
-                    <div className={field.divclassName} key={fieldIndex}>
-                      <h2 className={field.className}>{field.heading}</h2>
-                    </div>
-                  ) : field.type === "input" ? (
-                    <div className={field.divclassName} key={fieldIndex}>
-                      <InputField
-                        name={field.name}
-                        placeholder={field.placeholder}
-                        fieldClassName={field.fieldClassName}
-                        inputType={field.inputType}
-                        labelClassName={field.labelClassName}
-                        pattern={field.pattern}
-                      />
-                    </div>
-                  ) : field.type === "select" ? (
-                    <div className={field.divclassName} key={fieldIndex}>
-                      <SelectBox
-                        name={field.name}
-                        placeholder={field.placeholder}
-                        options={field.options}
-                        fieldClassName={field.fieldClassName}
-                      />
-                    </div>
-                  ) : field.type === "file" ? (
-                    <div className={field.divclassName} key={fieldIndex}>
-                      <ChooseFile
-                        name={field.name}
-                        profileImage={field.profileImage}
-                        type={field.type}
-                        fieldClassName={field.fieldClassName}
-                        buttonClassName={field.buttonClassName}
-                      />
-                    </div>
-                  ) : field.type === "textarea" ? (
-                    <div className={field.divclassName} key={fieldIndex}>
-                      {/* <Textarea allfield={field} /> */}
-                    </div>
-                  ) : field.type === "multiple" ? (
-                    <div className={field.divclassName} key={fieldIndex}>
-                      <MutlipleField Allfields={field.multipleFields} />
-                    </div>
-                  ) : (
-                    <h1>Nathing</h1>
-                  )}
-                </>
-              );
-            })}
-          </div>
-        );
-      })}
+    <form onSubmit={handleSubmit}>
+      <div className="flex flex-wrap">
+        {ArrayFacultyForm.map((field, fieldIndex) => {
+          return (
+            <React.Fragment key={`${field.name}-${fieldIndex}`}>
+              {field.type === "heading" ? (
+                <div className={field.divclassName}>
+                  <h2 className={field.className}>{field.heading}</h2>
+                </div>
+              ) : field.type === "input" ? (
+                <div className={field.divclassName}>
+                  <InputField
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    fieldClassName={field.fieldClassName}
+                    inputType={field.inputType}
+                    labelClassName={field.labelClassName}
+                    pattern={field.pattern}
+                    values={values[field.name]}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    error={errors[field.name]}
+                    touched={touched[field.name]}
+                  />
+                </div>
+              ) : field.type === "select" ? (
+                <div className={field.divclassName}>
+                  <SelectBox
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    options={field.options}
+                    fieldClassName={field.fieldClassName}
+                    values={values[field.name]}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    error={errors[field.name]}
+                    touched={touched[field.name]}
+                  />
+                </div>
+              ) : field.type === "file" ? (
+                <div className={field.divclassName}>
+                  <ChooseFile
+                    name={field.name}
+                    profileImage={field.profileImage}
+                    type={field.type}
+                    fieldClassName={field.fieldClassName}
+                    buttonClassName={field.buttonClassName}
+                    values={values[field.name]}
+                    setFieldValue={setFieldValue}
+                    handleBlur={handleBlur}
+                    error={errors[field.name]}
+                    touched={!!touched[field.name]}
+                  />
+                </div>
+              ) : field.type === "textarea" ? (
+                <div className={field.divclassName}>
+                  <Textarea
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    fieldClassName={field.fieldClassName}
+                    labelClassName={field.labelClassName}
+                    rows={field.rows}
+                    values={values[field.name]}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    error={errors[field.name]}
+                    touched={touched[field.name]}
+                  />
+                </div>
+              ) : field.type === "multiple" ? (
+                <div className={field.divclassName}>
+                  <MutlipleField
+                    Allfields={field.multipleFields}
+                    values={values[field.name]}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    error={errors[field.name]}
+                    touched={touched[field.name]}
+                  />
+                </div>
+              ) : (
+                <div className={field.className}>
+                  <CustomButton btnname={field.btnname} type={field.btnType} />
+                </div>
+              )}
+            </React.Fragment>
+          );
+        })}
+      </div>
     </form>
   );
 };
-
 export default FacultyForm;

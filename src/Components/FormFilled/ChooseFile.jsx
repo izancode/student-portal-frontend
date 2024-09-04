@@ -2,11 +2,9 @@ import PropTypes from "prop-types";
 const ChooseFile = ({
   name,
   profileImage,
-
   type,
   fieldClassName,
   buttonClassName,
-
   handleBlur,
   error,
   touched,
@@ -14,7 +12,7 @@ const ChooseFile = ({
 }) => {
   const handleFileChange = (event) => {
     const file = event.currentTarget.files[0];
-    console.log(name, file);
+
     setFieldValue(name, file);
   };
   return (
@@ -39,11 +37,9 @@ ChooseFile.propTypes = {
   type: PropTypes.string,
   fieldClassName: PropTypes.string,
   buttonClassName: PropTypes.string,
-
   error: PropTypes.string,
   setFieldValue: PropTypes.func,
   handleBlur: PropTypes.func,
   touched: PropTypes.bool,
 };
-
 export default ChooseFile;

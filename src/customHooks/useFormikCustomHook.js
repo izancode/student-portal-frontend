@@ -1,11 +1,8 @@
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { signUpSchema } from "../Components/Login/FormikFile/Formvalidation";
-import { initialValues } from "../Components/Login/FormikFile/initialValues";
-import { studentPostData } from "../Redux/ReduxThunk/studentThunks";
 import { unwrapResult } from "@reduxjs/toolkit";
 
-const useFormikCustomHook = () => {
+const useFormikCustomHook = (signUpSchema, initialValues, postData) => {
   const dispatch = useDispatch();
 
   const {
@@ -26,15 +23,9 @@ const useFormikCustomHook = () => {
       try {
         const formData = new FormData();
 
-        if (values.student_profile_image) {
-          formData.append(
-            "student_profile_image",
-            values.student_profile_image
-          );
-        }
-
         Object.keys(values).forEach((key) => {
-          if (key !== "student_profile_image") {
+          // Exclude DD, MM, YYYY from being directly appended
+          if (key !== "DD" && key !== "MM" && key !== "YYYY") {
             formData.append(key, values[key]);
           }
         });
@@ -46,7 +37,7 @@ const useFormikCustomHook = () => {
             formData.append("dob", dateOfBirth.toISOString());
           }
         }
-        const actionResult = await dispatch(studentPostData(formData));
+        const actionResult = await dispatch(postData(formData));
         unwrapResult(actionResult);
         //after This Successfull Sigin Want to success alert and success mail and redirect to login component
       } catch (error) {
