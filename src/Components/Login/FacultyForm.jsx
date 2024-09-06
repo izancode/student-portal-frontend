@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import ArrayFacultyForm from "./StudentArrayField/ArrayFacultyForm";
 import InputField from "../FormFilled/InputField";
 import SelectBox from "../FormFilled/SelectBox";
@@ -13,13 +12,12 @@ import { signUpSchema } from "./FormikFile/faculty/signUpSchemaFormik";
 import { facultyPostData } from "../../Redux/ReduxThunk/facultyThunks";
 import { initialValues } from "./FormikFile/faculty/initialValues";
 import { dumyInitialValues } from "./FormikFile/faculty/dumyInitialValues";
-
 import { useSelector } from "react-redux";
-
 import { InfinitySpin } from "react-loader-spinner";
+const isProduction = import.meta.env.MODE === "production";
+const formInitialValues = isProduction ? initialValues : dumyInitialValues;
 const FacultyForm = ({ handleSignUpPageProps }) => {
   const waitingForPostApi = useSelector((state) => state.faculty.status);
-
   const {
     values,
     errors,
@@ -30,7 +28,7 @@ const FacultyForm = ({ handleSignUpPageProps }) => {
     setFieldValue,
   } = useFormikCustomHook(
     signUpSchema,
-    initialValues,
+    formInitialValues,
     facultyPostData,
     handleSignUpPageProps
   );
@@ -142,7 +140,6 @@ const FacultyForm = ({ handleSignUpPageProps }) => {
     </form>
   );
 };
-
 FacultyForm.propTypes = {
   handleSignUpPageProps: PropTypes.func.isRequired,
 };

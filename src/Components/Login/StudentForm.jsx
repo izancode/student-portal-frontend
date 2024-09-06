@@ -16,8 +16,10 @@ import { studentPostData } from "../../Redux/ReduxThunk/studentThunks";
 import { useSelector } from "react-redux";
 import { InfinitySpin } from "react-loader-spinner";
 
+
+const isProduction = import.meta.env.MODE === "production";
+const formInitialValues = isProduction ? initialValues : dumyInitialValues;
 const StudentForm = ({ handleSignUpPageProps }) => {
-  console.log(import.meta.env);
   const waitingForPostApi = useSelector((state) => state.student.status);
   const {
     values,
@@ -29,7 +31,7 @@ const StudentForm = ({ handleSignUpPageProps }) => {
     setFieldValue,
   } = useFormikCustomHook(
     signUpSchema,
-    initialValues,
+    formInitialValues,
     studentPostData,
     handleSignUpPageProps
   );

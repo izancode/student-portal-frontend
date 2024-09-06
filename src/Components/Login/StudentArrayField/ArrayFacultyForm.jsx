@@ -312,7 +312,7 @@ const facultyField = [
 
   {
     type: "input",
-    name: "facultyt_instagram_url",
+    name: "faculty_instagram_url",
     placeholder: " Instagram URL",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "url",
