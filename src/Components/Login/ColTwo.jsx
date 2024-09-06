@@ -24,7 +24,11 @@ const ColTwo = ({ handleSignUpPageProps, signUppageProps }) => {
             <span className="font-bold">welcome!</span>
           </h2>
 
-          {signUppageProps ? <SignUpForm /> : <LoginForm />}
+          {signUppageProps ? (
+            <SignUpForm handleSignUpPageProps={handleSignUpPageProps} />
+          ) : (
+            <LoginForm />
+          )}
 
           <p className="text-xs mb-5">
             {signUppageProps

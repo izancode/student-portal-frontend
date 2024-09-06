@@ -60,7 +60,13 @@ const studentField = [
     placeholder: "Specialisation",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
-    options: ["Design Management & Strategic Thinking"],
+    options: [
+      "Design Management",
+      "Strategic Thinking",
+      "User Experience Design",
+      "Product Design",
+      "Brand Management",
+    ],
     fieldClassName:
       "w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer",
   },

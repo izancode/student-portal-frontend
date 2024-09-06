@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 const useSignUpPage = () => {
   const [signUppage, setSignUp] = useState(false);
   const handleSignUpPage = () => {
@@ -7,5 +6,4 @@ const useSignUpPage = () => {
   };
   return { signUppage, setSignUp, handleSignUpPage };
 };
-
 export default useSignUpPage;

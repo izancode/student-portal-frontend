@@ -1,12 +1,12 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import StudentForm from "./StudentForm";
 import FacultyForm from "./FacultyForm";
-const SignUpForm = () => {
+const SignUpForm = ({ handleSignUpPageProps }) => {
   const [tab, setTab] = useState("student");
   const tabChange = (getTab) => {
     setTab(getTab);
   };
-
   return (
     <>
       <div className="flex justify-center">
@@ -32,9 +32,15 @@ const SignUpForm = () => {
           </div>
         </div>
       </div>
-      {tab === "student" ? <StudentForm /> : <FacultyForm />}
+      {tab === "student" ? (
+        <StudentForm handleSignUpPageProps={handleSignUpPageProps} />
+      ) : (
+        <FacultyForm handleSignUpPageProps={handleSignUpPageProps} />
+      )}
     </>
   );
 };
-
+SignUpForm.propTypes = {
+  handleSignUpPageProps: PropTypes.func.isRequired,
+};
 export default SignUpForm;

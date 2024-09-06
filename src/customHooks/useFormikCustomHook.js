@@ -1,10 +1,14 @@
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
-
-const useFormikCustomHook = (signUpSchema, initialValues, postData) => {
+import { customToast } from "../utils/CustomAlert/cutomToast";
+const useFormikCustomHook = (
+  signUpSchema,
+  initialValues,
+  postData,
+  handleSignUpPageProps
+) => {
   const dispatch = useDispatch();
-
   const {
     values,
     errors,
@@ -14,22 +18,19 @@ const useFormikCustomHook = (signUpSchema, initialValues, postData) => {
     handleSubmit,
     setFieldError,
     setFieldValue,
+    resetForm,
   } = useFormik({
     validationSchema: signUpSchema,
     initialValues: initialValues,
     onSubmit: async (values) => {
-      console.log(values);
-
       try {
         const formData = new FormData();
-
         Object.keys(values).forEach((key) => {
           // Exclude DD, MM, YYYY from being directly appended
           if (key !== "DD" && key !== "MM" && key !== "YYYY") {
             formData.append(key, values[key]);
           }
         });
-
         const { DD, MM, YYYY } = values;
         if (DD && MM && YYYY) {
           const dateOfBirth = new Date(YYYY, MM - 1, DD);
@@ -38,16 +39,27 @@ const useFormikCustomHook = (signUpSchema, initialValues, postData) => {
           }
         }
         const actionResult = await dispatch(postData(formData));
-        unwrapResult(actionResult);
+        const dataPass = unwrapResult(actionResult);
+        if (dataPass) {
+          customToast("success", dataPass.message);
+          handleSignUpPageProps();
+        }
+        resetForm();
         //after This Successfull Sigin Want to success alert and success mail and redirect to login component
       } catch (error) {
         const backendError = error.message;
         const errorCode = backendError.code;
         const errorKey = Object.keys(error.message.keyValue)[0];
         const errorValue = error.message.keyValue[errorKey];
-
         if (errorCode === 11000) {
-          setFieldError(errorKey, `This ${errorValue} is already exists`);
+          setFieldError(
+            errorKey,
+            `This ${errorKey.replace(/_/g, " ")} is already exists`
+          );
+          customToast(
+            "error",
+            `The data ${errorValue} already exists in the database.`
+          );
         }
       }
     },
@@ -63,5 +75,4 @@ const useFormikCustomHook = (signUpSchema, initialValues, postData) => {
     setFieldValue,
   };
 };
-
 export default useFormikCustomHook;
