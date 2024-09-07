@@ -229,7 +229,7 @@ const studentField = [
     placeholder: "  Phone Number",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "tel",
-    pattern: "[+]?[0-9s-]{7,15}",
+    pattern: "[+]?[0-9 -]{7,15}",
     divclassName: "w-full lg:w-1/3 lg:px-4",
     labelClassName:
       "cursor-text absolute  appearance-none  text-sm text-black font-semibold duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-black peer-focus:font-semibold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.85] peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto",
@@ -242,7 +242,6 @@ const studentField = [
     placeholder: " Email Address",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "email",
-    pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$",
     divclassName: "w-full lg:w-1/3 lg:px-4",
     labelClassName:
       "cursor-text absolute  appearance-none  text-sm text-black font-semibold duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-black peer-focus:font-semibold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.85] peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto",
