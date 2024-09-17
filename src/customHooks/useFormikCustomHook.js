@@ -26,7 +26,6 @@ const useFormikCustomHook = (
       try {
         const formData = new FormData();
         Object.keys(values).forEach((key) => {
-          // Exclude DD, MM, YYYY from being directly appended
           if (key !== "DD" && key !== "MM" && key !== "YYYY") {
             formData.append(key, values[key]);
           }
@@ -47,20 +46,7 @@ const useFormikCustomHook = (
         resetForm();
         //after This Successfull Sigin Want to success alert and success mail and redirect to login component
       } catch (error) {
-        const backendError = error.message;
-        const errorCode = backendError.code;
-        const errorKey = Object.keys(error.message.keyValue)[0];
-        const errorValue = error.message.keyValue[errorKey];
-        if (errorCode === 11000) {
-          setFieldError(
-            errorKey,
-            `This ${errorKey.replace(/_/g, " ")} is already exists`
-          );
-          customToast(
-            "error",
-            `The data ${errorValue} already exists in the database.`
-          );
-        }
+        customToast("error", error.message);
       }
     },
   });

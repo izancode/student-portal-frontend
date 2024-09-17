@@ -14,10 +14,11 @@ export const studentPostData = createAsyncThunk(
         message: "Student has been registered successfully.",
       };
     } catch (error) {
-      const errorMessage = error.response
-        ? error.response.data
-        : { message: error.message };
-      return thunkAPI.rejectWithValue(errorMessage);
+      const errorPayload = {
+        message: error.response.data.message || "Internal Server Error",
+        status: error.response.data.status || 500,
+      };
+      return thunkAPI.rejectWithValue(errorPayload);
     }
   }
 );
