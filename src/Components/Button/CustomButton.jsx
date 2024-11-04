@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import leftArrow from "../../images/icon/chevron-right.png";
+
 const CustomButton = ({ btnname, type }) => {
   return (
     <button
@@ -9,7 +9,7 @@ const CustomButton = ({ btnname, type }) => {
       {btnname}
       <img
         className="w-[22px] relative left-[5px] transition-left duration-300 ease-in group-hover:left-[15px]"
-        src={leftArrow}
+        src="https://res.cloudinary.com/dlqylweq6/image/upload/v1728884803/chevron-right_ncpx2z.png"
         alt=""
       />
     </button>
