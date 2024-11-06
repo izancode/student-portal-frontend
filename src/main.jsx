@@ -8,11 +8,6 @@ import RegisterPages from "./Pages/Registration/Register/RegisterPages.jsx";
 import { LoginForm, OtpForm } from "./Pages/Registration/Login/LoginForm.jsx";
 import Dashboard from "./Pages/Registration/Home/Dashboard.jsx";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  OtpProtectRoute,
-  LoginProtectRoute,
-  HomeProtectRoute,
-} from "./utils/ProtectedRoute/protectRoute.jsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -23,13 +18,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/verify-otp",
-    element: <OtpProtectRoute />,
-    children: [
-      {
-        path: "/verify-otp",
-        element: <OtpForm />,
-      },
-    ],
+    element: <OtpForm />,
   },
   {
     path: "/signin",
@@ -37,13 +26,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <HomeProtectRoute />,
-    children: [
-      {
-        path: "/home",
-        element: <Dashboard />,
-      },
-    ],
+    element: <Dashboard />,
   },
 ]);
 createRoot(document.getElementById("root")).render(
