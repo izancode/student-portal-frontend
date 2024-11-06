@@ -32,7 +32,10 @@ export const otpPostData = createAsyncThunk(
       const response = await axios.post(
         import.meta.env.VITE_OTP_THUNKS_POST_API,
         formData,
-        { headers: { "Content-Type": "application/json" } }
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
       );
       console.log(response);
       return {
