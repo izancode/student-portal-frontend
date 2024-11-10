@@ -38,6 +38,9 @@ export const otpPostData = createAsyncThunk(
         }
       );
       console.log(response);
+      const token = response.data.token;
+      document.cookie = `token=${token}; path=/; max-age=172800; secure; samesite=None`;
+
       return {
         data: response.data,
         message: response.data.message,
