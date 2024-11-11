@@ -1,19 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const isProduction = import.meta.env.MODE === "production";
-
-const facultyEnvironmentValues = isProduction
-  ? import.meta.env.VITE_FACULTY_THUNKS_POST_API
-  : import.meta.env.VITE_FACULTY_THUNKS_POST_API_LOCAL;
-const studentEnvironmentValues = isProduction
-  ? import.meta.env.VITE_STUDENT_THUNKS_POST_API
-  : import.meta.env.VITE_STUDENT_THUNKS_POST_API_LOCAL;
 
 export const facultyPostData = createAsyncThunk(
   "student/postFacultyData",
   async (formData, thunkAPI) => {
     try {
-      const response = await axios.post(facultyEnvironmentValues, formData, {
+      const response = await axios.post("/api/v1/facultyusersignin", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -35,7 +27,7 @@ export const studentPostData = createAsyncThunk(
   "student/postStudentData",
   async (formData, thunkAPI) => {
     try {
-      const response = await axios.post(studentEnvironmentValues, formData, {
+      const response = await axios.post("/api/v1/studentusersignin", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       console.log(response);
