@@ -9,7 +9,6 @@ const otpEnvironmentValues = isProduction
   ? import.meta.env.VITE_OTP_THUNKS_POST_API
   : import.meta.env.VITE_OTP_THUNKS_POST_API_LOCAL;
 
-  
 export const loginPostData = createAsyncThunk(
   "student/postLoginData",
   async (formData, thunkAPI) => {
@@ -40,10 +39,11 @@ export const otpPostData = createAsyncThunk(
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
-      console.log(response);
-      const token = response.data.token;
-      document.cookie = `token=${token}; path=/; max-age=172800; secure; samesite=None`;
 
+      // const token = response.data.token;
+      // document.cookie = `token=${token}; path=/; max-age=172800; secure; samesite=None`;
+      console.log("cookie api response", response);
+      console.log("cookies here", document.cookie);
       return {
         data: response.data,
         message: response.data.message,
