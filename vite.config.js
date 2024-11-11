@@ -1,6 +1,6 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
-// console.log(import.meta.env.VITE_DOMAIN_URL);
+import http from "https";
 /* eslint-disable no-undef */
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => {
           target: env.VITE_DOMAIN_URL, // Get the target from the environment variable
           changeOrigin: true,
           secure: false,
+          agent: new http.Agent(),
         },
       },
     },
