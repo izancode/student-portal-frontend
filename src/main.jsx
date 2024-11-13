@@ -8,7 +8,7 @@ import RegisterPages from "./Pages/Registration/Register/RegisterPages.jsx";
 import { LoginForm, OtpForm } from "./Pages/Registration/Login/LoginForm.jsx";
 import Dashboard from "./Pages/Registration/Home/Dashboard.jsx";
 import "react-toastify/dist/ReactToastify.css";
-
+console.log(import.meta.env.MODE);
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([

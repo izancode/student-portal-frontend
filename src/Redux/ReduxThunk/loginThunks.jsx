@@ -1,6 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+const setCookieInProduction = (token) => {
+  if (import.meta.env.MODE === "production") {
+    const expires = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000);
 
+    const options = {
+      expires: expires.toUTCString(),
+      secure: true,
+      sameSite: "None",
+      path: "/",
+    };
+
+    document.cookie = `token=${token}; expires=${options.expires}; secure=${options.secure}; SameSite=${options.sameSite}; path=${options.path}`;
+  } else {
+    console.log("Cookies will only be set in production environment");
+  }
+};
 export const loginPostData = createAsyncThunk(
   "student/postLoginData",
   async (formData, thunkAPI) => {
@@ -39,9 +54,11 @@ export const otpPostData = createAsyncThunk(
           withCredentials: true,
         }
       );
+      if (response.data.token) {
+        const token = response.data.token;
+        setCookieInProduction(token);
+      }
 
-      console.log("cookie api response", response);
-      console.log("cookies here", document.cookie);
       return {
         data: response.data,
         message: response.data.message,
