@@ -1,24 +1,40 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { store } from "./Redux/Store/store";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import RegisterPages from "./Pages/Registration/Register/RegisterPages.jsx";
 import { LoginForm, OtpForm } from "./Pages/Registration/Login/LoginForm.jsx";
 import Dashboard from "./Pages/Registration/Home/Dashboard.jsx";
+import {
+  LoginProtectRoute,
+  OtpProtectRoute,
+  HomeProtectRoute,
+} from "./utils/ProtectedRoute/protectRoute.jsx";
 import "react-toastify/dist/ReactToastify.css";
-console.log(import.meta.env.MODE);
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LoginForm />,
+    element: <LoginProtectRoute />,
+    children: [
+      {
+        path: "/",
+        element: <LoginForm />, // HomePage is only accessible after passing the protection check
+      },
+    ],
   },
   {
     path: "/verify-otp",
-    element: <OtpForm />,
+    element: <OtpProtectRoute />, // Use protect route here
+    children: [
+      {
+        path: "/verify-otp",
+        element: <OtpForm />,
+      },
+    ],
   },
   {
     path: "/signin",
@@ -26,7 +42,13 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <Dashboard />,
+    element: <HomeProtectRoute />, // Protect home page route
+    children: [
+      {
+        path: "/home",
+        element: <Dashboard />, // HomePage is only accessible after passing the protection check
+      },
+    ],
   },
 ]);
 createRoot(document.getElementById("root")).render(

@@ -83,7 +83,7 @@ export const useFormikLoginHook = (
       try {
         const actionResult = await dispatch(postData(values));
         const dataPass = unwrapResult(actionResult);
-        console.log(dataPass);
+
         if (dataPass) {
           navigate("/verify-otp");
           customToast("success", dataPass.message);
@@ -136,7 +136,7 @@ export const useFormikOtpHook = (otpSchema, otpInitialValues, postData) => {
 
         const actionResult = await dispatch(postData(apiData));
         const dataPass = unwrapResult(actionResult);
-        console.log(dataPass);
+
         if (dataPass) {
           navigate("/home");
           customToast("success", dataPass.message);
