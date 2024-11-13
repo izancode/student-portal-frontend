@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
     server: {
       proxy: {
         "/api": {
-          target: "https://student-portal-api.vercel.app/",
+          target: env.VITE_DOMAIN_URL,
           changeOrigin: true,
           secure: false,
         },
