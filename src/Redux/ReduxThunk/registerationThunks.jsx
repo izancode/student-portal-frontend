@@ -5,11 +5,15 @@ export const facultyPostData = createAsyncThunk(
   "student/postFacultyData",
   async (formData, thunkAPI) => {
     try {
-      const response = await axios.post("/api/v1/facultyusersignin", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        import.meta.env.VITE_FACULTY_THUNKS_POST_API,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       return {
         data: response.data,
         message: "Faculty has been registered successfully.",
@@ -27,9 +31,13 @@ export const studentPostData = createAsyncThunk(
   "student/postStudentData",
   async (formData, thunkAPI) => {
     try {
-      const response = await axios.post("/api/v1/studentusersignin", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const response = await axios.post(
+        import.meta.env.VITE_STUDENT_THUNKS_POST_API,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       console.log(response);
       return {
         data: response.data,

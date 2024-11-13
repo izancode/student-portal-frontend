@@ -5,9 +5,13 @@ export const loginPostData = createAsyncThunk(
   "student/postLoginData",
   async (formData, thunkAPI) => {
     try {
-      const response = await axios.post("/api/v1/userlogin", formData, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await axios.post(
+        import.meta.env.VITE_LOGIN_THUNKS_POST_API,
+        formData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
       console.log(response);
       return {
         data: response.data,
@@ -27,10 +31,14 @@ export const otpPostData = createAsyncThunk(
   "student/postOtpData",
   async (formData, thunkAPI) => {
     try {
-      const response = await axios.post("/api/v1/userverifyotp", formData, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        import.meta.env.VITE_OTP_THUNKS_POST_API,
+        formData,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
 
       console.log("cookie api response", response);
       console.log("cookies here", document.cookie);
