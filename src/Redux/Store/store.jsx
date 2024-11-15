@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import { facultyUser, studentUser } from "../Slice/registerationSlice";
-import { login, otp } from "../Slice/loginSlice";
+import { login, otp, logout } from "../Slice/loginSlice";
 
 export const store = configureStore({
   reducer: {
@@ -9,5 +9,6 @@ export const store = configureStore({
     faculty: studentUser,
     login: login,
     otp: otp,
+    logout: logout,
   },
 });

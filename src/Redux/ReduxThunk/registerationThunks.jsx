@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const facultyPostData = createAsyncThunk(
-  "student/postFacultyData",
+  "faculty/postFacultyData",
   async (formData, thunkAPI) => {
     try {
       const response = await axios.post(

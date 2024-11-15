@@ -7,7 +7,8 @@ import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import RegisterPages from "./Pages/Registration/Register/RegisterPages.jsx";
 import { LoginForm, OtpForm } from "./Pages/Registration/Login/LoginForm.jsx";
-import Dashboard from "./Pages/Registration/Home/Dashboard.jsx";
+import Dashboard from "./Pages/home/Dashboard.jsx";
+import NotFoundPage from "./Pages/NotFound/NotFoundPage.jsx";
 import {
   LoginProtectRoute,
   OtpProtectRoute,
@@ -49,6 +50,11 @@ const router = createBrowserRouter([
         element: <Dashboard />, // HomePage is only accessible after passing the protection check
       },
     ],
+  },
+  {
+    // This is the wildcard route that catches all undefined routes
+    path: "*",
+    element: <NotFoundPage />, // 404 page component
   },
 ]);
 createRoot(document.getElementById("root")).render(
