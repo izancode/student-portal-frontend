@@ -7,7 +7,7 @@ import Textarea from "../../../Components/FormFilled/Textarea";
 import MutlipleField from "../../../Components/FormFilled/MutlipleField";
 import CustomButton from "../../../Components/Button/CustomButton";
 import { useFormikSignHook } from "../../../customHooks/useFormikCustomHook";
-
+import { useRef } from "react";
 import {
   studentSignUpSchema,
   studentInitialValues,
@@ -35,6 +35,10 @@ const facultyEnvironmentValues = isProduction
 
 export const StudentForm = () => {
   const waitingForPostApi = useSelector((state) => state.student.status);
+
+  const inputRefs = useRef([]);
+  // console.log(inputRefs);
+
   const {
     values,
     errors,
@@ -48,6 +52,33 @@ export const StudentForm = () => {
     studentEnvironmentValues,
     studentPostData
   );
+
+  const handleInputChange = (e, fieldKey) => {
+    if (/^[A-Za-z]*$/.test(e.target.value)) {
+      e.target.value = "";
+    }
+    if (fieldKey === 0 && e.target.id === "dd") {
+      if (e.target.value > 31) {
+        e.target.value = 31;
+      }
+    } else if (fieldKey === 1 && e.target.id === "mm") {
+      console.log("Month", e.target.value);
+      if (e.target.value > 12) {
+        e.target.value = 12;
+      }
+    } else if (fieldKey === 2 && e.target.id === "yyyy") {
+      if (e.target.value > 2000) {
+        e.target.value = 2000;
+      }
+    }
+  };
+
+  const handleKeyDown = (e, index) => {
+    const { value } = e.target;
+    if (e.key === "Backspace" && !value && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+  };
   return (
     <form onSubmit={handleSubmit}>
       {waitingForPostApi === "loading" ? (
@@ -138,6 +169,9 @@ export const StudentForm = () => {
                       handleBlur={handleBlur}
                       error={errors[field.name]}
                       touched={touched[field.name]}
+                      keyDown={handleKeyDown}
+                      handleInputChange={handleInputChange}
+                      inputRefs={inputRefs}
                     />
                   </div>
                 ) : (

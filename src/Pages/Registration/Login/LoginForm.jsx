@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import InputField from "../../../Components/FormFilled/InputField";
 import MultipleField from "../../../Components/FormFilled/MutlipleField";
 import CustomButton from "../../../Components/Button/CustomButton";
@@ -22,12 +23,9 @@ import {
 } from "../../../Components/Login/LoginBg";
 import { useSelector } from "react-redux";
 import { InfinitySpin } from "react-loader-spinner";
-
 import { arrayOtpField } from "../../../utils/Formik/formik";
-
 export const LoginForm = () => {
   const waitingForPostApi = useSelector((state) => state.login.status);
-
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormikLoginHook(loginSchema, loginInitialValues, loginPostData);
   return (
@@ -39,7 +37,6 @@ export const LoginForm = () => {
       >
         <div>
           <SectionTwo />
-
           {waitingForPostApi === "loading" ? (
             <div className="flex justify-center h-96 items-center">
               <InfinitySpin
@@ -67,17 +64,40 @@ export const LoginForm = () => {
               <CustomButton btnname="Get OTP" type="submit" />
             </form>
           )}
-
           <SectionThree />
         </div>
       </div>
     </div>
   );
 };
-
 export const OtpForm = () => {
   const waitingForPostApi = useSelector((state) => state.otp.status);
-
+  const inputRefs = useRef([]);
+  useEffect(() => {
+    if (inputRefs.current[0]) {
+      inputRefs.current[0].focus();
+    }
+  }, []);
+  const handleInputChange = (e, index) => {
+    const { value } = e.target;
+    if (/^\d{1}$/.test(value)) {
+      handleChange(e);
+      if (
+        value.length === 1 &&
+        index < arrayOtpField.multipleFields.length - 1
+      ) {
+        inputRefs.current[index + 1]?.focus();
+      }
+    } else if (value.length > 1) {
+      e.target.value = "";
+    }
+  };
+  const handleKeyDown = (e, index) => {
+    const { value } = e.target;
+    if (e.key === "Backspace" && !value && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+  };
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormikOtpHook(otpSchema, otpInitialValues, otpPostData);
   return (
@@ -89,7 +109,6 @@ export const OtpForm = () => {
       >
         <div>
           <SectionTwo />
-
           {waitingForPostApi === "loading" ? (
             <div className="flex justify-center h-96 items-center">
               <InfinitySpin
@@ -109,6 +128,9 @@ export const OtpForm = () => {
                 handleBlur={handleBlur}
                 error={errors[arrayOtpField.name]}
                 touched={touched[arrayOtpField.name]}
+                keyDown={handleKeyDown}
+                handleInputChange={handleInputChange}
+                inputRefs={inputRefs}
               />
               <CustomButton btnname="Verify OTP" />
             </form>

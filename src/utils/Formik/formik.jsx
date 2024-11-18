@@ -278,6 +278,16 @@ export const otpSchema = Yup.object({
     .typeError("Must be a number"),
 });
 
+export const loginInitialValues = {
+  login_with_email_phone: "",
+};
+
+export const otpInitialValues = {
+  otp1: "",
+  otp2: "",
+  otp3: "",
+  otp4: "",
+};
 export const studentInitialValues = {
   student_school: "",
   student_programs: "",
@@ -325,17 +335,6 @@ export const studentInitialValues = {
   student_mother_email: "",
   in_case_of_guardian_please_specify_the_relationship: "",
   statement_of_purpose: "",
-};
-
-export const loginInitialValues = {
-  login_with_email_phone: "",
-};
-
-export const otpInitialValues = {
-  otp1: "",
-  otp2: "",
-  otp3: "",
-  otp4: "",
 };
 
 export const facultyInitialValues = {
@@ -387,9 +386,9 @@ export const studentDumyInitialValues = {
   student_postal_code: "40008",
   student_phone_number: "7666129168",
   student_email: "sf48116@gmail.com",
-  DD: "30",
-  MM: "11",
-  YYYY: "1999",
+  DD: "",
+  MM: "",
+  YYYY: "",
   student_gender: "Male",
   student_blood_group: "A+",
   student_caste_category: "General",

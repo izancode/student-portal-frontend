@@ -3,10 +3,12 @@ import PropTypes from "prop-types";
 const MultipleField = ({
   Allfields,
   values,
-  handleChange,
   handleBlur,
   error,
   touched,
+  keyDown,
+  handleInputChange,
+  inputRefs,
 }) => {
   return (
     <div className="flex flex-wrap mb-4">
@@ -22,8 +24,10 @@ const MultipleField = ({
               className={filled.inputClass}
               placeholder=" "
               value={values}
-              onChange={handleChange}
               onBlur={handleBlur}
+              onChange={(e) => handleInputChange(e, index)}
+              onKeyDown={(e) => keyDown(e, index)}
+              ref={(el) => (inputRefs.current[index] = el)}
             />
             <label htmlFor={filled.key} className={filled.labelClassName}>
               {filled.name}
@@ -47,8 +51,11 @@ MultipleField.propTypes = {
   ).isRequired,
   error: PropTypes.string,
   values: PropTypes.string,
-  handleChange: PropTypes.func,
   handleBlur: PropTypes.func,
+  handleChange: PropTypes.func,
   touched: PropTypes.bool,
+  keyDown: PropTypes.func.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
+  inputRefs: PropTypes.object.isRequired,
 };
 export default MultipleField;

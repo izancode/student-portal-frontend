@@ -11,11 +11,10 @@ import Dashboard from "./Pages/home/Dashboard.jsx";
 import NotFoundPage from "./Pages/NotFound/NotFoundPage.jsx";
 import {
   LoginProtectRoute,
-  OtpProtectRoute,
   HomeProtectRoute,
 } from "./utils/ProtectedRoute/protectRoute.jsx";
 import "react-toastify/dist/ReactToastify.css";
-
+// OtpProtectRoute,
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,7 +28,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/verify-otp",
-    element: <OtpProtectRoute />, // Use protect route here
+    element: <OtpForm />, // Use protect route here
     children: [
       {
         path: "/verify-otp",
