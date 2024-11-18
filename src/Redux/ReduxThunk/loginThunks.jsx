@@ -75,6 +75,7 @@ export const logoutPostData = createAsyncThunk(
         message: response.data.message,
       };
     } catch (error) {
+      console.log(error);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
