@@ -14,7 +14,7 @@ const Header = () => {
     try {
       const actionResult = await dispatch(logoutPostData());
       const dataPass = unwrapResult(actionResult);
-      console.log("dataPass logout", dataPass);
+
       navigate("/");
       customToast("success", dataPass.message);
     } catch (error) {

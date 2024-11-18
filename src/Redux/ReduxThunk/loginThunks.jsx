@@ -69,13 +69,12 @@ export const logoutPostData = createAsyncThunk(
 
       document.cookie =
         "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      console.log("response logout", response);
+
       return {
         data: response.data,
         message: response.data.message,
       };
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
