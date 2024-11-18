@@ -49,3 +49,5 @@ Dashboard and Reporting: This feature provides users with personalized dashboard
 - All the Api Credential want to add in Env file
 - Student and Faculty Field make perfect and valid Data in SelectBox
 - just for testing
+- login otp and home is ready with authentication
+- there is 4 types of validation 1.Admin 2.Faculty 3.student 4.Parents
