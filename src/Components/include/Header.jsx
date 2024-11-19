@@ -32,27 +32,27 @@ const Header = () => {
   return (
     <>
       <nav className=" bg-[#342B7C] fixed top-0 left-0 right-0 z-50">
-        <div className="h-[70px] items-center  grid xl:grid-cols-12 px-3">
-          <div className="col-span-10">
+        <div className="h-[50px] items-center  grid grid-cols-12 px-2  sm:px-3 sm:h-[70px]">
+          <div className="col-span-8 md:col-span-10">
             <img
-              className="w-[250px]"
+              className="w-[200px] sm:w-[250px]"
               src="https://res.cloudinary.com/dlqylweq6/image/upload/v1731565016/atlastectLogo_t41zbi.png"
               alt="logo"
             />
           </div>
-          <div className="col-span-2 flex justify-end items-center">
+          <div className="col-span-4 md:col-span-2 flex justify-end items-center">
             <div>
               <img
-                className="w-[40px]  h-[40px] border-2 border-white rounded-[50rem] my-0 mx-auto"
+                className="w-[25px]  h-[25px] border-2 border-white rounded-[50rem] my-0 mx-auto sm:w-[40px]  sm:h-[40px]"
                 src="https://imageio.forbes.com/specials-images/imageserve/5faad4255239c9448d6c7bcd/Best-Animal-Photos-Contest--Close-Up-Of-baby-monkey/960x0.jpg?format=jpg&width=960"
                 alt="logo"
               />
-              <p className="text-[12px] text-white">Faizan Shaikh</p>
+              <p className="text-[10px] text-white sm:text-[12px]">Faizan</p>
             </div>
             <div className="ml-[12px]">
               <img
                 onClick={openModal}
-                className="w-[30px]  h-[30px]  my-0 mx-auto cursor-pointer"
+                className="w-[25px]  h-[25px]  my-0 mx-auto cursor-pointer sm:w-[30px]  sm:h-[30px]"
                 src="https://res.cloudinary.com/dlqylweq6/image/upload/v1731569044/Group_1_xfdvh4.png"
                 alt="logo"
               />
@@ -63,7 +63,7 @@ const Header = () => {
 
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
-          <div className="bg-white p-3 rounded shadow-lg w-1/4">
+          <div className="bg-white p-3 rounded shadow-lg w-full m-2 sm:w-1/4 sm:m-0">
             <p className="mb-5 text-center">
               Are you sure you want to log out?
             </p>

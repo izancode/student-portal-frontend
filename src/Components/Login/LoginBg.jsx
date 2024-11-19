@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import PropTypes from "prop-types";
 export const SectionOne = () => {
   return (
     <div className=" col-span-9  xl:h-screen ">
@@ -28,13 +28,17 @@ export const SectionTwo = () => {
   );
 };
 
-export const SectionThree = () => {
+export const SectionThree = ({ text1, text2 }) => {
   return (
     <p className="text-xs mb-5">
-      Don&apos;t have an account?
+      {text1}
       <span className="font-semibold text-[#1C22C1] cursor-pointer ml-1">
-        <Link to="/signin">Register Now</Link>
+        <Link to="/signin">{text2}</Link>
       </span>
     </p>
   );
+};
+SectionThree.propTypes = {
+  text1: PropTypes.string,
+  text2: PropTypes.string,
 };

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import InputField from "../../../Components/FormFilled/InputField";
 import MultipleField from "../../../Components/FormFilled/MutlipleField";
 import CustomButton from "../../../Components/Button/CustomButton";
@@ -64,7 +64,7 @@ export const LoginForm = () => {
               <CustomButton btnname="Get OTP" type="submit" />
             </form>
           )}
-          <SectionThree />
+          <SectionThree text1="Don't have an account?" text2="Register Now" />
         </div>
       </div>
     </div>
@@ -73,11 +73,29 @@ export const LoginForm = () => {
 export const OtpForm = () => {
   const waitingForPostApi = useSelector((state) => state.otp.status);
   const inputRefs = useRef([]);
+  const [time, setTime] = useState(120);
+
   useEffect(() => {
     if (inputRefs.current[0]) {
       inputRefs.current[0].focus();
     }
   }, []);
+
+  useEffect(() => {
+    if (time <= 0) return;
+
+    const interval = setInterval(() => {
+      setTime((prevTime) => prevTime - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [time]);
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes}:${secs < 10 ? `0${secs}` : secs}`;
+  };
   const handleInputChange = (e, index) => {
     const { value } = e.target;
     if (/^\d{1}$/.test(value)) {
@@ -135,7 +153,7 @@ export const OtpForm = () => {
               <CustomButton btnname="Verify OTP" />
             </form>
           )}
-          <SectionThree />
+          <SectionThree text1="OTP Expire in :" text2={formatTime(time)} />
         </div>
       </div>
     </div>
