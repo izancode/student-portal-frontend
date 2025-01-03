@@ -13,7 +13,7 @@ export const LoginProtectRoute = () => {
   if (!token && !tokenValue) {
     return <Outlet />;
   }
-  return <Navigate to="/home" />;
+  return <Navigate to="/menu" />;
 };
 export const HomeProtectRoute = () => {
   const token = document.cookie;

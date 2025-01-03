@@ -15,7 +15,7 @@ const RegisterPages = () => {
           src="https://res.cloudinary.com/dlqylweq6/image/upload/v1728884802/threeschool_gcwyrm.png"
           alt=""
         />
-        <h2 className=" leading-[1.2] text-[#1C22C1] capitalize mb-5 lg:text-[3.5rem] ">
+        <h2 className=" leading-[1.2] text-[#342B7C] capitalize mb-5 lg:text-[3.5rem] ">
           hello
           <span className="font-bold"> welcome!</span>
         </h2>
@@ -46,7 +46,7 @@ const RegisterPages = () => {
         {tab === "student" ? <StudentForm /> : <FacultyForm />}
         <p className="text-xs mb-5">
           Already have an account?
-          <span className="font-semibold text-[#1C22C1] cursor-pointer ml-1">
+          <span className="font-semibold text-[#342B7C] cursor-pointer ml-1">
             <Link to="/">Login Now</Link>
           </span>
         </p>

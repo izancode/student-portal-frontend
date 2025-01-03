@@ -20,7 +20,7 @@ export const SectionTwo = () => {
         src="https://res.cloudinary.com/dlqylweq6/image/upload/v1728884802/threeschool_gcwyrm.png"
         alt=""
       />
-      <h2 className=" text-[3.5rem] leading-[1.2] text-[#1C22C1] capitalize mb-5">
+      <h2 className=" text-[3.5rem] leading-[1.2] text-[#342B7C] capitalize mb-5">
         hello <br />
         <span className="font-bold">welcome!</span>
       </h2>
@@ -32,7 +32,7 @@ export const SectionThree = ({ text1, text2 }) => {
   return (
     <p className="text-xs mb-5">
       {text1}
-      <span className="font-semibold text-[#1C22C1] cursor-pointer ml-1">
+      <span className="font-semibold text-[#342B7C] cursor-pointer ml-1">
         <Link to="/signin">{text2}</Link>
       </span>
     </p>

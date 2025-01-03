@@ -64,7 +64,7 @@ export const logoutPostData = createAsyncThunk(
   async (formData, thunkAPI) => {
     try {
       const response = await axios.get(
-        import.meta.env.VITE_LOGOUT_THUNKS_POST_API
+        import.meta.env.VITE_LOGOUT_THUNKS_GET_API
       );
 
       document.cookie =

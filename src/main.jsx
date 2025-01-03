@@ -14,7 +14,7 @@ import {
   HomeProtectRoute,
 } from "./utils/ProtectedRoute/protectRoute.jsx";
 import "react-toastify/dist/ReactToastify.css";
-// OtpProtectRoute,
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,13 +22,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <LoginForm />, // HomePage is only accessible after passing the protection check
+        element: <LoginForm />,
       },
     ],
   },
   {
     path: "/verify-otp",
-    element: <OtpForm />, // Use protect route here
+    element: <OtpForm />,
     children: [
       {
         path: "/verify-otp",
@@ -41,19 +41,18 @@ const router = createBrowserRouter([
     element: <RegisterPages />,
   },
   {
-    path: "/home",
-    element: <HomeProtectRoute />, // Protect home page route
+    path: "/menu",
+    element: <HomeProtectRoute />,
     children: [
       {
-        path: "/home",
-        element: <Dashboard />, // HomePage is only accessible after passing the protection check
+        path: "/menu",
+        element: <Dashboard />,
       },
     ],
   },
   {
-    // This is the wildcard route that catches all undefined routes
     path: "*",
-    element: <NotFoundPage />, // 404 page component
+    element: <NotFoundPage />,
   },
 ]);
 createRoot(document.getElementById("root")).render(
