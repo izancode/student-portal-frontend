@@ -7,7 +7,8 @@ import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import RegisterPages from "./Pages/Registration/Register/RegisterPages.jsx";
 import { LoginForm, OtpForm } from "./Pages/Registration/Login/LoginForm.jsx";
-import { MenuPage, Profile } from "./Pages/home/Dashboard.jsx";
+import { Profile } from "./Pages/home/Dashboard.jsx";
+import { MenuPage } from "./Components/Layout/Layout.jsx";
 import NotFoundPage from "./Pages/NotFound/NotFoundPage.jsx";
 import {
   LoginProtectRoute,

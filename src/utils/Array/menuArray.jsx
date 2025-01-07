@@ -9,78 +9,78 @@ export const menuItems = [
     id: 2,
     imgSrc:
       "https://res.cloudinary.com/dlqylweq6/image/upload/v1735672950/2_fcoqna.png",
-    title: "Classes",
+    title: "Insight",
   },
   {
     id: 3,
     imgSrc:
       "https://res.cloudinary.com/dlqylweq6/image/upload/v1735672950/3_fgagxl.png",
-    title: "Campus Check-in",
+    title: "ClassLab Tools",
   },
   {
     id: 4,
     imgSrc:
       "https://res.cloudinary.com/dlqylweq6/image/upload/v1735672951/4_fcvkqr.png",
-    title: "Attendance Records",
+    title: "Course Schedule",
   },
   {
     id: 5,
     imgSrc:
       "https://res.cloudinary.com/dlqylweq6/image/upload/v1735672951/5_ptqgb1.png",
-    title: "Student Handbook",
+    title: "Class Timings",
   },
   {
     id: 6,
     imgSrc:
       "https://res.cloudinary.com/dlqylweq6/image/upload/v1735672952/6_w93mu5.png",
-    title: "Fees Payment",
+    title: "Faculty Allocation",
   },
   {
     id: 7,
     imgSrc:
       "https://res.cloudinary.com/dlqylweq6/image/upload/v1735672953/7_l4cunu.png",
-    title: "Selective Selection",
+    title: "Attendance",
   },
   {
     id: 8,
     imgSrc:
       "https://res.cloudinary.com/dlqylweq6/image/upload/v1735672946/8_u7kwd5.png",
-    title: "Survey",
+    title: "Assignment",
   },
   {
     id: 9,
     imgSrc:
       "https://res.cloudinary.com/dlqylweq6/image/upload/v1735672947/9_itlsxk.png",
-    title: "Placement Opportunity",
+    title: "Grades & Report",
   },
   {
     id: 10,
     imgSrc:
       "https://res.cloudinary.com/dlqylweq6/image/upload/v1735672946/10_hdg999.png",
-    title: "Holiday",
+    title: "Enrollement Status",
   },
   {
     id: 11,
     imgSrc:
       "https://res.cloudinary.com/dlqylweq6/image/upload/v1735672947/11_zjolb4.png",
-    title: "Event & Announcement",
+    title: "Academic History",
   },
   {
     id: 12,
     imgSrc:
       "https://res.cloudinary.com/dlqylweq6/image/upload/v1735672947/12_tmjv8z.png",
-    title: "Specialization Selection",
+    title: "Chat",
   },
   {
     id: 13,
     imgSrc:
       "https://res.cloudinary.com/dlqylweq6/image/upload/v1735672948/13_ummz0j.png",
-    title: "Exam Registration",
+    title: "Faculty Feedback",
   },
-  {
-    id: 14,
-    imgSrc:
-      "https://res.cloudinary.com/dlqylweq6/image/upload/v1735672948/14_yab6yn.png",
-    title: "Revolution Form",
-  },
+  // {
+  //   id: 14,
+  //   imgSrc:
+  //     "https://res.cloudinary.com/dlqylweq6/image/upload/v1735672948/14_yab6yn.png",
+  //   title: "Revolution Form",
+  // },
 ];
