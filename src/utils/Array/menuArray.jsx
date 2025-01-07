@@ -3,7 +3,7 @@ export const menuItems = [
     id: 1,
     imgSrc:
       "https://res.cloudinary.com/dlqylweq6/image/upload/v1735672949/1_qcdwhm.png",
-    title: "Student Profile",
+    title: "Profile",
   },
   {
     id: 2,

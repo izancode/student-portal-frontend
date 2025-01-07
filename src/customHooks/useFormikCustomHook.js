@@ -138,7 +138,7 @@ export const useFormikOtpHook = (otpSchema, otpInitialValues, postData) => {
         const dataPass = unwrapResult(actionResult);
 
         if (dataPass) {
-          navigate("/home");
+          navigate("/menu");
           customToast("success", dataPass.message);
         }
       } catch (error) {

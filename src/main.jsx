@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import RegisterPages from "./Pages/Registration/Register/RegisterPages.jsx";
 import { LoginForm, OtpForm } from "./Pages/Registration/Login/LoginForm.jsx";
-import Dashboard from "./Pages/home/Dashboard.jsx";
+import { MenuPage, Profile } from "./Pages/home/Dashboard.jsx";
 import NotFoundPage from "./Pages/NotFound/NotFoundPage.jsx";
 import {
   LoginProtectRoute,
@@ -46,7 +46,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/menu",
-        element: <Dashboard />,
+        element: <MenuPage />,
+      },
+    ],
+  },
+  {
+    path: "/profile",
+    element: <HomeProtectRoute />,
+    children: [
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },

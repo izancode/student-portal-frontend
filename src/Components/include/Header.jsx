@@ -1,61 +1,50 @@
-import { useState } from "react";
+import { useLogoutCustomHook } from "../../customHooks/useHeaderCustomHook";
+
 import { useDispatch } from "react-redux";
-import { logoutPostData } from "../../Redux/ReduxThunk/loginThunks";
-import { unwrapResult } from "@reduxjs/toolkit";
-import { customToast } from "../../utils/CustomAlert/cutomToast";
-import { useNavigate } from "react-router-dom";
-
+import { toggleSideBar } from "../../Redux/Slice/toggleSlice";
 const Header = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isModalOpen, openModal, closeModal, handleLogout } =
+    useLogoutCustomHook();
+
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    try {
-      const actionResult = await dispatch(logoutPostData());
-      const dataPass = unwrapResult(actionResult);
-
-      navigate("/");
-      customToast("success", dataPass.message);
-    } catch (error) {
-      customToast("error", error.message);
-    }
-  };
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  // Modal close karne ke liye function
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
   return (
     <>
-      <nav className=" bg-[#342B7C] fixed top-0 left-0 right-0 z-50">
-        <div className="h-[50px] items-center  grid grid-cols-12 px-2  sm:px-3 sm:h-[70px]">
-          <div className="col-span-8 md:col-span-10">
-            <img
-              className="w-[200px] sm:w-[250px]"
-              src="https://res.cloudinary.com/dlqylweq6/image/upload/v1731565016/atlastectLogo_t41zbi.png"
-              alt="logo"
-            />
+      <nav className=" bg-[#342B7C] fixed top-0 left-0 z-50 w-full ">
+        <div className="h-[50px] items-center  grid grid-cols-12 px-2  lg:px-3 lg:h-[60px]">
+          <div className="col-span-8 md:col-span-10 flex items-center">
+            <div>
+              <img
+                className="w-[20px] lg:hidden mr-2"
+                src="https://res.cloudinary.com/dlqylweq6/image/upload/v1736149286/image_2_1_wkgjt6.png"
+                alt="logo"
+                onClick={() => dispatch(toggleSideBar())}
+              />
+            </div>
+            <div>
+              <img
+                className="w-[200px] lg:w-[250px]"
+                src="https://res.cloudinary.com/dlqylweq6/image/upload/v1736148857/image_1_vfuoro.png"
+                alt="logo"
+              />
+            </div>
           </div>
           <div className="col-span-4 md:col-span-2 flex justify-end items-center">
             <div>
               <img
-                className="w-[25px]  h-[25px] border-2 border-white rounded-[50rem] my-0 mx-auto sm:w-[40px]  sm:h-[40px]"
+                className="w-[25px]  h-[25px] border-2 border-white rounded-[50rem] my-0 mx-auto lg:w-[35px]  lg:h-[35px]"
                 src="https://imageio.forbes.com/specials-images/imageserve/5faad4255239c9448d6c7bcd/Best-Animal-Photos-Contest--Close-Up-Of-baby-monkey/960x0.jpg?format=jpg&width=960"
                 alt="logo"
               />
-              <p className="text-[10px] text-white sm:text-[12px]">Faizan</p>
+              <p className="text-[10px] text-white lg:text-[12px]">Faizan</p>
             </div>
             <div className="ml-[12px]">
               <img
                 onClick={openModal}
-                className="w-[25px]  h-[25px]  my-0 mx-auto cursor-pointer sm:w-[30px]  sm:h-[30px]"
+                className="w-[25px]  h-[25px]  my-0 mx-auto cursor-pointer lg:w-[25px]  lg:h-[25px]"
                 src="https://res.cloudinary.com/dlqylweq6/image/upload/v1731569044/Group_1_xfdvh4.png"
                 alt="logo"
               />
+              <p className="text-[10px] text-white lg:text-[12px]">Logout</p>
             </div>
           </div>
         </div>
@@ -63,7 +52,7 @@ const Header = () => {
 
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
-          <div className="bg-white p-3 rounded shadow-lg w-full m-2 sm:w-1/4 sm:m-0">
+          <div className="bg-white p-3 rounded shadow-lg w-full m-2 lg:w-1/4 lg:m-0">
             <p className="mb-5 text-center">
               Are you sure you want to log out?
             </p>
