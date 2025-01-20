@@ -36,13 +36,13 @@ export const otpPostData = createAsyncThunk(
         formData,
         {
           headers: { "Content-Type": "application/json" },
-          // withCredentials: true,
+          withCredentials: true,
         }
       );
-
+      console.log({ document });
       if (response.data.token) {
         const token = response.data.token;
-        document.cookie = `token=${token}; path=/; max-age=172800; secure; samesite=None`; // 48 hours expiration
+        // document.cookie = `token=${token}; path=/; max-age=172800; secure; samesite=None`; // 48 hours expiration
       }
 
       return {

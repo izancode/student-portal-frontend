@@ -1,5 +1,4 @@
-import React from "react";
-
+import React, { useState } from "react";
 import InputField from "../../../Components/FormFilled/InputField";
 import SelectBox from "../../../Components/FormFilled/SelectBox";
 import ChooseFile from "../../../Components/FormFilled/ChooseFile";
@@ -7,37 +6,38 @@ import Textarea from "../../../Components/FormFilled/Textarea";
 import MutlipleField from "../../../Components/FormFilled/MutlipleField";
 import CustomButton from "../../../Components/Button/CustomButton";
 import { useFormikSignHook } from "../../../customHooks/useFormikCustomHook";
+import PropTypes from "prop-types";
 import { useRef } from "react";
 import {
   studentSignUpSchema,
   studentInitialValues,
-  studentDumyInitialValues,
   arrayStudentField,
   facultySignUpSchema,
-  facultyInitialValues,
   facultyDumyInitialValues,
   arrayFacultyField,
 } from "../../../utils/Formik/formik";
 
-import {
-  studentPostData,
-  facultyPostData,
-} from "../../../Redux/ReduxThunk/registerationThunks";
-import { useSelector } from "react-redux";
 import { InfinitySpin } from "react-loader-spinner";
 const isProduction = import.meta.env.MODE === "production";
-const studentEnvironmentValues = isProduction
-  ? studentInitialValues
-  : studentDumyInitialValues;
-const facultyEnvironmentValues = isProduction
-  ? facultyInitialValues
-  : facultyDumyInitialValues;
-
-export const StudentForm = () => {
-  const waitingForPostApi = useSelector((state) => state.student.status);
-
+export const StudentForm = ({ studentDumyInitialValues, studentPostData }) => {
+  const studentEnvironmentValues = isProduction
+    ? studentInitialValues
+    : studentDumyInitialValues;
+  const updatedStudentEnvironmentValues = { ...studentEnvironmentValues };
+  if (updatedStudentEnvironmentValues.dob) {
+    const dobDate = new Date(updatedStudentEnvironmentValues.dob);
+    updatedStudentEnvironmentValues.DD = String(dobDate.getDate()).padStart(
+      2,
+      "0"
+    );
+    updatedStudentEnvironmentValues.MM = String(
+      dobDate.getMonth() + 1
+    ).padStart(2, "0");
+    updatedStudentEnvironmentValues.YYYY = String(dobDate.getFullYear());
+    delete updatedStudentEnvironmentValues.dob;
+  }
+  const [loading, setLoading] = useState(false);
   const inputRefs = useRef([]);
-
   const {
     values,
     errors,
@@ -48,10 +48,10 @@ export const StudentForm = () => {
     setFieldValue,
   } = useFormikSignHook(
     studentSignUpSchema,
-    studentEnvironmentValues,
-    studentPostData
+    updatedStudentEnvironmentValues,
+    studentPostData,
+    setLoading
   );
-
   const handleInputChange = (e, fieldKey) => {
     if (/^[A-Za-z]*$/.test(e.target.value)) {
       e.target.value = "";
@@ -61,17 +61,15 @@ export const StudentForm = () => {
         e.target.value = 31;
       }
     } else if (fieldKey === 1 && e.target.id === "mm") {
-      console.log("Month", e.target.value);
       if (e.target.value > 12) {
         e.target.value = 12;
       }
     } else if (fieldKey === 2 && e.target.id === "yyyy") {
-      if (e.target.value > 2000) {
-        e.target.value = 2000;
+      if (e.target.value > 1990) {
+        e.target.value = 1990;
       }
     }
   };
-
   const handleKeyDown = (e, index) => {
     const { value } = e.target;
     if (e.key === "Backspace" && !value && index > 0) {
@@ -80,7 +78,7 @@ export const StudentForm = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      {waitingForPostApi === "loading" ? (
+      {loading ? (
         <div className="flex justify-center h-96 items-center">
           <InfinitySpin
             visible={true}
@@ -163,7 +161,14 @@ export const StudentForm = () => {
                   <div className={field.divclassName}>
                     <MutlipleField
                       Allfields={field.multipleFields}
-                      values={values[field.name]}
+                      values={(() => {
+                        const multipleFieldValues = {};
+                        field.multipleFields.forEach((subField) => {
+                          multipleFieldValues[subField.name] =
+                            values[subField.name] || "";
+                        });
+                        return multipleFieldValues;
+                      })()}
                       handleChange={handleChange}
                       handleBlur={handleBlur}
                       error={errors[field.name]}
@@ -189,11 +194,12 @@ export const StudentForm = () => {
     </form>
   );
 };
-
-export const FacultyForm = () => {
-  const waitingForPostApi = useSelector((state) => state.faculty.status);
+export const FacultyForm = ({ facultyInitialValues, facultyPostData }) => {
+  const facultyEnvironmentValues = isProduction
+    ? facultyInitialValues
+    : facultyDumyInitialValues;
+  const [loading, setLoading] = useState(false);
   const inputRefs = useRef([]);
-
   const {
     values,
     errors,
@@ -205,7 +211,8 @@ export const FacultyForm = () => {
   } = useFormikSignHook(
     facultySignUpSchema,
     facultyEnvironmentValues,
-    facultyPostData
+    facultyPostData,
+    setLoading
   );
   const handleInputChange = (e, fieldKey) => {
     if (/^[A-Za-z]*$/.test(e.target.value)) {
@@ -216,7 +223,6 @@ export const FacultyForm = () => {
         e.target.value = 31;
       }
     } else if (fieldKey === 1 && e.target.id === "mm") {
-      console.log("Month", e.target.value);
       if (e.target.value > 12) {
         e.target.value = 12;
       }
@@ -234,7 +240,7 @@ export const FacultyForm = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      {waitingForPostApi === "loading" ? (
+      {loading ? (
         <div className="flex justify-center h-96 items-center">
           <InfinitySpin
             visible={true}
@@ -317,7 +323,14 @@ export const FacultyForm = () => {
                   <div className={field.divclassName}>
                     <MutlipleField
                       Allfields={field.multipleFields}
-                      values={values[field.name]}
+                      values={(() => {
+                        const multipleFieldValues = {};
+                        field.multipleFields.forEach((subField) => {
+                          multipleFieldValues[subField.name] =
+                            values[subField.name] || "";
+                        });
+                        return multipleFieldValues;
+                      })()}
                       handleChange={handleChange}
                       handleBlur={handleBlur}
                       error={errors[field.name]}
@@ -342,4 +355,12 @@ export const FacultyForm = () => {
       )}
     </form>
   );
+};
+StudentForm.propTypes = {
+  studentDumyInitialValues: PropTypes.object.isRequired,
+  studentPostData: PropTypes.func,
+};
+FacultyForm.propTypes = {
+  facultyInitialValues: PropTypes.object.isRequired,
+  facultyPostData: PropTypes.func,
 };

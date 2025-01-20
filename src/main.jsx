@@ -7,12 +7,13 @@ import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import RegisterPages from "./Pages/Registration/Register/RegisterPages.jsx";
 import { LoginForm, OtpForm } from "./Pages/Registration/Login/LoginForm.jsx";
-import { Profile } from "./Pages/home/Dashboard.jsx";
+import { Profile, Insight, ClassLabTools } from "./Pages/home/Dashboard.jsx";
 import { MenuPage } from "./Components/Layout/Layout.jsx";
 import NotFoundPage from "./Pages/NotFound/NotFoundPage.jsx";
 import {
   LoginProtectRoute,
   HomeProtectRoute,
+  OtpProtectRoute,
 } from "./utils/ProtectedRoute/protectRoute.jsx";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/verify-otp",
-    element: <OtpForm />,
+    element: <OtpProtectRoute />,
     children: [
       {
         path: "/verify-otp",
@@ -58,6 +59,26 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+    ],
+  },
+  {
+    path: "/insight",
+    element: <HomeProtectRoute />,
+    children: [
+      {
+        path: "/insight",
+        element: <Insight />,
+      },
+    ],
+  },
+  {
+    path: "/classlab-tools",
+    element: <HomeProtectRoute />,
+    children: [
+      {
+        path: "/classlab-tools",
+        element: <ClassLabTools />,
       },
     ],
   },

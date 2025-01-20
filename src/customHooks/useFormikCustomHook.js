@@ -1,10 +1,15 @@
 import { useFormik } from "formik";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { customToast } from "../utils/CustomAlert/cutomToast";
 import { useNavigate } from "react-router-dom";
 
-export const useFormikSignHook = (signUpSchema, initialValues, postData) => {
+export const useFormikSignHook = (
+  signUpSchema,
+  initialValues,
+  postData,
+  setLoading
+) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -22,6 +27,7 @@ export const useFormikSignHook = (signUpSchema, initialValues, postData) => {
     initialValues: initialValues,
     onSubmit: async (values) => {
       try {
+        setLoading(true);
         const formData = new FormData();
         Object.keys(values).forEach((key) => {
           if (key !== "DD" && key !== "MM" && key !== "YYYY") {
@@ -40,6 +46,7 @@ export const useFormikSignHook = (signUpSchema, initialValues, postData) => {
         if (dataPass) {
           customToast("success", dataPass.message);
           navigate("/");
+          setLoading(false);
         }
         resetForm();
       } catch (error) {
@@ -47,6 +54,7 @@ export const useFormikSignHook = (signUpSchema, initialValues, postData) => {
       }
     },
   });
+
   return {
     values,
     errors,
@@ -62,7 +70,8 @@ export const useFormikSignHook = (signUpSchema, initialValues, postData) => {
 export const useFormikLoginHook = (
   loginSchema,
   loginInitialValues,
-  postData
+  postData,
+  setLoading
 ) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -81,12 +90,15 @@ export const useFormikLoginHook = (
     initialValues: loginInitialValues,
     onSubmit: async (values) => {
       try {
+        setLoading(true);
         const actionResult = await dispatch(postData(values));
         const dataPass = unwrapResult(actionResult);
 
         if (dataPass) {
           navigate("/verify-otp");
           customToast("success", dataPass.message);
+          setLoading(false);
+          sessionStorage.setItem("loginField", dataPass.data.identifier);
         }
       } catch (error) {
         customToast("error", error.message);
@@ -105,13 +117,16 @@ export const useFormikLoginHook = (
   };
 };
 
-export const useFormikOtpHook = (otpSchema, otpInitialValues, postData) => {
+export const useFormikOtpHook = (
+  otpSchema,
+  otpInitialValues,
+  postData,
+  setLoading
+) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const identifier = useSelector(
-    (state) => state.login.login[0]?.data?.identifier
-  );
+  const identifier = sessionStorage.getItem("loginField");
 
   const {
     values,
@@ -127,6 +142,7 @@ export const useFormikOtpHook = (otpSchema, otpInitialValues, postData) => {
     initialValues: otpInitialValues,
     onSubmit: async (values) => {
       try {
+        setLoading(true);
         const login_verify_otp = `${values.otp1}${values.otp2}${values.otp3}${values.otp4}`;
 
         const apiData = {
@@ -136,10 +152,12 @@ export const useFormikOtpHook = (otpSchema, otpInitialValues, postData) => {
 
         const actionResult = await dispatch(postData(apiData));
         const dataPass = unwrapResult(actionResult);
-
+        console.log(dataPass);
         if (dataPass) {
           navigate("/menu");
-          customToast("success", dataPass.message);
+          customToast("success", dataPass.message + "test");
+          sessionStorage.removeItem("loginField");
+          setLoading(false);
         }
       } catch (error) {
         customToast("error", error.message);

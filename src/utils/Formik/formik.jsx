@@ -368,12 +368,12 @@ export const facultyInitialValues = {
 };
 
 export const studentDumyInitialValues = {
-  student_school: "Greenwood High School",
+  student_school: "Springfield Academy",
   student_programs: "Computer Science",
   student_degree: "Bachelor of Science (B.Sc.)",
   student_specialisation: "Design Management",
   student_how_did_you_hear_about_us: "Word of Mouth",
-  student_profile_image: null, // or use "" if you prefer
+  student_profile_image: null,
   student_first_name: "Faizan",
   student_middle_name: "Sabir",
   student_last_name: "Shaikh",
@@ -386,9 +386,9 @@ export const studentDumyInitialValues = {
   student_postal_code: "40008",
   student_phone_number: "7666129168",
   student_email: "sf48116@gmail.com",
-  DD: "",
-  MM: "",
-  YYYY: "",
+  DD: "30",
+  MM: "11",
+  YYYY: "2000",
   student_gender: "Male",
   student_blood_group: "A+",
   student_caste_category: "General",
@@ -404,46 +404,49 @@ export const studentDumyInitialValues = {
   previous_college_city: "Mumbai",
   previous_college_grade_12th_school_details: "58",
   previous_college_name: "Maharashtra College",
-  student_father_name: "Sabir Shaikh",
+  student_father_name: "Father Shaikh",
   student_father_occupation: "Business",
   student_father_number: "9892306284",
-  student_father_email: "father@gmail.com",
-  student_mother_name: "Ruqaiyya",
+  student_father_email: "izancode11@gmail.com",
+  student_mother_name: "Mother Shaikh",
   student_mother_occupation: "Housewife",
   student_mother_number: "9987394168",
-  student_mother_email: "mother@gmail.com",
+  student_mother_email: "ishanashaikh2007@gmail.com",
   in_case_of_guardian_please_specify_the_relationship: "No",
-  statement_of_purpose: "Just for testing",
+  statement_of_purpose:
+    "I am deeply passionate about the transformative potential of computer science ssand its ability to solve complex real-world problems. My academic journey has been driven by an insatiable curiosity for technology and a desire to contribute meaningfully to society through innovative solutions.\n\nDuring my undergraduate studies, I developed a strong foundation in programming, data structures, and algorithms, which fueled my interest in areas like Artificial Intelligence, Data Science, and Software Development. Working on projects such as [mention a specific project] allowed me to combine theoretical knowledge with practical applications, honing my problem-solving and teamwork skills.\n\nBeyond academics, I have pursued internships and research opportunities to deepen my understanding of [specific interests]. For instance, during my internship at [company/institution], I contributed to [specific achievement]. These experiences solidified my passion for continuous learning and innovation.\n\nI am particularly drawn to [mention the university/program] for its cutting-edge research, esteemed faculty, and emphasis on interdisciplinary collaboration. I am eager to contribute to ongoing projects, especially in [specific areas], and to develop a comprehensive understanding of advanced concepts in computer science.\n\nMy long-term goal is to contribute to the development of technology that addresses global challenges, such as improving healthcare systems, optimizing energy efficiency, or enhancing digital security. I am confident that the rigorous training and vibrant academic environment at [university name] will provide the ideal platform for me to achieve these aspirations.",
 };
 
 export const facultyDumyInitialValues = {
-  faculty_id: 55555, // Or you can use `undefined` if you prefer
+  faculty_id: 12345,
   department: "Computer Science",
   designation_position: "Assistant Professor",
   qualification: "Ph.D. in Computer Science",
   experience_in_year: "5 years",
   courses_subjects_taught: "Introduction to Programming",
-  faculty_profile_image: null, // Or you can use `null` if no image
-  faculty_first_name: "Faizan",
-  faculty_middle_name: "Sabir",
-  faculty_last_name: "Shaikh",
+  faculty_profile_image: null,
+  faculty_first_name: "Devi",
+  faculty_middle_name: "Lal",
+  faculty_last_name: "Singh",
   faculty_nationality: "Indian",
-  faculty_address: "Byculla",
-  faculty_apartment: "Tehseen Tower",
+  faculty_address: "Dadar",
+  faculty_apartment: "Shivam Apartments",
   faculty_country: "India",
   faculty_state: "Maharashtra",
   faculty_city: "Mumbai",
-  faculty_postal_code: "40008",
-  faculty_phone_number: "7666129168",
-  faculty_email: "sf48116@gmail.com",
-  DD: "30",
-  MM: "11",
-  YYYY: "1999",
+  faculty_postal_code: "400014",
+  faculty_phone_number: "8237242970",
+  faculty_email: "aamir.khan@isdi.in",
+  DD: "12",
+  MM: "02",
+  YYYY: "1992",
   faculty_gender: "Male",
-  faculty_instagram_url: "https://www.instagram.com/izancode/",
-  faculty_linkedin_url: "https://www.linkedin.com/in/izancode/",
-  research_interests_if_applicable: "just for testing",
-  publications_if_applicable: "just for testing",
+  faculty_instagram_url: "https://www.instagram.com/aamir_khan_143_429252",
+  faculty_linkedin_url: "https://www.linkedin.com/in/aamir-khan-61454182/",
+  research_interests_if_applicable:
+    "My research interests lie in the areas of Artificial Intelligence, Machine Learning, and Data Science, with a particular focus on developing explainable AI systems and ethical frameworks for their deployment. I am passionate about exploring scalable algorithms for big data analysis and predictive modeling to solve real-world problems in healthcare and smart city planning. Additionally, I am interested in interdisciplinary applications of AI, such as bioinformatics and educational technology, and aim to contribute to the development of secure and privacy-preserving AI solutions. My work seeks to bridge theoretical advancements and practical implementations, fostering innovation in technology while addressing societal needs.",
+  publications_if_applicable:
+    "I have contributed to several peer-reviewed journals and international conferences in the fields of Artificial Intelligence, Machine Learning, and Data Science. My publications focus on developing innovative algorithms for explainable AI, privacy-preserving data analysis, and scalable big data solutions. Notable works include a study on ethical AI frameworks published in a leading journal and a conference paper on predictive modeling that received recognition for its practical applications in healthcare analytics. Additionally, I have co-authored interdisciplinary research bridging AI and bioinformatics, emphasizing real-world problem-solving through advanced computational methods. These publications reflect my commitment to advancing both theoretical knowledge and practical implementations in computer science.",
 };
 
 export const arrayStudentField = [
@@ -1068,7 +1071,7 @@ export const arrayStudentField = [
       "cursor-text absolute  appearance-none  text-sm text-black font-semibold duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-black peer-focus:font-semibold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.85] peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto",
     fieldClassName:
       "block font-bold rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm  bg-[#F0F0F0] appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer ",
-    rows: "4",
+    rows: "20",
   },
   {
     type: "button",

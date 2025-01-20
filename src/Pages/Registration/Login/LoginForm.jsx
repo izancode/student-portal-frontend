@@ -21,13 +21,17 @@ import {
   SectionTwo,
   SectionThree,
 } from "../../../Components/Login/LoginBg";
-import { useSelector } from "react-redux";
 import { InfinitySpin } from "react-loader-spinner";
 import { arrayOtpField } from "../../../utils/Formik/formik";
 export const LoginForm = () => {
-  const waitingForPostApi = useSelector((state) => state.login.status);
+  const [loading, setLoading] = useState(false);
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormikLoginHook(loginSchema, loginInitialValues, loginPostData);
+    useFormikLoginHook(
+      loginSchema,
+      loginInitialValues,
+      loginPostData,
+      setLoading
+    );
   return (
     <div className="grid xl:grid-cols-12 xl:h-screen ">
       <SectionOne />
@@ -37,7 +41,7 @@ export const LoginForm = () => {
       >
         <div>
           <SectionTwo />
-          {waitingForPostApi === "loading" ? (
+          {loading ? (
             <div className="flex justify-center h-96 items-center">
               <InfinitySpin
                 visible={true}
@@ -70,8 +74,9 @@ export const LoginForm = () => {
     </div>
   );
 };
+
 export const OtpForm = () => {
-  const waitingForPostApi = useSelector((state) => state.otp.status);
+  const [loading, setLoading] = useState(false);
   const inputRefs = useRef([]);
   const [time, setTime] = useState(120);
 
@@ -117,7 +122,7 @@ export const OtpForm = () => {
     }
   };
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormikOtpHook(otpSchema, otpInitialValues, otpPostData);
+    useFormikOtpHook(otpSchema, otpInitialValues, otpPostData, setLoading);
   return (
     <div className="grid xl:grid-cols-12 xl:h-screen ">
       <SectionOne />
@@ -127,7 +132,7 @@ export const OtpForm = () => {
       >
         <div>
           <SectionTwo />
-          {waitingForPostApi === "loading" ? (
+          {loading ? (
             <div className="flex justify-center h-96 items-center">
               <InfinitySpin
                 visible={true}

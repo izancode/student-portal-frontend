@@ -1,9 +1,9 @@
-import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 
 export const OtpProtectRoute = () => {
-  const loginStatus = useSelector((state) => state.login.status);
-  return loginStatus ? <Outlet /> : <Navigate to="/" />;
+  const loginField = sessionStorage.getItem("loginField");
+  console.log(loginField);
+  return loginField ? <Outlet /> : <Navigate to="/" />;
 };
 
 export const LoginProtectRoute = () => {
@@ -17,8 +17,9 @@ export const LoginProtectRoute = () => {
 };
 export const HomeProtectRoute = () => {
   const token = document.cookie;
+  console.log({ document });
   const tokenValue = token.split("=")[1];
-
+  console.log(tokenValue);
   if (token && tokenValue) {
     return <Outlet />;
   }

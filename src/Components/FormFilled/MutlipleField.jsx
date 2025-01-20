@@ -20,10 +20,9 @@ const MultipleField = ({
               pattern={filled.pattern}
               id={filled.key}
               name={filled.name}
-              values={filled.name}
               className={filled.inputClass}
-              placeholder=" "
-              value={values}
+              placeholder=""
+              value={values?.[filled?.name] || values}
               onBlur={handleBlur}
               onChange={(e) => handleInputChange(e, index)}
               onKeyDown={(e) => keyDown(e, index)}
@@ -50,7 +49,7 @@ MultipleField.propTypes = {
     })
   ).isRequired,
   error: PropTypes.string,
-  values: PropTypes.string,
+  values: PropTypes.object,
   handleBlur: PropTypes.func,
   handleChange: PropTypes.func,
   touched: PropTypes.bool,

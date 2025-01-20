@@ -1,5 +1,8 @@
 import Header from "../../Components/include/Header";
 import { HomeMenu, SideBarMenu } from "../../Components/Menu/MenuLayout";
+import { Rheader } from "../../Components/RightSideContent/Rheader";
+import { closeSideBar } from "../../Redux/Slice/toggleSlice";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 
 export const HeaderLayout = ({ children }) => {
@@ -22,6 +25,22 @@ export const SidebarMenuLayout = ({ children }) => {
   );
 };
 
+export const Rcontent = ({ children }) => {
+  const dispatch = useDispatch();
+  return (
+    <HeaderLayout>
+      <SidebarMenuLayout>
+        <div
+          className="col-span-4  lg:col-span-10 "
+          onClick={() => dispatch(closeSideBar())}
+        >
+          <Rheader />
+          {children}
+        </div>
+      </SidebarMenuLayout>
+    </HeaderLayout>
+  );
+};
 export const MenuPage = () => {
   return (
     <HeaderLayout>
@@ -34,5 +53,8 @@ HeaderLayout.propTypes = {
   children: PropTypes.node,
 };
 SidebarMenuLayout.propTypes = {
+  children: PropTypes.node,
+};
+Rcontent.propTypes = {
   children: PropTypes.node,
 };

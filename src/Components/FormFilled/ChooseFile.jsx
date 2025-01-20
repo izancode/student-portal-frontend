@@ -12,6 +12,7 @@ const ChooseFile = ({
 }) => {
   const handleFileChange = (event) => {
     const file = event.currentTarget.files[0];
+    console.log(file);
     setFieldValue(name, file);
   };
   return (

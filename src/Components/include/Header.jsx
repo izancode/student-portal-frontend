@@ -1,12 +1,17 @@
 import { useLogoutCustomHook } from "../../customHooks/useHeaderCustomHook";
-
-import { useDispatch } from "react-redux";
 import { toggleSideBar } from "../../Redux/Slice/toggleSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { userGetDataThunk } from "../../Redux/ReduxThunk/fetchDataThunks";
 const Header = () => {
   const { isModalOpen, openModal, closeModal, handleLogout } =
     useLogoutCustomHook();
-
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(userGetDataThunk());
+  }, [dispatch]);
+  const user = useSelector((state) => state.user?.userDetail?.data);
+
   return (
     <>
       <nav className=" bg-[#342B7C] fixed top-0 left-0 z-50 w-full ">
@@ -32,10 +37,12 @@ const Header = () => {
             <div>
               <img
                 className="w-[25px]  h-[25px] border-2 border-white rounded-[50rem] my-0 mx-auto lg:w-[35px]  lg:h-[35px]"
-                src="https://imageio.forbes.com/specials-images/imageserve/5faad4255239c9448d6c7bcd/Best-Animal-Photos-Contest--Close-Up-Of-baby-monkey/960x0.jpg?format=jpg&width=960"
+                src={user?.faculty_profile_image || user?.student_profile_image}
                 alt="logo"
               />
-              <p className="text-[10px] text-white lg:text-[12px]">Faizan</p>
+              <p className="text-[10px] text-white lg:text-[12px]">
+                {user?.faculty_first_name || user?.student_first_name}
+              </p>
             </div>
             <div className="ml-[12px]">
               <img
@@ -51,7 +58,7 @@ const Header = () => {
       </nav>
 
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-[99]">
           <div className="bg-white p-3 rounded shadow-lg w-full m-2 lg:w-1/4 lg:m-0">
             <p className="mb-5 text-center">
               Are you sure you want to log out?

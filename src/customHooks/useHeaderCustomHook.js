@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { logoutPostData } from "../Redux/ReduxThunk/loginThunks";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { customToast } from "../utils/CustomAlert/cutomToast";
+import { clearUserDetail } from "../Redux/Slice/fetchDataSlice";
 export const useLogoutCustomHook = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ export const useLogoutCustomHook = () => {
     try {
       const actionResult = await dispatch(logoutPostData());
       const dataPass = unwrapResult(actionResult);
+      dispatch(clearUserDetail());
 
       navigate("/");
       customToast("success", dataPass.message);

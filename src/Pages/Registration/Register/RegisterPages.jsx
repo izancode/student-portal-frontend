@@ -1,7 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  studentDumyInitialValues,
+  facultyInitialValues,
+} from "../../../utils/Formik/formik";
 
 import { StudentForm, FacultyForm } from "./UserForm";
+
+import {
+  studentPostData,
+  facultyPostData,
+} from "../../../Redux/ReduxThunk/registerationThunks";
+
 const RegisterPages = () => {
   const [tab, setTab] = useState("student");
   const tabChange = (getTab) => {
@@ -43,7 +53,17 @@ const RegisterPages = () => {
             </div>
           </div>
         </div>
-        {tab === "student" ? <StudentForm /> : <FacultyForm />}
+        {tab === "student" ? (
+          <StudentForm
+            studentDumyInitialValues={studentDumyInitialValues}
+            studentPostData={studentPostData}
+          />
+        ) : (
+          <FacultyForm
+            facultyInitialValues={facultyInitialValues}
+            facultyPostData={facultyPostData}
+          />
+        )}
         <p className="text-xs mb-5">
           Already have an account?
           <span className="font-semibold text-[#342B7C] cursor-pointer ml-1">
