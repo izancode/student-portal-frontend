@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
 export const loginPostData = createAsyncThunk(
   "user/postLoginData",
@@ -42,6 +43,7 @@ export const otpPostData = createAsyncThunk(
       console.log({ document });
       if (response.data.token) {
         const token = response.data.token;
+        console.log(token);
         // document.cookie = `token=${token}; path=/; max-age=172800; secure; samesite=None`; // 48 hours expiration
       }
 
