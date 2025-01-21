@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-axios.defaults.withCredentials = true;
+
 export const loginPostData = createAsyncThunk(
   "user/postLoginData",
   async (formData, thunkAPI) => {
@@ -39,7 +39,7 @@ export const otpPostData = createAsyncThunk(
           withCredentials: true,
         }
       );
-
+      console.log({ document });
       if (response.data.token) {
         const token = response.data.token;
         console.log(token);
