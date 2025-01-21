@@ -36,7 +36,7 @@ export const otpPostData = createAsyncThunk(
         formData,
         {
           headers: { "Content-Type": "application/json" },
-          // withCredentials: true,
+          withCredentials: true,
         }
       );
       console.log({ document });
