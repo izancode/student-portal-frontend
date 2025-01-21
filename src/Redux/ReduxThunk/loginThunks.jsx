@@ -43,7 +43,7 @@ export const otpPostData = createAsyncThunk(
       if (response.data.token) {
         const token = response.data.token;
         console.log(token);
-        // document.cookie = `token=${token}; path=/; max-age=172800; secure; samesite=None`;
+        document.cookie = `token=${token}; path=/; max-age=172800; secure; samesite=None`;
       }
 
       return {

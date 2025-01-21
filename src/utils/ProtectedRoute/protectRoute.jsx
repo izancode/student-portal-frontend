@@ -20,7 +20,7 @@ export const HomeProtectRoute = () => {
   console.log({ document });
   const tokenValue = token.split("=")[1];
   console.log(tokenValue);
-  if (token && tokenValue) {
+  if (!token && !tokenValue) {
     return <Outlet />;
   }
   return <Navigate to="/" />;
