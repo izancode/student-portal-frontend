@@ -13,12 +13,14 @@ export const useLogoutCustomHook = () => {
   const handleLogout = async () => {
     try {
       const actionResult = await dispatch(logoutPostData());
-      const dataPass = unwrapResult(actionResult);
-      dispatch(clearUserDetail());
 
-      navigate("/");
+      const dataPass = unwrapResult(actionResult);
+
       customToast("success", dataPass.message);
+      dispatch(clearUserDetail());
+      navigate("/");
     } catch (error) {
+      console.log(error);
       customToast("error", error.message);
     }
   };

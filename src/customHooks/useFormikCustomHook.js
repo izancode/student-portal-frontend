@@ -152,7 +152,7 @@ export const useFormikOtpHook = (
 
         const actionResult = await dispatch(postData(apiData));
         const dataPass = unwrapResult(actionResult);
-        console.log(dataPass);
+
         if (dataPass) {
           navigate("/menu");
           customToast("success", dataPass.message + "test");

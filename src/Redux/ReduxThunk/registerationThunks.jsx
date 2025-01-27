@@ -38,7 +38,7 @@ export const studentPostData = createAsyncThunk(
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-      console.log(response);
+
       return {
         data: response.data,
         message: "Student has been registered successfully.",
