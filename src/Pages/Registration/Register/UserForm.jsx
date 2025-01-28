@@ -136,6 +136,7 @@ export const StudentForm = ({ studentDumyInitialValues, studentPostData }) => {
                       fieldClassName={field.fieldClassName}
                       buttonClassName={field.buttonClassName}
                       values={values[field.name]}
+                      imageBUrl={values.student_profile_image}
                       setFieldValue={setFieldValue}
                       handleBlur={handleBlur}
                       error={errors[field.name]}
