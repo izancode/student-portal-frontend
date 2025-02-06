@@ -23,7 +23,7 @@ const ChooseFile = ({
     "https://res.cloudinary.com/dlqylweq6/image/upload/v1738059447/image_5_yfieap.png"
   );
   const [updateApiFile, setUpdateApiFile] = useState(false);
-  console.log(updateApiFile);
+
   const dispatch = useDispatch();
 
   const handleFileChange = (event) => {
