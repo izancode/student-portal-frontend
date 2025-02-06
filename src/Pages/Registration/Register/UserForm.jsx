@@ -1,44 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import InputField from "../../../Components/FormFilled/InputField";
 import SelectBox from "../../../Components/FormFilled/SelectBox";
 import ChooseFile from "../../../Components/FormFilled/ChooseFile";
 import Textarea from "../../../Components/FormFilled/Textarea";
 import MutlipleField from "../../../Components/FormFilled/MutlipleField";
 import CustomButton from "../../../Components/Button/CustomButton";
-import { useFormikSignHook } from "../../../customHooks/useFormikCustomHook";
-import PropTypes from "prop-types";
-import { useRef } from "react";
 import {
-  studentSignUpSchema,
-  studentInitialValues,
   arrayStudentField,
-  facultySignUpSchema,
-  facultyDumyInitialValues,
   arrayFacultyField,
 } from "../../../utils/Formik/formik";
-
-import { InfinitySpin } from "react-loader-spinner";
-const isProduction = import.meta.env.MODE === "production";
-export const StudentForm = ({ studentDumyInitialValues, studentPostData }) => {
-  const studentEnvironmentValues = isProduction
-    ? studentInitialValues
-    : studentDumyInitialValues;
-  const updatedStudentEnvironmentValues = { ...studentEnvironmentValues };
-  if (updatedStudentEnvironmentValues.dob) {
-    const dobDate = new Date(updatedStudentEnvironmentValues.dob);
-    updatedStudentEnvironmentValues.DD = String(dobDate.getDate()).padStart(
-      2,
-      "0"
-    );
-    updatedStudentEnvironmentValues.MM = String(
-      dobDate.getMonth() + 1
-    ).padStart(2, "0");
-    updatedStudentEnvironmentValues.YYYY = String(dobDate.getFullYear());
-    delete updatedStudentEnvironmentValues.dob;
-  }
-  const [loading, setLoading] = useState(false);
-  const inputRefs = useRef([]);
+import { useDataCustomHook } from "../../../customHooks/useDataCustomHook";
+import { LoaderInfinitySpin } from "../../../utils/Loader/Loader";
+export const StudentForm = ({
+  dumyInitialValues,
+  initialValues,
+  postData,
+  apiFrom,
+}) => {
+  const skipFields = [
+    "student_first_name",
+    "student_middle_name",
+    "student_last_name",
+    "student_email",
+    "student_phone_number",
+    "student_father_name",
+    "student_father_number",
+    "student_father_email",
+    "student_mother_name",
+    "student_mother_number",
+    "student_mother_email",
+  ];
   const {
+    loading,
+    inputRefs,
     values,
     errors,
     touched,
@@ -46,51 +41,37 @@ export const StudentForm = ({ studentDumyInitialValues, studentPostData }) => {
     handleChange,
     handleSubmit,
     setFieldValue,
-  } = useFormikSignHook(
-    studentSignUpSchema,
-    updatedStudentEnvironmentValues,
-    studentPostData,
-    setLoading
-  );
-  const handleInputChange = (e, fieldKey) => {
-    if (/^[A-Za-z]*$/.test(e.target.value)) {
-      e.target.value = "";
+    handleInputChange,
+    handleKeyDown,
+  } = useDataCustomHook(dumyInitialValues, initialValues, postData, apiFrom);
+  const updatedArray = arrayStudentField.map((material) => {
+    if (skipFields.includes(material.name)) {
+      return {
+        ...material,
+        labelClassName: material.labelClassName
+          ? `${material.labelClassName} text-gray-400 select-none pointer-events-none`
+          : `${material.labelClassName}`,
+        fieldClassName: material.fieldClassName
+          ? `${material.fieldClassName} text-gray-400 select-none pointer-events-none`
+          : `${material.labelClassName}`,
+        disabled: true,
+      };
     }
-    if (fieldKey === 0 && e.target.id === "dd") {
-      if (e.target.value > 31) {
-        e.target.value = 31;
-      }
-    } else if (fieldKey === 1 && e.target.id === "mm") {
-      if (e.target.value > 12) {
-        e.target.value = 12;
-      }
-    } else if (fieldKey === 2 && e.target.id === "yyyy") {
-      if (e.target.value > 1990) {
-        e.target.value = 1990;
-      }
-    }
-  };
-  const handleKeyDown = (e, index) => {
-    const { value } = e.target;
-    if (e.key === "Backspace" && !value && index > 0) {
-      inputRefs.current[index - 1]?.focus();
-    }
-  };
+    return material;
+  });
+  const mainArrayForField =
+    apiFrom === "post"
+      ? arrayStudentField
+      : apiFrom === "update"
+      ? updatedArray
+      : null;
   return (
     <form onSubmit={handleSubmit}>
       {loading ? (
-        <div className="flex justify-center h-96 items-center">
-          <InfinitySpin
-            visible={true}
-            width="200"
-            color="#1c22c1"
-            ariaLabel="infinity-spin-loading"
-            wrapperStyle={{}}
-          />
-        </div>
+        <LoaderInfinitySpin />
       ) : (
         <div className="flex flex-wrap ">
-          {arrayStudentField.map((field, fieldIndex) => {
+          {mainArrayForField.map((field, fieldIndex) => {
             return (
               <React.Fragment key={`${field.name}-${fieldIndex}`}>
                 {field.type === "heading" ? (
@@ -111,6 +92,7 @@ export const StudentForm = ({ studentDumyInitialValues, studentPostData }) => {
                       handleBlur={handleBlur}
                       error={errors[field.name]}
                       touched={touched[field.name]}
+                      disabled={field.disabled}
                     />
                   </div>
                 ) : field.type === "select" ? (
@@ -141,6 +123,7 @@ export const StudentForm = ({ studentDumyInitialValues, studentPostData }) => {
                       handleBlur={handleBlur}
                       error={errors[field.name]}
                       touched={!!touched[field.name]}
+                      apiFrom={apiFrom}
                     />
                   </div>
                 ) : field.type === "textarea" ? (
@@ -182,7 +165,7 @@ export const StudentForm = ({ studentDumyInitialValues, studentPostData }) => {
                 ) : (
                   <div className={field.className}>
                     <CustomButton
-                      btnname={field.btnname}
+                      btnname={apiFrom === "update" ? "Save" : field.btnname}
                       type={field.btnType}
                     />
                   </div>
@@ -195,13 +178,15 @@ export const StudentForm = ({ studentDumyInitialValues, studentPostData }) => {
     </form>
   );
 };
-export const FacultyForm = ({ facultyInitialValues, facultyPostData }) => {
-  const facultyEnvironmentValues = isProduction
-    ? facultyInitialValues
-    : facultyDumyInitialValues;
-  const [loading, setLoading] = useState(false);
-  const inputRefs = useRef([]);
+export const FacultyForm = ({
+  dumyInitialValues,
+  initialValues,
+  postData,
+  apiFrom,
+}) => {
   const {
+    loading,
+    inputRefs,
     values,
     errors,
     touched,
@@ -209,51 +194,50 @@ export const FacultyForm = ({ facultyInitialValues, facultyPostData }) => {
     handleChange,
     handleSubmit,
     setFieldValue,
-  } = useFormikSignHook(
-    facultySignUpSchema,
-    facultyEnvironmentValues,
-    facultyPostData,
-    setLoading
-  );
-  const handleInputChange = (e, fieldKey) => {
-    if (/^[A-Za-z]*$/.test(e.target.value)) {
-      e.target.value = "";
+    handleInputChange,
+    handleKeyDown,
+  } = useDataCustomHook(dumyInitialValues, initialValues, postData, apiFrom);
+  const skipFields = [
+    "student_first_name",
+    "student_middle_name",
+    "student_last_name",
+    "student_email",
+    "student_phone_number",
+    "student_father_name",
+    "student_father_number",
+    "student_father_email",
+    "student_mother_name",
+    "student_mother_number",
+    "student_mother_email",
+  ];
+  const updatedArray = arrayFacultyField.map((material) => {
+    if (skipFields.includes(material.name)) {
+      return {
+        ...material,
+        labelClassName: material.labelClassName
+          ? `${material.labelClassName} text-gray-400 select-none pointer-events-none`
+          : `${material.labelClassName}`,
+        fieldClassName: material.fieldClassName
+          ? `${material.fieldClassName} text-gray-400 select-none pointer-events-none`
+          : `${material.labelClassName}`,
+        disabled: true,
+      };
     }
-    if (fieldKey === 0 && e.target.id === "dd") {
-      if (e.target.value > 31) {
-        e.target.value = 31;
-      }
-    } else if (fieldKey === 1 && e.target.id === "mm") {
-      if (e.target.value > 12) {
-        e.target.value = 12;
-      }
-    } else if (fieldKey === 2 && e.target.id === "yyyy") {
-      if (e.target.value > 1990) {
-        e.target.value = 1990;
-      }
-    }
-  };
-  const handleKeyDown = (e, index) => {
-    const { value } = e.target;
-    if (e.key === "Backspace" && !value && index > 0) {
-      inputRefs.current[index - 1]?.focus();
-    }
-  };
+    return material;
+  });
+  const mainArrayForField =
+    apiFrom === "post"
+      ? arrayStudentField
+      : apiFrom === "update"
+      ? updatedArray
+      : null;
   return (
     <form onSubmit={handleSubmit}>
       {loading ? (
-        <div className="flex justify-center h-96 items-center">
-          <InfinitySpin
-            visible={true}
-            width="200"
-            color="#1c22c1"
-            ariaLabel="infinity-spin-loading"
-            wrapperStyle={{}}
-          />
-        </div>
+        <LoaderInfinitySpin />
       ) : (
         <div className="flex flex-wrap">
-          {arrayFacultyField.map((field, fieldIndex) => {
+          {mainArrayForField.map((field, fieldIndex) => {
             return (
               <React.Fragment key={`${field.name}-${fieldIndex}`}>
                 {field.type === "heading" ? (
@@ -358,10 +342,14 @@ export const FacultyForm = ({ facultyInitialValues, facultyPostData }) => {
   );
 };
 StudentForm.propTypes = {
-  studentDumyInitialValues: PropTypes.object.isRequired,
-  studentPostData: PropTypes.func,
+  dumyInitialValues: PropTypes.object.isRequired,
+  initialValues: PropTypes.object.isRequired,
+  postData: PropTypes.func,
+  apiFrom: PropTypes.string.isRequired,
 };
 FacultyForm.propTypes = {
-  facultyInitialValues: PropTypes.object.isRequired,
-  facultyPostData: PropTypes.func,
+  dumyInitialValues: PropTypes.object.isRequired,
+  initialValues: PropTypes.object.isRequired,
+  postData: PropTypes.func,
+  apiFrom: PropTypes.string.isRequired,
 };

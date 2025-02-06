@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   studentDumyInitialValues,
+  facultyDumyInitialValues,
+  studentInitialValues,
   facultyInitialValues,
 } from "../../../utils/Formik/formik";
 
@@ -55,13 +57,17 @@ const RegisterPages = () => {
         </div>
         {tab === "student" ? (
           <StudentForm
-            studentDumyInitialValues={studentDumyInitialValues}
-            studentPostData={studentPostData}
+            dumyInitialValues={studentDumyInitialValues}
+            initialValues={studentInitialValues}
+            postData={studentPostData}
+            apiFrom="post"
           />
         ) : (
           <FacultyForm
-            facultyInitialValues={facultyInitialValues}
-            facultyPostData={facultyPostData}
+            dumyInitialValues={facultyDumyInitialValues}
+            initialValues={facultyInitialValues}
+            postData={facultyPostData}
+            apiFrom="post"
           />
         )}
         <p className="text-xs mb-5">

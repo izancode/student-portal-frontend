@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 const InputField = ({
   name,
   placeholder,
-
   fieldClassName,
   inputType,
   labelClassName,
@@ -12,6 +11,7 @@ const InputField = ({
   handleBlur,
   error,
   touched,
+  disabled,
 }) => {
   return (
     <div className="relative mb-5">
@@ -26,6 +26,7 @@ const InputField = ({
         value={values}
         onChange={handleChange}
         onBlur={handleBlur}
+        disabled={disabled}
       />
       <label htmlFor={name} className={labelClassName}>
         {placeholder}
@@ -46,6 +47,7 @@ InputField.propTypes = {
   values: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   error: PropTypes.string,
   touched: PropTypes.bool,
+  disabled: PropTypes.bool,
 
   handleChange: PropTypes.func, // Add handleChange here
   handleBlur: PropTypes.func, // Add handleBlur here

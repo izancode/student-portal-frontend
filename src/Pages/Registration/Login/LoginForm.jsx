@@ -21,7 +21,8 @@ import {
   SectionTwo,
   SectionThree,
 } from "../../../Components/Login/LoginBg";
-import { InfinitySpin } from "react-loader-spinner";
+
+import { LoaderInfinitySpin } from "../../../utils/Loader/Loader";
 import { arrayOtpField } from "../../../utils/Formik/formik";
 export const LoginForm = () => {
   const [loading, setLoading] = useState(false);
@@ -42,15 +43,7 @@ export const LoginForm = () => {
         <div>
           <SectionTwo />
           {loading ? (
-            <div className="flex justify-center h-96 items-center">
-              <InfinitySpin
-                visible={true}
-                width="200"
-                color="#1c22c1"
-                ariaLabel="infinity-spin-loading"
-                wrapperStyle={{}}
-              />
-            </div>
+            <LoaderInfinitySpin />
           ) : (
             <form onSubmit={handleSubmit}>
               <InputField
@@ -133,15 +126,7 @@ export const OtpForm = () => {
         <div>
           <SectionTwo />
           {loading ? (
-            <div className="flex justify-center h-96 items-center">
-              <InfinitySpin
-                visible={true}
-                width="200"
-                color="#1c22c1"
-                ariaLabel="infinity-spin-loading"
-                wrapperStyle={{}}
-              />
-            </div>
+            <LoaderInfinitySpin />
           ) : (
             <form onSubmit={handleSubmit}>
               <MultipleField
