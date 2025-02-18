@@ -10,6 +10,7 @@ const MultipleField = ({
   handleInputChange,
   inputRefs,
 }) => {
+  console.log(values);
   return (
     <div className="flex flex-wrap mb-4">
       {Allfields.map((filled, index) => {
@@ -22,7 +23,7 @@ const MultipleField = ({
               name={filled.name}
               className={filled.inputClass}
               placeholder=""
-              value={values?.[filled?.name] || values}
+              value={values?.[filled?.name] || values.filled}
               onBlur={handleBlur}
               onChange={(e) => handleInputChange(e, index)}
               onKeyDown={(e) => keyDown(e, index)}
