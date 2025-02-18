@@ -33,11 +33,6 @@ export const useFormikSignHook = (
         setLoading(true);
         const skipFields = [
           "_id",
-          "student_first_name",
-          "student_middle_name",
-          "student_last_name",
-          "student_email",
-          "student_phone_number",
           "student_father_name",
           "student_father_number",
           "student_father_email",
@@ -45,6 +40,9 @@ export const useFormikSignHook = (
           "student_mother_number",
           "student_mother_email",
           "student_profile_image",
+          "student_father_occupation",
+          "student_mother_occupation",
+          "in_case_of_guardian_please_specify_the_relationship",
           "image_public_id",
           "__v",
           "createdAt",

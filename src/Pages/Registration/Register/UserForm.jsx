@@ -19,17 +19,15 @@ export const StudentForm = ({
   apiFrom,
 }) => {
   const skipFields = [
-    "student_first_name",
-    "student_middle_name",
-    "student_last_name",
-    "student_email",
-    "student_phone_number",
     "student_father_name",
     "student_father_number",
     "student_father_email",
     "student_mother_name",
     "student_mother_number",
     "student_mother_email",
+    "student_father_occupation",
+    "student_mother_occupation",
+    "in_case_of_guardian_please_specify_the_relationship",
   ];
   const {
     loading,
@@ -209,6 +207,9 @@ export const FacultyForm = ({
     "student_mother_name",
     "student_mother_number",
     "student_mother_email",
+    "student_father_occupation",
+    "student_mother_occupation",
+    "in_case_of_guardian_please_specify_the_relationship",
   ];
   const updatedArray = arrayFacultyField.map((material) => {
     if (skipFields.includes(material.name)) {
@@ -225,6 +226,8 @@ export const FacultyForm = ({
     }
     return material;
   });
+  console.log(updatedArray);
+
   const mainArrayForField =
     apiFrom === "post"
       ? arrayStudentField

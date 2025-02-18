@@ -34,6 +34,8 @@ export const useDataCustomHook = (
   const inputRefs = useRef([]);
 
   const handleInputChange = (e, fieldKey) => {
+    console.log("e" + e.target.id);
+    console.log("fieldKey" + fieldKey);
     if (/^[A-Za-z]*$/.test(e.target.value)) {
       e.target.value = "";
     }
