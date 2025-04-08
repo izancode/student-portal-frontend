@@ -52,7 +52,7 @@ const ChooseFile = ({
   const updateImage = async (file) => {
     try {
       const formData = new FormData();
-      formData.append("student_profile_image", file);
+      formData.append("profile_image", file);
       const fileUploaded = await dispatch(studentImageUpdateData(formData));
       const dataPass = unwrapResult(fileUploaded);
       if (dataPass) {
@@ -99,10 +99,7 @@ ChooseFile.propTypes = {
   type: PropTypes.string,
   fieldClassName: PropTypes.string,
   buttonClassName: PropTypes.string,
-  imageBUrl: PropTypes.oneOfType([
-    PropTypes.string, // Allows a string
-    PropTypes.object, // Allows an object
-  ]),
+  imageBUrl: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   error: PropTypes.string,
   setFieldValue: PropTypes.func,
   handleBlur: PropTypes.func,

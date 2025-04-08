@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import InputField from "../../../Components/FormFilled/InputField";
 import SelectBox from "../../../Components/FormFilled/SelectBox";
@@ -18,17 +19,111 @@ export const StudentForm = ({
   postData,
   apiFrom,
 }) => {
-  const skipFields = [
-    "student_father_name",
-    "student_father_number",
-    "student_father_email",
-    "student_mother_name",
-    "student_mother_number",
-    "student_mother_email",
-    "student_father_occupation",
-    "student_mother_occupation",
-    "in_case_of_guardian_please_specify_the_relationship",
-  ];
+  const role = useSelector((state) => state.user?.userDetail?.role);
+
+  let skipFields = [];
+  if (role === "student") {
+    skipFields = [
+      "student_father_name",
+      "student_father_number",
+      "student_father_email",
+      "student_mother_name",
+      "student_mother_number",
+      "student_mother_email",
+      "student_father_occupation",
+      "student_mother_occupation",
+      "in_case_of_guardian_please_specify_the_relationship",
+    ];
+  } else if (role === "father") {
+    skipFields = [
+      "student_school",
+      "student_programs",
+      "student_degree",
+      "student_specialisation",
+      "student_how_did_you_hear_about_us",
+      "profile_image",
+      "student_first_name",
+      "student_middle_name",
+      "student_last_name",
+      "student_nationality",
+      "student_address",
+      "student_apartment",
+      "student_country",
+      "student_state",
+      "student_city",
+      "student_postal_code",
+      "student_phone_number",
+      "student_email",
+      "DD",
+      "MM",
+      "YYYY",
+      "student_gender",
+      "student_blood_group",
+      "student_caste_category",
+      "student_instagram_url",
+      "student_linkedin_url",
+      "previous_college_grade_10_details",
+      "previous_college_percentage_grade_secured",
+      "previous_college_marks_secured",
+      "previous_college_marks_out_of",
+      "previous_college_academic_year",
+      "previous_college_examination_board",
+      "previous_college_state",
+      "previous_college_city",
+      "previous_college_grade_12th_school_details",
+      "previous_college_name",
+      "student_mother_name",
+      "student_mother_occupation",
+      "student_mother_number",
+      "student_mother_email",
+      "statement_of_purpose",
+    ];
+  } else if (role === "mother") {
+    skipFields = [
+      "student_school",
+      "student_programs",
+      "student_degree",
+      "student_specialisation",
+      "student_how_did_you_hear_about_us",
+      "profile_image",
+      "student_first_name",
+      "student_middle_name",
+      "student_last_name",
+      "student_nationality",
+      "student_address",
+      "student_apartment",
+      "student_country",
+      "student_state",
+      "student_city",
+      "student_postal_code",
+      "student_phone_number",
+      "student_email",
+      "DD",
+      "MM",
+      "YYYY",
+      "student_gender",
+      "student_blood_group",
+      "student_caste_category",
+      "student_instagram_url",
+      "student_linkedin_url",
+      "previous_college_grade_10_details",
+      "previous_college_percentage_grade_secured",
+      "previous_college_marks_secured",
+      "previous_college_marks_out_of",
+      "previous_college_academic_year",
+      "previous_college_examination_board",
+      "previous_college_state",
+      "previous_college_city",
+      "previous_college_grade_12th_school_details",
+      "previous_college_name",
+      "student_father_name",
+      "student_father_occupation",
+      "student_father_number",
+      "student_father_email",
+      "statement_of_purpose",
+    ];
+  }
+
   const {
     loading,
     inputRefs,
@@ -42,20 +137,49 @@ export const StudentForm = ({
     handleInputChange,
     handleKeyDown,
   } = useDataCustomHook(dumyInitialValues, initialValues, postData, apiFrom);
+
   const updatedArray = arrayStudentField.map((material) => {
+    const underDate = material.multipleFields;
+
+    // Check if multipleFields exists
+    const updatedMultipleFields = underDate
+      ? underDate.map((dateName) =>
+          skipFields.includes(dateName.name)
+            ? {
+                ...dateName,
+                labelClassName: dateName.labelClassName
+                  ? `${dateName.labelClassName} text-gray-400 select-none pointer-events-none`
+                  : `${dateName.labelClassName}`,
+                inputClass: dateName.inputClass
+                  ? `${dateName.inputClass} text-gray-400 select-none pointer-events-none`
+                  : `${dateName.inputClass}`,
+                disabled: true,
+              }
+            : dateName
+        )
+      : undefined;
+
     if (skipFields.includes(material.name)) {
       return {
         ...material,
+        multipleFields: updatedMultipleFields,
         labelClassName: material.labelClassName
           ? `${material.labelClassName} text-gray-400 select-none pointer-events-none`
           : `${material.labelClassName}`,
         fieldClassName: material.fieldClassName
           ? `${material.fieldClassName} text-gray-400 select-none pointer-events-none`
-          : `${material.labelClassName}`,
+          : `${material.fieldClassName}`,
+        buttonClassName: material.buttonClassName
+          ? `${material.buttonClassName} text-gray-400 select-none pointer-events-none`
+          : `${material.buttonClassName}`,
         disabled: true,
       };
     }
-    return material;
+
+    return {
+      ...material,
+      multipleFields: updatedMultipleFields,
+    };
   });
   const mainArrayForField =
     apiFrom === "post"
@@ -63,6 +187,7 @@ export const StudentForm = ({
       : apiFrom === "update"
       ? updatedArray
       : null;
+
   return (
     <form onSubmit={handleSubmit}>
       {loading ? (
@@ -116,7 +241,7 @@ export const StudentForm = ({
                       fieldClassName={field.fieldClassName}
                       buttonClassName={field.buttonClassName}
                       values={values[field.name]}
-                      imageBUrl={values.student_profile_image}
+                      imageBUrl={values.profile_image}
                       setFieldValue={setFieldValue}
                       handleBlur={handleBlur}
                       error={errors[field.name]}
@@ -195,52 +320,14 @@ export const FacultyForm = ({
     handleInputChange,
     handleKeyDown,
   } = useDataCustomHook(dumyInitialValues, initialValues, postData, apiFrom);
-  const skipFields = [
-    "student_first_name",
-    "student_middle_name",
-    "student_last_name",
-    "student_email",
-    "student_phone_number",
-    "student_father_name",
-    "student_father_number",
-    "student_father_email",
-    "student_mother_name",
-    "student_mother_number",
-    "student_mother_email",
-    "student_father_occupation",
-    "student_mother_occupation",
-    "in_case_of_guardian_please_specify_the_relationship",
-  ];
-  const updatedArray = arrayFacultyField.map((material) => {
-    if (skipFields.includes(material.name)) {
-      return {
-        ...material,
-        labelClassName: material.labelClassName
-          ? `${material.labelClassName} text-gray-400 select-none pointer-events-none`
-          : `${material.labelClassName}`,
-        fieldClassName: material.fieldClassName
-          ? `${material.fieldClassName} text-gray-400 select-none pointer-events-none`
-          : `${material.labelClassName}`,
-        disabled: true,
-      };
-    }
-    return material;
-  });
-  console.log(updatedArray);
 
-  const mainArrayForField =
-    apiFrom === "post"
-      ? arrayStudentField
-      : apiFrom === "update"
-      ? updatedArray
-      : null;
   return (
     <form onSubmit={handleSubmit}>
       {loading ? (
         <LoaderInfinitySpin />
       ) : (
         <div className="flex flex-wrap">
-          {mainArrayForField.map((field, fieldIndex) => {
+          {arrayFacultyField.map((field, fieldIndex) => {
             return (
               <React.Fragment key={`${field.name}-${fieldIndex}`}>
                 {field.type === "heading" ? (
@@ -286,10 +373,12 @@ export const FacultyForm = ({
                       fieldClassName={field.fieldClassName}
                       buttonClassName={field.buttonClassName}
                       values={values[field.name]}
+                      imageBUrl={values.profile_image}
                       setFieldValue={setFieldValue}
                       handleBlur={handleBlur}
                       error={errors[field.name]}
                       touched={!!touched[field.name]}
+                      apiFrom={apiFrom}
                     />
                   </div>
                 ) : field.type === "textarea" ? (
@@ -331,7 +420,7 @@ export const FacultyForm = ({
                 ) : (
                   <div className={field.className}>
                     <CustomButton
-                      btnname={field.btnname}
+                      btnname={apiFrom === "update" ? "Save" : field.btnname}
                       type={field.btnType}
                     />
                   </div>

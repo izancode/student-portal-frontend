@@ -10,7 +10,7 @@ export const studentSignUpSchema = Yup.object({
   student_how_did_you_hear_about_us: Yup.string().required(
     "How did you hear about us field is required"
   ),
-  student_profile_image: Yup.string().required(
+  profile_image: Yup.string().required(
     "Student profile image field is required"
   ),
 
@@ -166,7 +166,7 @@ export const facultySignUpSchema = Yup.object({
     "Courses/Subjects taught field is required"
   ),
 
-  faculty_profile_image: Yup.mixed()
+  profile_image: Yup.mixed()
     .nullable()
     .required("Faculty profile image field is required"),
 
@@ -294,7 +294,7 @@ export const studentInitialValues = {
   student_degree: "",
   student_specialisation: "",
   student_how_did_you_hear_about_us: "",
-  student_profile_image: null, // or use "" if you prefer
+  profile_image: null, // or use "" if you prefer
   student_first_name: "",
   student_middle_name: "",
   student_last_name: "",
@@ -344,7 +344,7 @@ export const facultyInitialValues = {
   qualification: "",
   experience_in_year: "",
   courses_subjects_taught: "",
-  faculty_profile_image: "", // Or you can use `null` if no image
+  profile_image: "", // Or you can use `null` if no image
   faculty_first_name: "",
   faculty_middle_name: "",
   faculty_last_name: "",
@@ -373,7 +373,7 @@ export const studentDumyInitialValues = {
   student_degree: "Bachelor of Science (B.Sc.)",
   student_specialisation: "Design Management",
   student_how_did_you_hear_about_us: "Word of Mouth",
-  student_profile_image: null,
+  profile_image: null,
   student_first_name: "Faizan",
   student_middle_name: "Sabir",
   student_last_name: "Shaikh",
@@ -386,9 +386,9 @@ export const studentDumyInitialValues = {
   student_postal_code: "40008",
   student_phone_number: "7666129168",
   student_email: "sf48116@gmail.com",
-  DD: "30",
-  MM: "11",
-  YYYY: "2000",
+  DD: "15",
+  MM: "2",
+  YYYY: "1999",
   student_gender: "Male",
   student_blood_group: "A+",
   student_caste_category: "General",
@@ -424,7 +424,7 @@ export const facultyDumyInitialValues = {
   qualification: "Ph.D. in Computer Science",
   experience_in_year: "5 years",
   courses_subjects_taught: "Introduction to Programming",
-  faculty_profile_image: null,
+  profile_image: null,
   faculty_first_name: "Devi",
   faculty_middle_name: "Lal",
   faculty_last_name: "Singh",
@@ -539,7 +539,7 @@ export const arrayStudentField = [
   },
   {
     type: "file",
-    name: "student_profile_image",
+    name: "profile_image",
     profileImage: "Profile image",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
@@ -1059,7 +1059,7 @@ export const arrayStudentField = [
     labelClassName:
       "cursor-text absolute  appearance-none  text-sm text-black font-semibold duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-black peer-focus:font-semibold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.85] peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto",
     fieldClassName:
-      "block h-14  font-bold rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm  bg-[#F0F0F0] appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer ",
+      "block h-14   font-bold rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm  bg-[#F0F0F0] appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer ",
   },
   {
     type: "textarea",
@@ -1068,9 +1068,9 @@ export const arrayStudentField = [
     className: "w-full lg:w-1/3 lg:px-4",
     divclassName: "w-full  lg:px-4",
     labelClassName:
-      "cursor-text absolute  appearance-none  text-sm text-black font-semibold duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-black peer-focus:font-semibold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.85] peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto",
+      "cursor-text absolute  appearance-none  text-sm text-black font-semibold duration-300 transform-translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-black peer-focus:font-semibold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.85] peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto",
     fieldClassName:
-      "block font-bold rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm  bg-[#F0F0F0] appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer ",
+      "block font-bold scrollbar-style-2 rounded-lg px-2.5  pt-10 pb-2.5 w-full text-sm  bg-[#F0F0F0] appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer ",
     rows: "2",
   },
   {
@@ -1177,7 +1177,7 @@ export const arrayFacultyField = [
   },
   {
     type: "file",
-    name: "faculty_profile_image",
+    name: "profile_image",
     profileImage: "Profile image",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 

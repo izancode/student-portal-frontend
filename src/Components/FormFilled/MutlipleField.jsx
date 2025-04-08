@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useEffect } from "react";
 
 const MultipleField = ({
   Allfields,
@@ -10,6 +11,22 @@ const MultipleField = ({
   handleInputChange,
   inputRefs,
 }) => {
+  useEffect(() => {
+    inputRefs.current.forEach((input, index) => {
+      if (input) {
+        input.addEventListener("keydown", (e) => keyDown(e, index));
+      }
+    });
+
+    return () => {
+      inputRefs.current.forEach((input, index) => {
+        if (input) {
+          input.removeEventListener("keydown", (e) => keyDown(e, index));
+        }
+      });
+    };
+  }, []);
+
   return (
     <div className="flex flex-wrap mb-4">
       {Allfields.map((filled, index) => {
@@ -17,12 +34,13 @@ const MultipleField = ({
           <div key={index} className={`relative ${filled.divClass}`}>
             <input
               type={filled.type}
+              autoComplete="off"
               pattern={filled.pattern}
               id={filled.key}
               name={filled.name}
               className={filled.inputClass}
               placeholder=""
-              value={values?.[filled?.name] || values}
+              value={values?.[filled?.name]}
               onBlur={handleBlur}
               onChange={(e) => handleInputChange(e, index)}
               onKeyDown={(e) => keyDown(e, index)}

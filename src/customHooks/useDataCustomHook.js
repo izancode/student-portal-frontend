@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useRef } from "react";
 import { useFormikSignHook } from "../customHooks/useFormikCustomHook";
-import { studentSignUpSchema } from "../utils/Formik/formik";
+import {
+  studentSignUpSchema,
+  facultySignUpSchema,
+} from "../utils/Formik/formik";
+import { useSelector } from "react-redux";
 
 const isProduction = import.meta.env.MODE === "production";
 
@@ -12,47 +16,50 @@ export const useDataCustomHook = (
   apiFrom,
   skipFields
 ) => {
-  const studentEnvironmentValues = isProduction
-    ? initialValues
-    : dumyInitialValues;
+  const role = useSelector((state) => state.user?.userDetail?.role);
 
-  const updatedStudentEnvironmentValues = { ...studentEnvironmentValues };
-  if (updatedStudentEnvironmentValues.dob) {
-    const dobDate = new Date(updatedStudentEnvironmentValues.dob);
-    updatedStudentEnvironmentValues.DD = String(dobDate.getDate()).padStart(
+  let SignUpSchema;
+  if (role === "student" || role === "father" || role === "mother") {
+    SignUpSchema = studentSignUpSchema;
+  } else if (role === "faculty") {
+    SignUpSchema = facultySignUpSchema;
+  }
+
+  const environmentValues = isProduction ? initialValues : dumyInitialValues;
+
+  const updatedEnvironmentValues = { ...environmentValues };
+  if (updatedEnvironmentValues.dob) {
+    const dobDate = new Date(updatedEnvironmentValues.dob);
+    updatedEnvironmentValues.DD = String(dobDate.getDate()).padStart(2, "0");
+    updatedEnvironmentValues.MM = String(dobDate.getMonth() + 1).padStart(
       2,
       "0"
     );
-    updatedStudentEnvironmentValues.MM = String(
-      dobDate.getMonth() + 1
-    ).padStart(2, "0");
-    updatedStudentEnvironmentValues.YYYY = String(dobDate.getFullYear());
-    delete updatedStudentEnvironmentValues.dob;
+    updatedEnvironmentValues.YYYY = String(dobDate.getFullYear());
+    delete updatedEnvironmentValues.dob;
   }
 
   const [loading, setLoading] = useState(false);
   const inputRefs = useRef([]);
 
-  const handleInputChange = (e, fieldKey) => {
-    console.log("e" + e.target.id);
-    console.log("fieldKey" + fieldKey);
-    if (/^[A-Za-z]*$/.test(e.target.value)) {
-      e.target.value = "";
+  const handleInputChange = (e) => {
+    let { name, value } = e.target;
+
+    if (!Number(value)) {
+      value = "";
     }
-    if (fieldKey === 0 && e.target.id === "dd") {
-      if (e.target.value > 31) {
-        e.target.value = 31;
-      }
-    } else if (fieldKey === 1 && e.target.id === "mm") {
-      if (e.target.value > 12) {
-        e.target.value = 12;
-      }
-    } else if (fieldKey === 2 && e.target.id === "yyyy") {
-      if (e.target.value > 1990) {
-        e.target.value = 1990;
-      }
+    if (name === "DD") {
+      if (value > 31) return;
     }
+    if (name === "MM") {
+      if (value > 12) return;
+    }
+    if (name === "YYYY") {
+      if (value > 2005) return;
+    }
+    setFieldValue(name, value);
   };
+
   const handleKeyDown = (e, index) => {
     const { value } = e.target;
     if (e.key === "Backspace" && !value && index > 0) {
@@ -68,15 +75,16 @@ export const useDataCustomHook = (
     handleSubmit,
     setFieldValue,
   } = useFormikSignHook(
-    studentSignUpSchema,
-    updatedStudentEnvironmentValues,
+    SignUpSchema,
+    updatedEnvironmentValues,
     postData,
     setLoading,
     apiFrom,
     skipFields
   );
+
   return {
-    updatedStudentEnvironmentValues,
+    updatedEnvironmentValues,
     loading,
     inputRefs,
     values,

@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const studentUpdateData = createAsyncThunk(
-  "student/updateStudentData",
+export const userUpdateData = createAsyncThunk(
+  "user/updateUserData",
   async (formData, thunkAPI) => {
     try {
       const response = await axios.patch(

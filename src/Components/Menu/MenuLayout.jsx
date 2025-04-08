@@ -3,6 +3,8 @@ import { menuItems } from "../../utils/Array/menuArray.jsx";
 import { useSelector } from "react-redux";
 export const HomeMenu = () => {
   const user = useSelector((state) => state.user?.userDetail?.data);
+  const role = useSelector((state) => state.user?.userDetail?.role);
+
   return (
     <div className=" px-2 lg:max-w-[1200px] mx-auto h-[calc(100vh-50px)] sm:h-[calc(100vh-60px)] flex items-center">
       <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-y-[15px] gap-x-[10px]  sm:gap-y-[10px] sm:gap-x-[30px] lg:gap-y-[10px] lg:gap-x-[4rem] w-full">
@@ -10,10 +12,14 @@ export const HomeMenu = () => {
           <h2 className="text-[22px] sm:text-[32px] text-[#342B7C]">
             Hi{" "}
             <span className="font-semibold">
-              {user?.faculty_first_name && user?.faculty_last_name
+              {role === "faculty"
                 ? user.faculty_first_name + " " + user.faculty_last_name
-                : user?.student_first_name && user?.student_last_name
+                : role === "student"
                 ? user.student_first_name + " " + user.student_last_name
+                : role === "father"
+                ? user.student_father_name
+                : role === "mother"
+                ? user.student_mother_name
                 : ""}
             </span>
           </h2>
@@ -29,6 +35,7 @@ export const HomeMenu = () => {
 export const SideBarMenu = () => {
   const isSideBarOpen = useSelector((state) => state.sideBar.isSideBarOpen);
   const user = useSelector((state) => state.user?.userDetail?.data);
+  const role = useSelector((state) => state.user?.userDetail?.role);
 
   return (
     <div
@@ -38,68 +45,104 @@ export const SideBarMenu = () => {
           : "left-[-90px]"
       } z-50 lg:static lg:shadow-[unset]`}
     >
-      <div className="hidden h-[119px] lg:flex py-2 items-center text-white bg-[#2b264c]">
+      <div className="hidden h-[119px] lg:flex  items-center text-white bg-[#2b264c]">
         <div className="w-2/5">
           <img
-            src={user?.faculty_profile_image || user?.student_profile_image}
-            className="w-[70px] h-[70px] rounded-[50rem] mx-auto"
+            src={
+              role === "student" || role === "faculty"
+                ? user?.profile_image
+                : role === "father"
+                ? "https://res.cloudinary.com/dlqylweq6/image/upload/v1740046270/Group_2_3_nuoxik.png"
+                : role === "mother"
+                ? "https://res.cloudinary.com/dlqylweq6/image/upload/v1740046245/Group_2_2_j2crkm.png"
+                : ""
+            }
+            className="w-[60px] h-[60px] rounded-[50rem] mx-auto mb-[6px]"
             alt=""
           />
-          <p className="text-[12px] font-semibold text-center">
-            {user?.faculty_first_name && user?.faculty_last_name
+          <p className="text-[12px] font-semibold text-center leading-[12px] mb-[2px]">
+            {role === "faculty"
               ? user.faculty_first_name + " " + user.faculty_last_name
-              : user?.student_first_name && user?.student_last_name
+              : role === "student"
               ? user.student_first_name + " " + user.student_last_name
+              : role === "father"
+              ? user.student_father_name
+              : role === "mother"
+              ? user.student_mother_name
               : ""}
           </p>
-          <p className="text-[8px] font-medium text-center">
-            {user?.designation_position || user?.student_specialisation}
+          <p className="text-[10px] font-medium text-center leading-[9px] capitalize">
+            Role : {role}
           </p>
         </div>
         <div className="w-3/5 pl-2">
           <p className="flex items-center text-[10px] font-medium">
-            <img
-              src="https://atlasskilltech.app/studentportal24/assets/images/icon/idumbericon.png"
-              alt=""
-              className="h-fit mr-1"
-            />
-            {user?.faculty_id || user?.student_blood_group}
+            {role === "faculty"
+              ? user?.faculty_id
+              : role === "student"
+              ? user?.student_blood_group
+              : role === "father"
+              ? user?.student_father_occupation
+              : role === "mother"
+              ? user?.student_mother_occupation
+              : ""}
           </p>
           <p className="flex items-center text-[10px] font-medium">
-            <img
-              src="https://atlasskilltech.app/studentportal24/assets/images/icon/idumbericon.png"
-              alt=""
-              className="h-fit mr-1"
-            />
-            {user?.department || user?.student_programs}
+            {role === "faculty"
+              ? user?.department
+              : role === "student"
+              ? user?.student_programs
+              : role === "father"
+              ? ""
+              : role === "mother"
+              ? ""
+              : ""}
           </p>
           <p className="flex items-center text-[10px] font-medium">
-            <img
-              src="https://atlasskilltech.app/studentportal24/assets/images/icon/idumbericon.png"
-              alt=""
-              className="h-fit mr-1"
-            />
-            <a
-              href={`tel:${
-                user?.faculty_phone_number || user?.student_phone_number
-              }`}
-            >
-              {user?.faculty_phone_number || user?.student_phone_number}
-            </a>
+            {role === "faculty" ? (
+              <a href={`tel:${user?.faculty_phone_number}`}>
+                {user?.faculty_phone_number}
+              </a>
+            ) : role === "student" ? (
+              <a href={`tel:${user?.student_phone_number}`}>
+                {user?.student_phone_number}
+              </a>
+            ) : role === "father" ? (
+              <a href={`tel:${user?.student_father_number}`}>
+                {user?.student_father_number}
+              </a>
+            ) : role === "mother" ? (
+              <a href={`tel:${user?.student_mother_number}`}>
+                {user?.student_mother_number}
+              </a>
+            ) : (
+              ""
+            )}
           </p>
           <p className="flex items-center text-[10px] font-medium">
-            <img
-              src="https://atlasskilltech.app/studentportal24/assets/images/icon/idumbericon.png"
-              alt=""
-              className="h-fit mr-1"
-            />
-            <a href={`mailto:${user?.faculty_email || user?.student_email}`}>
-              {user?.faculty_email || user?.student_email}
-            </a>
+            {role === "faculty" ? (
+              <a href={`mailto:${user?.faculty_email}`}>
+                {user?.faculty_email}
+              </a>
+            ) : role === "student" ? (
+              <a href={`mailto:${user?.student_email}`}>
+                {user?.student_email}
+              </a>
+            ) : role === "father" ? (
+              <a href={`mailto:${user?.student_father_email}`}>
+                {user?.student_father_email}
+              </a>
+            ) : role === "mother" ? (
+              <a href={`mailto:${user?.student_mother_email}`}>
+                {user?.student_mother_email}
+              </a>
+            ) : (
+              ""
+            )}
           </p>
         </div>
       </div>
-      <div className="flex h-screen lg:h-[calc(100vh-179px)] lg:px-1 text-white overflow-auto ">
+      <div className="flex h-screen lg:h-[calc(100vh-179px)] lg:px-1 text-white overflow-auto scrollbar-style-2">
         <ul className="w-[90px] lg:w-full">
           {menuItems.map((item) => (
             <MenuList key={item.id} imgSrc={item.imgSrc} title={item.title} />

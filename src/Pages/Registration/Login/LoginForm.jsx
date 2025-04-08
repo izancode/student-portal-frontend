@@ -131,7 +131,7 @@ export const OtpForm = () => {
             <form onSubmit={handleSubmit}>
               <MultipleField
                 Allfields={arrayOtpField.multipleFields}
-                values={values[arrayOtpField.name]}
+                values={values}
                 handleChange={handleChange}
                 handleBlur={handleBlur}
                 error={errors[arrayOtpField.name]}

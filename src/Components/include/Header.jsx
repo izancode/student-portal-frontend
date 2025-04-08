@@ -11,6 +11,7 @@ const Header = () => {
     dispatch(userGetDataThunk());
   }, [dispatch]);
   const user = useSelector((state) => state.user?.userDetail?.data);
+  const role = useSelector((state) => state.user?.userDetail?.role);
 
   return (
     <>
@@ -37,11 +38,27 @@ const Header = () => {
             <div>
               <img
                 className="w-[25px]  h-[25px] border-2 border-white rounded-[50rem] my-0 mx-auto lg:w-[35px]  lg:h-[35px]"
-                src={user?.faculty_profile_image || user?.student_profile_image}
+                src={
+                  role === "student" || role === "faculty"
+                    ? user?.profile_image
+                    : role === "father"
+                    ? "https://res.cloudinary.com/dlqylweq6/image/upload/v1740046270/Group_2_3_nuoxik.png"
+                    : role === "mother"
+                    ? "https://res.cloudinary.com/dlqylweq6/image/upload/v1740046245/Group_2_2_j2crkm.png"
+                    : ""
+                }
                 alt="logo"
               />
               <p className="text-[10px] text-white lg:text-[12px]">
-                {user?.faculty_first_name || user?.student_first_name}
+                {role === "faculty"
+                  ? user.faculty_first_name
+                  : role === "student"
+                  ? user.student_first_name
+                  : role === "father"
+                  ? user.student_father_name
+                  : role === "mother"
+                  ? user.student_mother_name
+                  : ""}
               </p>
             </div>
             <div className="ml-[12px]">

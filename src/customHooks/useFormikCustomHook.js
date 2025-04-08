@@ -4,6 +4,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import { customToast } from "../utils/CustomAlert/cutomToast";
 import { useNavigate } from "react-router-dom";
 import { userGetDataThunk } from "../Redux/ReduxThunk/fetchDataThunks";
+import { useSelector } from "react-redux";
 
 export const useFormikSignHook = (
   signUpSchema,
@@ -14,6 +15,9 @@ export const useFormikSignHook = (
 ) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const role = useSelector((state) => state.user?.userDetail?.role);
+  console.log(role);
 
   const {
     values,
@@ -31,24 +35,132 @@ export const useFormikSignHook = (
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        const skipFields = [
-          "_id",
-          "student_father_name",
-          "student_father_number",
-          "student_father_email",
-          "student_mother_name",
-          "student_mother_number",
-          "student_mother_email",
-          "student_profile_image",
-          "student_father_occupation",
-          "student_mother_occupation",
-          "in_case_of_guardian_please_specify_the_relationship",
-          "image_public_id",
-          "__v",
-          "createdAt",
-          "updatedAt",
-        ];
 
+        let skipFields = [];
+        if (role === "Student") {
+          skipFields = [
+            "_id",
+            "student_father_name",
+            "student_father_number",
+            "student_father_email",
+            "student_mother_name",
+            "student_mother_number",
+            "student_mother_email",
+            "profile_image",
+            "student_father_occupation",
+            "student_mother_occupation",
+            "in_case_of_guardian_please_specify_the_relationship",
+            "image_public_id",
+            "__v",
+            "createdAt",
+            "updatedAt",
+          ];
+        } else if (role === "faculty") {
+          skipFields = [
+            "_id",
+            "profile_image",
+            "image_public_id",
+            "__v",
+            "createdAt",
+            "updatedAt",
+          ];
+        } else if (role === "father") {
+          skipFields = [
+            "_id",
+            "student_school",
+            "student_programs",
+            "student_degree",
+            "student_specialisation",
+            "student_how_did_you_hear_about_us",
+            "profile_image",
+            "student_first_name",
+            "student_middle_name",
+            "student_last_name",
+            "student_nationality",
+            "student_address",
+            "student_apartment",
+            "student_country",
+            "student_state",
+            "student_city",
+            "student_postal_code",
+            "student_phone_number",
+            "student_email",
+            "DD",
+            "MM",
+            "YYYY",
+            "student_gender",
+            "student_blood_group",
+            "student_caste_category",
+            "student_instagram_url",
+            "student_linkedin_url",
+            "previous_college_grade_10_details",
+            "previous_college_percentage_grade_secured",
+            "previous_college_marks_secured",
+            "previous_college_marks_out_of",
+            "previous_college_academic_year",
+            "previous_college_examination_board",
+            "previous_college_state",
+            "previous_college_city",
+            "previous_college_grade_12th_school_details",
+            "previous_college_name",
+            "student_mother_name",
+            "student_mother_occupation",
+            "student_mother_number",
+            "student_mother_email",
+            "statement_of_purpose",
+            "__v",
+            "createdAt",
+            "updatedAt",
+          ];
+        } else if (role === "mother") {
+          skipFields = [
+            "_id",
+            "student_school",
+            "student_programs",
+            "student_degree",
+            "student_specialisation",
+            "student_how_did_you_hear_about_us",
+            "profile_image",
+            "student_first_name",
+            "student_middle_name",
+            "student_last_name",
+            "student_nationality",
+            "student_address",
+            "student_apartment",
+            "student_country",
+            "student_state",
+            "student_city",
+            "student_postal_code",
+            "student_phone_number",
+            "student_email",
+            "DD",
+            "MM",
+            "YYYY",
+            "student_gender",
+            "student_blood_group",
+            "student_caste_category",
+            "student_instagram_url",
+            "student_linkedin_url",
+            "previous_college_grade_10_details",
+            "previous_college_percentage_grade_secured",
+            "previous_college_marks_secured",
+            "previous_college_marks_out_of",
+            "previous_college_academic_year",
+            "previous_college_examination_board",
+            "previous_college_state",
+            "previous_college_city",
+            "previous_college_grade_12th_school_details",
+            "previous_college_name",
+            "student_father_name",
+            "student_father_occupation",
+            "student_father_number",
+            "student_father_email",
+            "statement_of_purpose",
+            "__v",
+            "createdAt",
+            "updatedAt",
+          ];
+        }
         const UpdatedValue = Object.keys(values)
           .filter((key) => !skipFields.includes(key))
           .reduce((acc, key) => {
