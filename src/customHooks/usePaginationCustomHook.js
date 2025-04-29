@@ -8,16 +8,6 @@ export const usePaginationCustomHook = () => {
   const [loading, setLoading] = useState(true);
   const limit = 2;
 
-  const displayPageNo = Math.ceil(allUserdata.number_Of_Login_User / limit);
-
-  const displayPageNoInBox = Array.from({ length: displayPageNo });
-  const paginationClick = async (id) => {
-    if (id < 1 || id > displayPageNo) {
-      return;
-    }
-    setPageNo(id);
-  };
-
   useEffect(() => {
     let isMounted = true;
     const fetchData = async () => {
@@ -41,6 +31,23 @@ export const usePaginationCustomHook = () => {
       isMounted = false; // Cleanup: set flag false on unmount
     };
   }, [pageNo]);
+  const displayPageNo = Math.ceil(allUserdata.number_Of_Login_User / limit);
 
-  return { loading, allUserdata, displayPageNoInBox, paginationClick, pageNo };
+  console.log(allUserdata.number_Of_Login_User);
+
+  const displayPageNoInBox = Array.from({ length: displayPageNo });
+  const paginationClick = async (id) => {
+    if (id < 1 || id > displayPageNo) {
+      return;
+    }
+    setPageNo(id);
+  };
+  return {
+    loading,
+    allUserdata,
+    displayPageNoInBox,
+    paginationClick,
+    pageNo,
+    displayPageNo,
+  };
 };

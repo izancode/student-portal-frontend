@@ -6,8 +6,14 @@ import { LoaderInfinitySpin } from "../../utils/Loader/Loader";
 import { Pagination } from "../../Components/Pagination/Pagination";
 import { usePaginationCustomHook } from "../../customHooks/usePaginationCustomHook";
 export const Ruser = ({ onButtonClick }) => {
-  const { loading, allUserdata, displayPageNoInBox, paginationClick, pageNo } =
-    usePaginationCustomHook();
+  const {
+    loading,
+    allUserdata,
+    displayPageNoInBox,
+    paginationClick,
+    pageNo,
+    displayPageNo,
+  } = usePaginationCustomHook();
   return (
     <>
       {loading ? (
@@ -89,11 +95,15 @@ export const Ruser = ({ onButtonClick }) => {
                   </tbody>
                 </table>
               </div>
-              <Pagination
-                pageNo={pageNo}
-                paginationClick={paginationClick}
-                displayPageNoInBox={displayPageNoInBox}
-              />
+              {displayPageNo > 1 ? (
+                <Pagination
+                  pageNo={pageNo}
+                  paginationClick={paginationClick}
+                  displayPageNoInBox={displayPageNoInBox}
+                />
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </>
