@@ -33,8 +33,6 @@ export const usePaginationCustomHook = () => {
   }, [pageNo]);
   const displayPageNo = Math.ceil(allUserdata.number_Of_Login_User / limit);
 
-  console.log(allUserdata.number_Of_Login_User);
-
   const displayPageNoInBox = Array.from({ length: displayPageNo });
   const paginationClick = async (id) => {
     if (id < 1 || id > displayPageNo) {
