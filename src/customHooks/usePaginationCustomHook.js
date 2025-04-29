@@ -5,19 +5,18 @@ import { customToast } from "../utils/CustomAlert/cutomToast";
 export const usePaginationCustomHook = () => {
   const [pageNo, setPageNo] = useState(1);
   const [allUserdata, setallUserdata] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const limit = 2;
 
   useEffect(() => {
     let isMounted = true;
     const fetchData = async () => {
       try {
+        setLoading(true);
         const AllUserDataForAdmin = await allUserGetDataThunk(pageNo, limit);
 
         if (isMounted) {
-          // Only update state if component is mounted
           setallUserdata(AllUserDataForAdmin.data);
-
           setLoading(false);
         }
       } catch (error) {
@@ -28,7 +27,7 @@ export const usePaginationCustomHook = () => {
 
     fetchData();
     return () => {
-      isMounted = false; // Cleanup: set flag false on unmount
+      isMounted = false;
     };
   }, [pageNo]);
   const displayPageNo = Math.ceil(allUserdata.number_Of_Login_User / limit);
