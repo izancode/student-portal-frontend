@@ -21,8 +21,8 @@ const userDetailSlice = createSlice({
         state.error = null;
       })
       .addCase(userGetDataThunk.fulfilled, (state, action) => {
-        state.status = true;
         state.userDetail = action.payload.data;
+        state.status = action.payload.data.status;
         state.error = null;
       })
       .addCase(userGetDataThunk.rejected, (state, action) => {
@@ -31,5 +31,6 @@ const userDetailSlice = createSlice({
       });
   },
 });
+
 export const { clearUserDetail } = userDetailSlice.actions;
 export const userDetailCatch = userDetailSlice.reducer;

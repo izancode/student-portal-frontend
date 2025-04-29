@@ -14,37 +14,31 @@ export const studentSignUpSchema = Yup.object({
     "Student profile image field is required"
   ),
 
-  student_first_name: Yup.string()
+  first_name: Yup.string()
     .max(25, "First name cannot be longer than 25 characters")
     .required("Student first name field is required"),
 
-  student_middle_name: Yup.string()
+  middle_name: Yup.string()
     .max(25, "Middle name cannot be longer than 25 characters")
     .required("Student middle name field is required"),
 
-  student_last_name: Yup.string()
+  last_name: Yup.string()
     .max(25, "Last name cannot be longer than 25 characters")
     .required("Student last name field is required"),
 
-  student_nationality: Yup.string().required(
-    "Student nationality field is required"
-  ),
-  student_address: Yup.string().required("Student address field is required"),
-  student_apartment: Yup.string().required(
-    "Student apartment field is required"
-  ),
-  student_country: Yup.string().required("Student country field is required"),
-  student_state: Yup.string().required("Student state field is required"),
-  student_city: Yup.string().required("Student city field is required"),
-  student_postal_code: Yup.string().required(
-    "Student postal code field is required"
-  ),
+  nationality: Yup.string().required("Student nationality field is required"),
+  address: Yup.string().required("Student address field is required"),
+  apartment: Yup.string().required("Student apartment field is required"),
+  country: Yup.string().required("Student country field is required"),
+  state: Yup.string().required("Student state field is required"),
+  city: Yup.string().required("Student city field is required"),
+  postal_code: Yup.string().required("Student postal code field is required"),
 
-  student_phone_number: Yup.string()
+  phone_number: Yup.string()
     .matches(/^[0-9]+$/, "Phone number must be numeric")
     .required("Student phone number field is required"),
 
-  student_email: Yup.string()
+  email: Yup.string()
     .email("Please enter a valid email address")
     .required("Student email field is required"),
 
@@ -61,7 +55,7 @@ export const studentSignUpSchema = Yup.object({
     .min(1900, "Year must be at least 1900")
     .max(new Date().getFullYear(), `Year can't be in the future`),
 
-  student_gender: Yup.string().required("Student gender field is required"),
+  gender: Yup.string().required("Student gender field is required"),
   student_blood_group: Yup.string().required(
     "Student blood group field is required"
   ),
@@ -69,11 +63,11 @@ export const studentSignUpSchema = Yup.object({
     "Student caste category field is required"
   ),
 
-  student_instagram_url: Yup.string()
+  instagram_url: Yup.string()
     .url("Please enter a valid URL")
     .required("Student Instagram URL field is required"),
 
-  student_linkedin_url: Yup.string()
+  linkedin_url: Yup.string()
     .url("Please enter a valid URL")
     .required("Student LinkedIn URL field is required"),
 
@@ -170,37 +164,37 @@ export const facultySignUpSchema = Yup.object({
     .nullable()
     .required("Faculty profile image field is required"),
 
-  faculty_first_name: Yup.string()
+  first_name: Yup.string()
     .max(25, "First name cannot be longer than 25 characters")
     .required("First name field is required"),
 
-  faculty_middle_name: Yup.string()
+  middle_name: Yup.string()
     .max(25, "Middle name cannot be longer than 25 characters")
     .required("Middle name field is required"),
 
-  faculty_last_name: Yup.string()
+  last_name: Yup.string()
     .max(25, "Last name cannot be longer than 25 characters")
     .required("Last name field is required"),
 
-  faculty_nationality: Yup.string().required("Nationality field is required"),
+  nationality: Yup.string().required("Nationality field is required"),
 
-  faculty_address: Yup.string().required("Address field is required"),
+  address: Yup.string().required("Address field is required"),
 
-  faculty_apartment: Yup.string().required("Apartment field is required"),
+  apartment: Yup.string().required("Apartment field is required"),
 
-  faculty_country: Yup.string().required("Country field is required"),
+  country: Yup.string().required("Country field is required"),
 
-  faculty_state: Yup.string().required("State field is required"),
+  state: Yup.string().required("State field is required"),
 
-  faculty_city: Yup.string().required("City field is required"),
+  city: Yup.string().required("City field is required"),
 
-  faculty_postal_code: Yup.string().required("Postal code field is required"),
+  postal_code: Yup.string().required("Postal code field is required"),
 
-  faculty_phone_number: Yup.string()
+  phone_number: Yup.string()
     .matches(/^[0-9]+$/, "Phone number must be numeric")
     .required("Phone number field is required"),
 
-  faculty_email: Yup.string()
+  email: Yup.string()
     .email("Please enter a valid email address")
     .required("Email field is required"),
 
@@ -219,13 +213,13 @@ export const facultySignUpSchema = Yup.object({
     .min(1900, "Year must be at least 1900")
     .max(new Date().getFullYear(), `Year can't be in the future`),
 
-  faculty_gender: Yup.string().required("Gender field is required"),
+  gender: Yup.string().required("Gender field is required"),
 
-  faculty_instagram_url: Yup.string()
+  instagram_url: Yup.string()
     .url("Please enter a valid Instagram URL")
     .required("Instagram URL field is required"),
 
-  faculty_linkedin_url: Yup.string()
+  linkedin_url: Yup.string()
     .url("Please enter a valid LinkedIn URL")
     .required("LinkedIn URL field is required"),
 
@@ -233,7 +227,33 @@ export const facultySignUpSchema = Yup.object({
 
   publications_if_applicable: Yup.string().nullable(),
 });
+export const adminSignUpSchema = Yup.object({
+  department: Yup.string().required("Department field is required"),
 
+  profile_image: Yup.mixed()
+    .nullable()
+    .required("Faculty profile image field is required"),
+
+  first_name: Yup.string()
+    .max(25, "First name cannot be longer than 25 characters")
+    .required("First name field is required"),
+
+  middle_name: Yup.string()
+    .max(25, "Middle name cannot be longer than 25 characters")
+    .required("Middle name field is required"),
+
+  last_name: Yup.string()
+    .max(25, "Last name cannot be longer than 25 characters")
+    .required("Last name field is required"),
+
+  phone_number: Yup.string()
+    .matches(/^[0-9]+$/, "Phone number must be numeric")
+    .required("Phone number field is required"),
+
+  email: Yup.string()
+    .email("Please enter a valid email address")
+    .required("Email field is required"),
+});
 export const loginSchema = Yup.object({
   login_with_email_phone: Yup.string()
     .test(
@@ -295,26 +315,26 @@ export const studentInitialValues = {
   student_specialisation: "",
   student_how_did_you_hear_about_us: "",
   profile_image: null, // or use "" if you prefer
-  student_first_name: "",
-  student_middle_name: "",
-  student_last_name: "",
-  student_nationality: "",
-  student_address: "",
-  student_apartment: "",
-  student_country: "",
-  student_state: "",
-  student_city: "",
-  student_postal_code: "",
-  student_phone_number: "",
-  student_email: "",
+  first_name: "",
+  middle_name: "",
+  last_name: "",
+  nationality: "",
+  address: "",
+  apartment: "",
+  country: "",
+  state: "",
+  city: "",
+  postal_code: "",
+  phone_number: "",
+  email: "",
   DD: "",
   MM: "",
   YYYY: "",
-  student_gender: "",
+  gender: "",
   student_blood_group: "",
   student_caste_category: "",
-  student_instagram_url: "",
-  student_linkedin_url: "",
+  instagram_url: "",
+  linkedin_url: "",
   previous_college_grade_10_details: "",
   previous_college_percentage_grade_secured: "",
   previous_college_marks_secured: "",
@@ -345,24 +365,24 @@ export const facultyInitialValues = {
   experience_in_year: "",
   courses_subjects_taught: "",
   profile_image: "", // Or you can use `null` if no image
-  faculty_first_name: "",
-  faculty_middle_name: "",
-  faculty_last_name: "",
-  faculty_nationality: "",
-  faculty_address: "",
-  faculty_apartment: "",
-  faculty_country: "",
-  faculty_state: "",
-  faculty_city: "",
-  faculty_postal_code: "",
-  faculty_phone_number: "",
-  faculty_email: "",
+  first_name: "",
+  middle_name: "",
+  last_name: "",
+  nationality: "",
+  address: "",
+  apartment: "",
+  country: "",
+  state: "",
+  city: "",
+  postal_code: "",
+  phone_number: "",
+  email: "",
   DD: "",
   MM: "",
   YYYY: "",
-  faculty_gender: "",
-  faculty_instagram_url: "",
-  faculty_linkedin_url: "",
+  gender: "",
+  instagram_url: "",
+  linkedin_url: "",
   research_interests_if_applicable: "",
   publications_if_applicable: "",
 };
@@ -374,26 +394,26 @@ export const studentDumyInitialValues = {
   student_specialisation: "Design Management",
   student_how_did_you_hear_about_us: "Word of Mouth",
   profile_image: null,
-  student_first_name: "Faizan",
-  student_middle_name: "Sabir",
-  student_last_name: "Shaikh",
-  student_nationality: "Indian",
-  student_address: "Byculla",
-  student_apartment: "Tehseen Tower",
-  student_country: "India",
-  student_state: "Maharashtra",
-  student_city: "Mumbai",
-  student_postal_code: "40008",
-  student_phone_number: "7666129168",
-  student_email: "sf48116@gmail.com",
+  first_name: "Faizan",
+  middle_name: "Sabir",
+  last_name: "Shaikh",
+  nationality: "Indian",
+  address: "Byculla",
+  apartment: "Tehseen Tower",
+  country: "India",
+  state: "Maharashtra",
+  city: "Mumbai",
+  postal_code: "40008",
+  phone_number: "7666129168",
+  email: "sf48116@gmail.com",
   DD: "15",
   MM: "2",
   YYYY: "1999",
-  student_gender: "Male",
+  gender: "Male",
   student_blood_group: "A+",
   student_caste_category: "General",
-  student_instagram_url: "https://www.instagram.com/izancode/",
-  student_linkedin_url: "https://www.linkedin.com/in/izancode/",
+  instagram_url: "https://www.instagram.com/izancode/",
+  linkedin_url: "https://www.linkedin.com/in/izancode/",
   previous_college_grade_10_details: "B",
   previous_college_percentage_grade_secured: "60",
   previous_college_marks_secured: "319",
@@ -425,24 +445,24 @@ export const facultyDumyInitialValues = {
   experience_in_year: "5 years",
   courses_subjects_taught: "Introduction to Programming",
   profile_image: null,
-  faculty_first_name: "Devi",
-  faculty_middle_name: "Lal",
-  faculty_last_name: "Singh",
-  faculty_nationality: "Indian",
-  faculty_address: "Dadar",
-  faculty_apartment: "Shivam Apartments",
-  faculty_country: "India",
-  faculty_state: "Maharashtra",
-  faculty_city: "Mumbai",
-  faculty_postal_code: "400014",
-  faculty_phone_number: "8237242970",
-  faculty_email: "aamir.khan@isdi.in",
+  first_name: "Devi",
+  middle_name: "Lal",
+  last_name: "Singh",
+  nationality: "Indian",
+  address: "Dadar",
+  apartment: "Shivam Apartments",
+  country: "India",
+  state: "Maharashtra",
+  city: "Mumbai",
+  postal_code: "400014",
+  phone_number: "8237242970",
+  email: "aamir.khan@isdi.in",
   DD: "12",
   MM: "02",
   YYYY: "1992",
-  faculty_gender: "Male",
-  faculty_instagram_url: "https://www.instagram.com/aamir_khan_143_429252",
-  faculty_linkedin_url: "https://www.linkedin.com/in/aamir-khan-61454182/",
+  gender: "Male",
+  instagram_url: "https://www.instagram.com/aamir_khan_143_429252",
+  linkedin_url: "https://www.linkedin.com/in/aamir-khan-61454182/",
   research_interests_if_applicable:
     "My research interests lie in the areas of Artificial Intelligence, Machine Learning, and Data Science, with a particular focus on developing explainable AI systems and ethical frameworks for their deployment. I am passionate about exploring scalable algorithms for big data analysis and predictive modeling to solve real-world problems in healthcare and smart city planning. Additionally, I am interested in interdisciplinary applications of AI, such as bioinformatics and educational technology, and aim to contribute to the development of secure and privacy-preserving AI solutions. My work seeks to bridge theoretical advancements and practical implementations, fostering innovation in technology while addressing societal needs.",
   publications_if_applicable:
@@ -557,7 +577,7 @@ export const arrayStudentField = [
   },
   {
     type: "input",
-    name: "student_first_name",
+    name: "first_name",
     placeholder: "First name",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "text",
@@ -569,7 +589,7 @@ export const arrayStudentField = [
   },
   {
     type: "input",
-    name: "student_middle_name",
+    name: "middle_name",
     placeholder: "Middle name",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "text",
@@ -581,7 +601,7 @@ export const arrayStudentField = [
   },
   {
     type: "input",
-    name: "student_last_name",
+    name: "last_name",
     placeholder: " Last name",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "text",
@@ -593,7 +613,7 @@ export const arrayStudentField = [
   },
   {
     type: "select",
-    name: "student_nationality",
+    name: "nationality",
     placeholder: "Nationality",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
@@ -603,7 +623,7 @@ export const arrayStudentField = [
   },
   {
     type: "input",
-    name: "student_address",
+    name: "address",
     placeholder: " Address",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "text",
@@ -615,7 +635,7 @@ export const arrayStudentField = [
   },
   {
     type: "input",
-    name: "student_apartment",
+    name: "apartment",
     placeholder: " Apartment, suit, etc",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "text",
@@ -627,7 +647,7 @@ export const arrayStudentField = [
   },
   {
     type: "select",
-    name: "student_country",
+    name: "country",
     placeholder: "Country",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
@@ -643,7 +663,7 @@ export const arrayStudentField = [
   },
   {
     type: "select",
-    name: "student_state",
+    name: "state",
     placeholder: "State",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
@@ -653,7 +673,7 @@ export const arrayStudentField = [
   },
   {
     type: "select",
-    name: "student_city",
+    name: "city",
     placeholder: "City",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
@@ -663,7 +683,7 @@ export const arrayStudentField = [
   },
   {
     type: "input",
-    name: "student_postal_code",
+    name: "postal_code",
     placeholder: " Postal code",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "number",
@@ -676,7 +696,7 @@ export const arrayStudentField = [
   },
   {
     type: "input",
-    name: "student_phone_number",
+    name: "phone_number",
     placeholder: "  Phone Number",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "tel",
@@ -689,7 +709,7 @@ export const arrayStudentField = [
   },
   {
     type: "input",
-    name: "student_email",
+    name: "email",
     placeholder: " Email Address",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "email",
@@ -740,7 +760,7 @@ export const arrayStudentField = [
   },
   {
     type: "select",
-    name: "student_gender",
+    name: "gender",
     placeholder: "Gender",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
@@ -784,7 +804,7 @@ export const arrayStudentField = [
   },
   {
     type: "input",
-    name: "student_instagram_url",
+    name: "instagram_url",
     placeholder: " Instagram URL",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "url",
@@ -796,7 +816,7 @@ export const arrayStudentField = [
   },
   {
     type: "input",
-    name: "student_linkedin_url",
+    name: "linkedin_url",
     placeholder: " Linkedin URL",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "url",
@@ -1194,7 +1214,7 @@ export const arrayFacultyField = [
   },
   {
     type: "input",
-    name: "faculty_first_name",
+    name: "first_name",
     placeholder: "First name",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "text",
@@ -1206,7 +1226,7 @@ export const arrayFacultyField = [
   },
   {
     type: "input",
-    name: "faculty_middle_name",
+    name: "middle_name",
     placeholder: "Middle name",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "text",
@@ -1218,7 +1238,7 @@ export const arrayFacultyField = [
   },
   {
     type: "input",
-    name: "faculty_last_name",
+    name: "last_name",
     placeholder: " Last name",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "text",
@@ -1230,7 +1250,7 @@ export const arrayFacultyField = [
   },
   {
     type: "select",
-    name: "faculty_nationality",
+    name: "nationality",
     placeholder: "Nationality",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
@@ -1240,7 +1260,7 @@ export const arrayFacultyField = [
   },
   {
     type: "input",
-    name: "faculty_address",
+    name: "address",
     placeholder: " Address",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "text",
@@ -1252,7 +1272,7 @@ export const arrayFacultyField = [
   },
   {
     type: "input",
-    name: "faculty_apartment",
+    name: "apartment",
     placeholder: " Apartment, suit, etc",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "text",
@@ -1264,7 +1284,7 @@ export const arrayFacultyField = [
   },
   {
     type: "select",
-    name: "faculty_country",
+    name: "country",
     placeholder: "Country",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
@@ -1280,7 +1300,7 @@ export const arrayFacultyField = [
   },
   {
     type: "select",
-    name: "faculty_state",
+    name: "state",
     placeholder: "State",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
@@ -1290,7 +1310,7 @@ export const arrayFacultyField = [
   },
   {
     type: "select",
-    name: "faculty_city",
+    name: "city",
     placeholder: "City",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
@@ -1300,7 +1320,7 @@ export const arrayFacultyField = [
   },
   {
     type: "input",
-    name: "faculty_postal_code",
+    name: "postal_code",
     placeholder: " Postal code",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "number",
@@ -1312,7 +1332,7 @@ export const arrayFacultyField = [
   },
   {
     type: "input",
-    name: "faculty_phone_number",
+    name: "phone_number",
     placeholder: "  Phone Number",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "tel",
@@ -1325,7 +1345,7 @@ export const arrayFacultyField = [
   },
   {
     type: "input",
-    name: "faculty_email",
+    name: "email",
     placeholder: " Email Address",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "email",
@@ -1373,7 +1393,7 @@ export const arrayFacultyField = [
   },
   {
     type: "select",
-    name: "faculty_gender",
+    name: "gender",
     placeholder: "Gender",
     divclassName: "w-full lg:w-1/3 lg:px-4",
 
@@ -1390,7 +1410,7 @@ export const arrayFacultyField = [
 
   {
     type: "input",
-    name: "faculty_instagram_url",
+    name: "instagram_url",
     placeholder: " Instagram URL",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "url",
@@ -1402,7 +1422,7 @@ export const arrayFacultyField = [
   },
   {
     type: "input",
-    name: "faculty_linkedin_url",
+    name: "linkedin_url",
     placeholder: " Linkedin URL",
     className: "w-full lg:w-1/3 lg:px-4",
     inputType: "url",
@@ -1447,6 +1467,109 @@ export const arrayFacultyField = [
   {
     type: "button",
     name: "faculty_submit",
+    btnname: "Submit",
+    btnType: "submit",
+    className: "w-full lg:w-1/4 lg:px-4",
+  },
+];
+
+export const arrayAdminField = [
+  {
+    type: "heading",
+    heading: "Professional Information:",
+    className: "w-full mb-2 lg:px-4 text-lg text-[#1C22C1]",
+    divclassName: "w-full",
+  },
+  {
+    type: "input",
+    name: "department",
+    placeholder: "Department",
+    className: "w-full lg:w-1/3 lg:px-4",
+    inputType: "text",
+    divclassName: "w-full lg:w-1/3 lg:px-4",
+    labelClassName:
+      "cursor-text absolute  appearance-none  text-sm text-black font-semibold duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-black peer-focus:font-semibold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.85] peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto",
+    fieldClassName:
+      "block h-14  font-bold rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm  bg-[#F0F0F0] appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer ",
+  },
+  {
+    type: "file",
+    name: "profile_image",
+    profileImage: "Profile image",
+    divclassName: "w-full lg:w-1/3 lg:px-4",
+
+    fieldClassName:
+      "absolute block h-14 opacity-0 cursor-pointer w-full px-2.5 py-2.5 text-sm",
+    buttonClassName:
+      "block h-14 flex items-center font-semibold rounded-lg text-left px-2.5 py-2.5 w-full cursor-pointer text-sm bg-[#F0F0F0] appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer z-0",
+  },
+
+  {
+    type: "input",
+    name: "first_name",
+    placeholder: "First name",
+    className: "w-full lg:w-1/3 lg:px-4",
+    inputType: "text",
+    divclassName: "w-full lg:w-1/3 lg:px-4",
+    labelClassName:
+      "cursor-text absolute  appearance-none  text-sm text-black font-semibold duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-black peer-focus:font-semibold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.85] peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto",
+    fieldClassName:
+      "block h-14  font-bold rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm  bg-[#F0F0F0] appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer ",
+  },
+  {
+    type: "input",
+    name: "middle_name",
+    placeholder: "Middle name",
+    className: "w-full lg:w-1/3 lg:px-4",
+    inputType: "text",
+    divclassName: "w-full lg:w-1/3 lg:px-4",
+    labelClassName:
+      "cursor-text absolute  appearance-none  text-sm text-black font-semibold duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-black peer-focus:font-semibold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.85] peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto",
+    fieldClassName:
+      "block h-14  font-bold rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm  bg-[#F0F0F0] appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer ",
+  },
+  {
+    type: "input",
+    name: "last_name",
+    placeholder: " Last name",
+    className: "w-full lg:w-1/3 lg:px-4",
+    inputType: "text",
+    divclassName: "w-full lg:w-1/3 lg:px-4",
+    labelClassName:
+      "cursor-text absolute  appearance-none  text-sm text-black font-semibold duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-black peer-focus:font-semibold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.85] peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto",
+    fieldClassName:
+      "block h-14  font-bold rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm  bg-[#F0F0F0] appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer ",
+  },
+
+  {
+    type: "input",
+    name: "phone_number",
+    placeholder: "  Phone Number",
+    className: "w-full lg:w-1/3 lg:px-4",
+    inputType: "tel",
+
+    divclassName: "w-full lg:w-1/3 lg:px-4",
+    labelClassName:
+      "cursor-text absolute  appearance-none  text-sm text-black font-semibold duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-black peer-focus:font-semibold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.85] peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto",
+    fieldClassName:
+      "block h-14  font-bold rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm  bg-[#F0F0F0] appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer ",
+  },
+  {
+    type: "input",
+    name: "email",
+    placeholder: " Email Address",
+    className: "w-full lg:w-1/3 lg:px-4",
+    inputType: "email",
+    divclassName: "w-full lg:w-full lg:px-4",
+    labelClassName:
+      "cursor-text absolute  appearance-none  text-sm text-black font-semibold duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-black peer-focus:font-semibold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.85] peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto",
+    fieldClassName:
+      "block h-14  font-bold rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm  bg-[#F0F0F0] appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer ",
+  },
+
+  {
+    type: "button",
+    name: "admin_submit",
     btnname: "Submit",
     btnType: "submit",
     className: "w-full lg:w-1/4 lg:px-4",

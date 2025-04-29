@@ -27,7 +27,6 @@ const ChooseFile = ({
   const dispatch = useDispatch();
 
   const handleFileChange = (event) => {
-    console.log(apiFrom);
     const file = event.currentTarget.files[0];
 
     if (file) {

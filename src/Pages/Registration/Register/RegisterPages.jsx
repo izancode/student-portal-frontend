@@ -14,6 +14,11 @@ import {
   facultyPostData,
 } from "../../../Redux/ReduxThunk/registerationThunks";
 
+
+
+
+
+
 const RegisterPages = () => {
   const [tab, setTab] = useState("student");
   const tabChange = (getTab) => {

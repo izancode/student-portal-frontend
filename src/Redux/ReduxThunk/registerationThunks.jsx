@@ -44,7 +44,6 @@ export const studentPostData = createAsyncThunk(
         message: "Student has been registered successfully.",
       };
     } catch (error) {
-      console.log(error);
       const errorPayload = {
         message: error.response.data.message || "Internal Server Error",
         status: error.response.data.status || 500,

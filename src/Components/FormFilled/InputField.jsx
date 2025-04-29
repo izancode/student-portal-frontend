@@ -49,8 +49,8 @@ InputField.propTypes = {
   touched: PropTypes.bool,
   disabled: PropTypes.bool,
 
-  handleChange: PropTypes.func, // Add handleChange here
-  handleBlur: PropTypes.func, // Add handleBlur here
+  handleChange: PropTypes.func,
+  handleBlur: PropTypes.func,
 };
 
 export default InputField;

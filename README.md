@@ -51,3 +51,17 @@ Dashboard and Reporting: This feature provides users with personalized dashboard
 - just for testing
 - login otp and home is ready with authentication
 - there is 4 types of validation 1.Admin 2.Faculty 3.student 4.Parents
+- Till now i created a lot of basic feauture in this project now user can login with 4 different
+- and based upon it role the dashboard will diplayed for each user
+- user can update his own profile when they are succefully login
+- and also for student parents and make some new thing in frontend like if role is student then student can se his father mother deatail but they can't change as same for parents also
+- now i m working on admin role becoz admin have authority to control all over the dashboard they can change menu they can change the theame then can update any user detail and many more
+
+
+
+# Exprience
+
+Now i have just made header with responsive i want to share my experience with tailwind is pretty good i dont have to create a single css or css file
+its very simple to use in class only i really love it
+
+

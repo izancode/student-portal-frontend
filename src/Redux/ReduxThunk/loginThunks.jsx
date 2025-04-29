@@ -18,7 +18,6 @@ export const loginPostData = createAsyncThunk(
         message: response.data.message,
       };
     } catch (error) {
-      console.log(error);
       const errorMessage = error.response
         ? error.response.data
         : { message: error.message };
@@ -45,7 +44,6 @@ export const otpPostData = createAsyncThunk(
         message: response.data.message,
       };
     } catch (error) {
-      console.log(error);
       const errorMessage = error.response
         ? error.response.data
         : { message: error.message };
@@ -62,13 +60,12 @@ export const logoutPostData = createAsyncThunk(
         import.meta.env.VITE_LOGOUT_THUNKS_GET_API,
         { withCredentials: true }
       );
-      console.log(response);
+
       return {
         data: response.data,
         message: response.data.message,
       };
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }

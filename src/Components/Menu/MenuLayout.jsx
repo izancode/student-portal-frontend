@@ -12,10 +12,8 @@ export const HomeMenu = () => {
           <h2 className="text-[22px] sm:text-[32px] text-[#342B7C]">
             Hi{" "}
             <span className="font-semibold">
-              {role === "faculty"
-                ? user.faculty_first_name + " " + user.faculty_last_name
-                : role === "student"
-                ? user.student_first_name + " " + user.student_last_name
+              {role === "faculty" || role === "student" || role === "admin"
+                ? user.first_name + " " + user.last_name
                 : role === "father"
                 ? user.student_father_name
                 : role === "mother"
@@ -49,7 +47,7 @@ export const SideBarMenu = () => {
         <div className="w-2/5">
           <img
             src={
-              role === "student" || role === "faculty"
+              role === "student" || role === "faculty" || role === "admin"
                 ? user?.profile_image
                 : role === "father"
                 ? "https://res.cloudinary.com/dlqylweq6/image/upload/v1740046270/Group_2_3_nuoxik.png"
@@ -61,10 +59,8 @@ export const SideBarMenu = () => {
             alt=""
           />
           <p className="text-[12px] font-semibold text-center leading-[12px] mb-[2px]">
-            {role === "faculty"
-              ? user.faculty_first_name + " " + user.faculty_last_name
-              : role === "student"
-              ? user.student_first_name + " " + user.student_last_name
+            {role === "faculty" || role === "student" || role === "admin"
+              ? user.first_name + " " + user.last_name
               : role === "father"
               ? user.student_father_name
               : role === "mother"
@@ -88,7 +84,7 @@ export const SideBarMenu = () => {
               : ""}
           </p>
           <p className="flex items-center text-[10px] font-medium">
-            {role === "faculty"
+            {role === "faculty" || role === "admin"
               ? user?.department
               : role === "student"
               ? user?.student_programs
@@ -98,15 +94,9 @@ export const SideBarMenu = () => {
               ? ""
               : ""}
           </p>
-          <p className="flex items-center text-[10px] font-medium">
-            {role === "faculty" ? (
-              <a href={`tel:${user?.faculty_phone_number}`}>
-                {user?.faculty_phone_number}
-              </a>
-            ) : role === "student" ? (
-              <a href={`tel:${user?.student_phone_number}`}>
-                {user?.student_phone_number}
-              </a>
+          <p className="flex items-center text-[10px] font-medium ">
+            {role === "faculty" || role === "student" || role === "admin" ? (
+              <a href={`tel:${user?.phone_number}`}>{user?.phone_number}</a>
             ) : role === "father" ? (
               <a href={`tel:${user?.student_father_number}`}>
                 {user?.student_father_number}
@@ -119,15 +109,9 @@ export const SideBarMenu = () => {
               ""
             )}
           </p>
-          <p className="flex items-center text-[10px] font-medium">
-            {role === "faculty" ? (
-              <a href={`mailto:${user?.faculty_email}`}>
-                {user?.faculty_email}
-              </a>
-            ) : role === "student" ? (
-              <a href={`mailto:${user?.student_email}`}>
-                {user?.student_email}
-              </a>
+          <p className="flex items-center text-[10px] font-medium w-full break-all leading-[10px]">
+            {role === "faculty" || role === "student" || role === "admin" ? (
+              <a href={`mailto:${user?.email}`}>{user?.email}</a>
             ) : role === "father" ? (
               <a href={`mailto:${user?.student_father_email}`}>
                 {user?.student_father_email}

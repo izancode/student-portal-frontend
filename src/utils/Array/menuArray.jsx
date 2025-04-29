@@ -9,7 +9,7 @@ export const menuItems = [
     id: 2,
     imgSrc:
       "https://res.cloudinary.com/dlqylweq6/image/upload/v1735672950/2_fcoqna.png",
-    title: "Insight",
+    title: "User",
   },
   {
     id: 3,

@@ -43,7 +43,7 @@ export const LoginForm = () => {
         <div>
           <SectionTwo />
           {loading ? (
-            <LoaderInfinitySpin />
+            <LoaderInfinitySpin heightClass="h-96" />
           ) : (
             <form onSubmit={handleSubmit}>
               <InputField
@@ -126,7 +126,7 @@ export const OtpForm = () => {
         <div>
           <SectionTwo />
           {loading ? (
-            <LoaderInfinitySpin />
+            <LoaderInfinitySpin heightClass="h-96" />
           ) : (
             <form onSubmit={handleSubmit}>
               <MultipleField

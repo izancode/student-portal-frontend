@@ -16,8 +16,7 @@ export const useFormikSignHook = (
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const role = useSelector((state) => state.user?.userDetail?.role);
-  console.log(role);
+  const role = useSelector((state) => state.user?.userRole);
 
   const {
     values,
@@ -37,7 +36,7 @@ export const useFormikSignHook = (
         setLoading(true);
 
         let skipFields = [];
-        if (role === "Student") {
+        if (role === "student") {
           skipFields = [
             "_id",
             "student_father_name",
@@ -64,6 +63,15 @@ export const useFormikSignHook = (
             "createdAt",
             "updatedAt",
           ];
+        } else if (role === "admin") {
+          skipFields = [
+            "_id",
+            "profile_image",
+            "image_public_id",
+            "__v",
+            "createdAt",
+            "updatedAt",
+          ];
         } else if (role === "father") {
           skipFields = [
             "_id",
@@ -73,26 +81,26 @@ export const useFormikSignHook = (
             "student_specialisation",
             "student_how_did_you_hear_about_us",
             "profile_image",
-            "student_first_name",
-            "student_middle_name",
-            "student_last_name",
-            "student_nationality",
-            "student_address",
-            "student_apartment",
-            "student_country",
-            "student_state",
-            "student_city",
-            "student_postal_code",
-            "student_phone_number",
-            "student_email",
+            "first_name",
+            "middle_name",
+            "last_name",
+            "nationality",
+            "address",
+            "apartment",
+            "country",
+            "state",
+            "city",
+            "postal_code",
+            "phone_number",
+            "email",
             "DD",
             "MM",
             "YYYY",
-            "student_gender",
+            "gender",
             "student_blood_group",
             "student_caste_category",
-            "student_instagram_url",
-            "student_linkedin_url",
+            "instagram_url",
+            "linkedin_url",
             "previous_college_grade_10_details",
             "previous_college_percentage_grade_secured",
             "previous_college_marks_secured",
@@ -121,26 +129,26 @@ export const useFormikSignHook = (
             "student_specialisation",
             "student_how_did_you_hear_about_us",
             "profile_image",
-            "student_first_name",
-            "student_middle_name",
-            "student_last_name",
-            "student_nationality",
-            "student_address",
-            "student_apartment",
-            "student_country",
-            "student_state",
-            "student_city",
-            "student_postal_code",
-            "student_phone_number",
-            "student_email",
+            "first_name",
+            "middle_name",
+            "last_name",
+            "nationality",
+            "address",
+            "apartment",
+            "country",
+            "state",
+            "city",
+            "postal_code",
+            "phone_number",
+            "email",
             "DD",
             "MM",
             "YYYY",
-            "student_gender",
+            "gender",
             "student_blood_group",
             "student_caste_category",
-            "student_instagram_url",
-            "student_linkedin_url",
+            "instagram_url",
+            "linkedin_url",
             "previous_college_grade_10_details",
             "previous_college_percentage_grade_secured",
             "previous_college_marks_secured",
@@ -314,7 +322,7 @@ export const useFormikOtpHook = (
 
         if (dataPass) {
           navigate("/menu");
-          customToast("success", dataPass.message + "test");
+          customToast("success", dataPass.message);
           sessionStorage.removeItem("loginField");
           setLoading(false);
         }

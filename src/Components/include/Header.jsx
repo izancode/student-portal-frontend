@@ -12,6 +12,7 @@ const Header = () => {
   }, [dispatch]);
   const user = useSelector((state) => state.user?.userDetail?.data);
   const role = useSelector((state) => state.user?.userDetail?.role);
+ 
 
   return (
     <>
@@ -39,7 +40,7 @@ const Header = () => {
               <img
                 className="w-[25px]  h-[25px] border-2 border-white rounded-[50rem] my-0 mx-auto lg:w-[35px]  lg:h-[35px]"
                 src={
-                  role === "student" || role === "faculty"
+                  role === "student" || role === "faculty" || role === "admin"
                     ? user?.profile_image
                     : role === "father"
                     ? "https://res.cloudinary.com/dlqylweq6/image/upload/v1740046270/Group_2_3_nuoxik.png"
@@ -50,10 +51,8 @@ const Header = () => {
                 alt="logo"
               />
               <p className="text-[10px] text-white lg:text-[12px]">
-                {role === "faculty"
-                  ? user.faculty_first_name
-                  : role === "student"
-                  ? user.student_first_name
+                {role === "faculty" || role === "student" || role === "admin"
+                  ? user.first_name
                   : role === "father"
                   ? user.student_father_name
                   : role === "mother"

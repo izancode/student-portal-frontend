@@ -19,7 +19,6 @@ export const userUpdateData = createAsyncThunk(
         message: response.data.message,
       };
     } catch (error) {
-      console.log(error);
       const errorPayload = {
         message: error.response.data.message || "Internal Server Error",
         status: error.response.data.status || 500,
@@ -46,7 +45,6 @@ export const studentImageUpdateData = createAsyncThunk(
         message: response.data.message,
       };
     } catch (error) {
-      console.log(error);
       const errorPayload = {
         message: error.response.data.message || "Internal Server Error",
         status: error.response.data.status || 500,

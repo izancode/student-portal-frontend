@@ -4,6 +4,7 @@ import { useFormikSignHook } from "../customHooks/useFormikCustomHook";
 import {
   studentSignUpSchema,
   facultySignUpSchema,
+  adminSignUpSchema,
 } from "../utils/Formik/formik";
 import { useSelector } from "react-redux";
 
@@ -23,6 +24,8 @@ export const useDataCustomHook = (
     SignUpSchema = studentSignUpSchema;
   } else if (role === "faculty") {
     SignUpSchema = facultySignUpSchema;
+  } else if (role === "admin") {
+    SignUpSchema = adminSignUpSchema;
   }
 
   const environmentValues = isProduction ? initialValues : dumyInitialValues;

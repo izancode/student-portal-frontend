@@ -1,8 +1,9 @@
 import { InfinitySpin } from "react-loader-spinner";
+import PropTypes from "prop-types";
 
-export const LoaderInfinitySpin = () => {
+export const LoaderInfinitySpin = ({ heightClass }) => {
   return (
-    <div className="flex justify-center h-96 items-center">
+    <div className={`flex justify-center  ${heightClass} items-center`}>
       <InfinitySpin
         visible={true}
         width="200"
@@ -13,3 +14,7 @@ export const LoaderInfinitySpin = () => {
     </div>
   );
 };
+LoaderInfinitySpin.propTypes = {
+  heightClass: PropTypes.string,
+};
+// className="flex justify-center h-96 items-center"
