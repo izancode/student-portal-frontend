@@ -19,8 +19,6 @@ export const RProfile = ({ userId }) => {
   const findUserLogin = allUserdata?.number_Of_Login_User?.find((item) => {
     return item.userId === userId;
   });
-  console.log("findUserLogin", findUserLogin);
-  console.log("allUserdata?.login_User_Data", allUserdata?.login_User_Data);
 
   const normal_User_Detail = useSelector((state) =>
     userId === undefined ? state.user?.userDetail?.data : findUserDetail
