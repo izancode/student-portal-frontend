@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { LoaderInfinitySpin } from "../../utils/Loader/Loader";
 
 import { Pagination } from "../../Components/Pagination/Pagination";
-import { usePaginationCustomHook } from "../../customHooks/usePaginationCustomHook";
+import { useUserForAdminCustomHook } from "../../customHooks/useUserForAdminCustomHook";
 export const Ruser = ({ onButtonClick }) => {
   const {
     loading,
@@ -13,7 +13,8 @@ export const Ruser = ({ onButtonClick }) => {
     paginationClick,
     pageNo,
     displayPageNo,
-  } = usePaginationCustomHook();
+  } = useUserForAdminCustomHook();
+
   return (
     <>
       {loading ? (

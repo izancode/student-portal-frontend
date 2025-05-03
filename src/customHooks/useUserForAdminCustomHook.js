@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { allUserGetDataThunk } from "../Redux/ReduxThunk/fetchDataThunks";
 import { customToast } from "../utils/CustomAlert/cutomToast";
-
-export const usePaginationCustomHook = () => {
+//useUserForAdmin
+export const useUserForAdminCustomHook = () => {
   const [pageNo, setPageNo] = useState(1);
   const [allUserdata, setallUserdata] = useState("");
   const [loading, setLoading] = useState(false);
@@ -30,7 +30,10 @@ export const usePaginationCustomHook = () => {
       isMounted = false;
     };
   }, [pageNo]);
-  const displayPageNo = Math.ceil(allUserdata.number_Of_Login_User / limit);
+
+  const displayPageNo = Math.ceil(
+    allUserdata?.number_Of_Login_User?.length / limit
+  );
 
   const displayPageNoInBox = Array.from({ length: displayPageNo });
   const paginationClick = async (id) => {

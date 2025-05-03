@@ -7,38 +7,30 @@ import {
 } from "../Registration/Register/UserForm";
 import { userUpdateData } from "../../Redux/ReduxThunk/updationThunks";
 import { LoaderInfinitySpin } from "../../utils/Loader/Loader";
+import { useUserForAdminCustomHook } from "../../customHooks/useUserForAdminCustomHook";
 
 export const RProfile = ({ userId }) => {
-  const full_User_Data = useSelector(
-    (state) => state.user?.allUserDetail?.full_User_Data
-  );
-  const login_User_Data = useSelector(
-    (state) => state.user?.allUserDetail?.login_User_Data
-  );
+  const { allUserdata } = useUserForAdminCustomHook();
 
-  let find_Normal_User_Detail;
-  let find_Normal_User_Role;
-  if (userId !== undefined) {
-    find_Normal_User_Detail = full_User_Data.find(
-      (item) => item._id === userId
-    );
+  const findUserDetail = allUserdata?.full_User_Data?.find((item) => {
+    return item._id === userId;
+  });
 
-    find_Normal_User_Role = login_User_Data.find(
-      (item) => item.userId === userId
-    );
-  }
+  const findUserLogin = allUserdata?.number_Of_Login_User?.find((item) => {
+    return item.userId === userId;
+  });
+  console.log("findUserLogin", findUserLogin);
+  console.log("allUserdata?.login_User_Data", allUserdata?.login_User_Data);
 
   const normal_User_Detail = useSelector((state) =>
-    userId == undefined ? state.user?.userDetail?.data : find_Normal_User_Detail
+    userId === undefined ? state.user?.userDetail?.data : findUserDetail
   );
 
   const normal_User_Role = useSelector((state) =>
-    userId == undefined
-      ? state.user?.userDetail?.role
-      : find_Normal_User_Role.role
+    userId === undefined ? state.user?.userDetail?.role : findUserLogin?.role
   );
 
-  if (!normal_User_Detail) {
+  if (!normal_User_Detail || !normal_User_Role) {
     return <LoaderInfinitySpin heightClass="h-[calc(100vh-179px)]" />;
   }
   return (

@@ -7,7 +7,21 @@ import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import RegisterPages from "./Pages/Registration/Register/RegisterPages.jsx";
 import { LoginForm, OtpForm } from "./Pages/Registration/Login/LoginForm.jsx";
-import { Profile, User, ClassLabTools } from "./Pages/home/Dashboard.jsx";
+import {
+  Profile,
+  User,
+  ClassLabTools,
+  CourseSchedule,
+  ClassTimings,
+  FacultyAllocation,
+  Attendance,
+  Assignment,
+  GradesReport,
+  EnrollementStatus,
+  AcademicHistory,
+  Chat,
+  FacultyFeedback,
+} from "./Pages/home/Dashboard.jsx";
 import { MenuPage } from "./Components/Layout/Layout.jsx";
 import NotFoundPage from "./Pages/NotFound/NotFoundPage.jsx";
 import {
@@ -79,6 +93,106 @@ const router = createBrowserRouter([
       {
         path: "/classlab-tools",
         element: <ClassLabTools />,
+      },
+    ],
+  },
+  {
+    path: "/course-schedule",
+    element: <HomeProtectRoute />,
+    children: [
+      {
+        path: "/course-schedule",
+        element: <CourseSchedule />,
+      },
+    ],
+  },
+  {
+    path: "/class-timings",
+    element: <HomeProtectRoute />,
+    children: [
+      {
+        path: "/class-timings",
+        element: <ClassTimings />,
+      },
+    ],
+  },
+  {
+    path: "/faculty-allocation",
+    element: <HomeProtectRoute />,
+    children: [
+      {
+        path: "/faculty-allocation",
+        element: <FacultyAllocation />,
+      },
+    ],
+  },
+  {
+    path: "/attendance",
+    element: <HomeProtectRoute />,
+    children: [
+      {
+        path: "/attendance",
+        element: <Attendance />,
+      },
+    ],
+  },
+  {
+    path: "/assignment",
+    element: <HomeProtectRoute />,
+    children: [
+      {
+        path: "/assignment",
+        element: <Assignment />,
+      },
+    ],
+  },
+  {
+    path: "/grades-&-report",
+    element: <HomeProtectRoute />,
+    children: [
+      {
+        path: "/grades-&-report",
+        element: <GradesReport />,
+      },
+    ],
+  },
+  {
+    path: "/enrollement-status",
+    element: <HomeProtectRoute />,
+    children: [
+      {
+        path: "/enrollement-status",
+        element: <EnrollementStatus />,
+      },
+    ],
+  },
+  {
+    path: "/academic-history",
+    element: <HomeProtectRoute />,
+    children: [
+      {
+        path: "/academic-history",
+        element: <AcademicHistory />,
+      },
+    ],
+  },
+  {
+    path: "/chat",
+    element: <HomeProtectRoute />,
+    children: [
+      {
+        path: "/chat",
+        element: <Chat />,
+      },
+    ],
+  },
+  {
+    path: "/faculty-feedback",
+    element: <HomeProtectRoute />,
+    children: [
+      {
+        path: "/faculty-feedback",
+        element: <FacultyFeedback />,
       },
     ],
   },
