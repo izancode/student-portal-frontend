@@ -5,25 +5,40 @@ import { LoaderInfinitySpin } from "../../utils/Loader/Loader";
 
 import { Pagination } from "../../Components/Pagination/Pagination";
 import { useUserForAdminCustomHook } from "../../customHooks/useUserForAdminCustomHook";
+
+import { SearchBar } from "../../Components/RightSideContent/SearchBar";
 export const Ruser = ({ onButtonClick }) => {
   const {
     loading,
     allUserdata,
-    displayPageNoInBox,
     paginationClick,
     pageNo,
     displayPageNo,
+    searchKeyFunction,
+    key,
   } = useUserForAdminCustomHook();
 
   return (
     <>
-      {loading ? (
-        <LoaderInfinitySpin heightclassName="h-[calc(100vh-179px)]" />
-      ) : (
-        <>
-          <div className="grid grid-cols-12 h-[calc(100vh-169px)] lg:h-[calc(100vh-179px)] overflow-auto scrollbar-style-2">
-            <div className="col-span-12 px-2 lg:px-0">
-              <div className="md:px-4  pb-[50px]">
+      <div className="grid grid-cols-12 w-full   lg:px-3">
+        {/* h-[calc(100vh-169px)] lg:h-[calc(100vh-179px)] */}
+        <div className="col-span-12 lg:col-start-10 lg:col-end-13 mt-5 px-3 lg:px-0">
+          <SearchBar onGetSearchKey={searchKeyFunction} />
+        </div>
+        {allUserdata?.login_Data_with_image?.length === 0 ? (
+          <div className="col-span-12 ">
+            <img
+              src="https://res.cloudinary.com/dlqylweq6/image/upload/v1746516658/image_1-removebg-preview_ogblrc.png"
+              className="w-[75%] lg:w-[35%] mx-auto"
+              alt=""
+            />
+          </div>
+        ) : (
+          <>
+            <div className="col-span-12 overflow-auto scrollbar-style-2">
+              {loading ? (
+                <LoaderInfinitySpin heightclassName="h-[calc(100vh-179px)]" />
+              ) : (
                 <table className="border-collapse   w-full ">
                   <thead>
                     <tr>
@@ -48,67 +63,79 @@ export const Ruser = ({ onButtonClick }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {Array.isArray(allUserdata.login_User_Data) &&
-                      allUserdata.login_User_Data.map((element, index) => {
-                        const userFind = allUserdata.full_User_Data.find(
-                          (item) => item._id === element.userId
-                        );
+                    {Array.isArray(allUserdata.login_Data_with_image) &&
+                      allUserdata.login_Data_with_image.map(
+                        (element, index) => {
+                          return (
+                            <tr key={index}>
+                              <td className="border border-gray-300 py-1 px-2 whitespace-nowrap ">
+                                {element.login_User.name}
+                              </td>
 
-                        return (
-                          <tr key={index}>
-                            <td className="border border-gray-300 py-1 px-2 whitespace-nowrap ">
-                              {element.name}
-                            </td>
+                              <td className="border border-gray-300 py-1 px-2 whitespace-nowrap ">
+                                {element.login_User.phone_number}
+                              </td>
+                              <td className="border border-gray-300 py-1 px-2 whitespace-nowrap ">
+                                {element.login_User.email}
+                              </td>
+                              <td className="border border-gray-300 py-1 px-2 whitespace-nowrap ">
+                                {element.login_User.role}
+                              </td>
 
-                            <td className="border border-gray-300 py-1 px-2 whitespace-nowrap ">
-                              {element.phone_number}
-                            </td>
-                            <td className="border border-gray-300 py-1 px-2 whitespace-nowrap ">
-                              {element.email}
-                            </td>
-                            <td className="border border-gray-300 py-1 px-2 whitespace-nowrap ">
-                              {element.role}
-                            </td>
+                              <td className="border border-gray-300 py-1 px-2 whitespace-nowrap ">
+                                <img
+                                  className="w-[40px]  h-[40px] lg:w-[35px]  lg:h-[35px] border-2 border-white rounded-[50rem] my-0 mx-auto"
+                                  src={
+                                    element.login_User.role == "father"
+                                      ? element.father_profile_image
+                                      : element.login_User.role == "mother"
+                                      ? element.mother_profile_image
+                                      : element.profile_image
+                                  }
+                                  alt=""
+                                />
+                              </td>
 
-                            <td className="border border-gray-300 py-1 px-2 whitespace-nowrap ">
-                              <img
-                                className="w-[40px]  h-[40px] lg:w-[35px]  lg:h-[35px] border-2 border-white rounded-[50rem] my-0 mx-auto"
-                                src={userFind.profile_image}
-                                alt=""
-                              />
-                            </td>
-
-                            <td className="border border-gray-300 py-1 px-2 whitespace-nowrap">
-                              <button
-                                onClick={() => onButtonClick(userFind._id)}
-                                id={userFind._id}
-                                className="w-1/2"
-                              >
-                                <FontAwesomeIcon icon={faEye} />
-                              </button>
-                              <button id={element._id} className="w-1/2">
-                                <FontAwesomeIcon icon={faTrash} />
-                              </button>
-                            </td>
-                          </tr>
-                        );
-                      })}
+                              <td className="border border-gray-300 py-1 px-2 whitespace-nowrap">
+                                <button
+                                  onClick={() =>
+                                    onButtonClick(
+                                      element.login_User.userId,
+                                      element.login_User.role
+                                    )
+                                  }
+                                  id={element.login_User._id}
+                                  className="w-1/2"
+                                >
+                                  <FontAwesomeIcon icon={faEye} />
+                                </button>
+                                <button
+                                  id={element.login_User._id}
+                                  className="w-1/2"
+                                >
+                                  <FontAwesomeIcon icon={faTrash} />
+                                </button>
+                              </td>
+                            </tr>
+                          );
+                        }
+                      )}
                   </tbody>
                 </table>
-              </div>
-              {displayPageNo > 1 ? (
-                <Pagination
-                  pageNo={pageNo}
-                  paginationClick={paginationClick}
-                  displayPageNoInBox={displayPageNoInBox}
-                />
-              ) : (
-                ""
               )}
             </div>
-          </div>
-        </>
-      )}
+            {displayPageNo >= 1 && key === "" ? (
+              <Pagination
+                pageNo={pageNo}
+                paginationClick={paginationClick}
+                displayPageNo={displayPageNo}
+              />
+            ) : (
+              ""
+            )}
+          </>
+        )}
+      </div>
     </>
   );
 };

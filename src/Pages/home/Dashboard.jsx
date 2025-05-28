@@ -12,16 +12,18 @@ export const Profile = () => {
 
 export const User = () => {
   const [id, setId] = useState(null);
-  const handleClick = (id) => {
-    console.log("handleClick", id);
+
+  const [role, setRole] = useState(null);
+  const handleClick = (id, role) => {
     setId(id);
+    setRole(role);
   };
   return (
     <Rcontent>
       {id === null ? (
         <Ruser onButtonClick={handleClick} />
       ) : (
-        <RProfile userId={id} />
+        <RProfile userId={id} role={role} />
       )}
     </Rcontent>
   );

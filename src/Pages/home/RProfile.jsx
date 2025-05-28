@@ -1,5 +1,8 @@
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { customToast } from "../../utils/CustomAlert/cutomToast";
+
 import {
   StudentForm,
   FacultyForm,
@@ -7,25 +10,41 @@ import {
 } from "../Registration/Register/UserForm";
 import { userUpdateData } from "../../Redux/ReduxThunk/updationThunks";
 import { LoaderInfinitySpin } from "../../utils/Loader/Loader";
-import { useUserForAdminCustomHook } from "../../customHooks/useUserForAdminCustomHook";
+import { allSingleUserGetDataThunk } from "../../Redux/ReduxThunk/fetchDataThunks";
 
-export const RProfile = ({ userId }) => {
-  const { allUserdata } = useUserForAdminCustomHook();
+export const RProfile = ({ userId, role }) => {
+  /* console.log("userId", userId);
+  console.log("role", role);
+ */
+  const [allSingleUserdata, setallSingleUserdata] = useState("");
 
-  const findUserDetail = allUserdata?.full_User_Data?.find((item) => {
-    return item._id === userId;
-  });
+  useEffect(() => {
+    let isMounted = true;
+    const fetchData = async () => {
+      try {
+        const AllSingleUserDataForAdmin = await allSingleUserGetDataThunk(
+          userId
+        );
 
-  const findUserLogin = allUserdata?.number_Of_Login_User?.find((item) => {
-    return item.userId === userId;
-  });
+        if (isMounted) {
+          setallSingleUserdata(AllSingleUserDataForAdmin.data);
+        }
+      } catch (error) {
+        customToast("error", error.message);
+      }
+    };
+    fetchData();
+    return () => {
+      isMounted = false;
+    };
+  }, [userId]);
 
   const normal_User_Detail = useSelector((state) =>
-    userId === undefined ? state.user?.userDetail?.data : findUserDetail
+    userId === undefined ? state.user?.userDetail?.data : allSingleUserdata.data
   );
 
   const normal_User_Role = useSelector((state) =>
-    userId === undefined ? state.user?.userDetail?.role : findUserLogin?.role
+    userId === undefined ? state.user?.userDetail?.role : role
   );
 
   if (!normal_User_Detail || !normal_User_Role) {
@@ -41,22 +60,28 @@ export const RProfile = ({ userId }) => {
             <StudentForm
               dumyInitialValues={normal_User_Detail}
               initialValues={normal_User_Detail}
-              apiFrom="update"
+              apiFrom={userId ? "admin-update" : "update"}
               postData={userUpdateData}
+              normal_User_Role={normal_User_Role}
+              userId={userId}
             />
           ) : normal_User_Role === "faculty" ? (
             <FacultyForm
               dumyInitialValues={normal_User_Detail}
               initialValues={normal_User_Detail}
-              apiFrom="update"
+              apiFrom={userId ? "admin-update" : "update"}
               postData={userUpdateData}
+              normal_User_Role={normal_User_Role}
+              userId={userId}
             />
           ) : normal_User_Role === "admin" ? (
             <AdminForm
               dumyInitialValues={normal_User_Detail}
               initialValues={normal_User_Detail}
-              apiFrom="update"
+              apiFrom={userId ? "admin-update" : "update"}
               postData={userUpdateData}
+              normal_User_Role={normal_User_Role}
+              userId={userId}
             />
           ) : (
             ""
@@ -69,4 +94,5 @@ export const RProfile = ({ userId }) => {
 
 RProfile.propTypes = {
   userId: PropTypes.string,
+  role: PropTypes.string,
 };

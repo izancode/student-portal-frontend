@@ -15,9 +15,15 @@ export const useDataCustomHook = (
   initialValues,
   postData,
   apiFrom,
-  skipFields
+  skipFields,
+  normal_User_Role,
+  userId
 ) => {
-  const role = useSelector((state) => state.user?.userDetail?.role);
+  const role = useSelector(
+    (state) => normal_User_Role || state.user?.userDetail?.role
+  );
+  // console.log("useDataCustomHook role", role);
+  // console.log("useDataCustomHook userId", userId);
 
   let SignUpSchema;
   if (role === "student" || role === "father" || role === "mother") {
@@ -83,9 +89,11 @@ export const useDataCustomHook = (
     postData,
     setLoading,
     apiFrom,
-    skipFields
+    skipFields,
+    role,
+    userId
   );
-
+  console.log("useFormikSignHook", values);
   return {
     updatedEnvironmentValues,
     loading,

@@ -115,7 +115,9 @@ export const studentSignUpSchema = Yup.object({
   student_father_email: Yup.string()
     .email("Please enter a valid email address")
     .required("Student father email field is required"),
-
+  father_profile_image: Yup.string().required(
+    "Father profile image field is required"
+  ),
   student_mother_name: Yup.string().required(
     "Student mother name field is required"
   ),
@@ -129,7 +131,9 @@ export const studentSignUpSchema = Yup.object({
   student_mother_email: Yup.string()
     .email("Please enter a valid email address")
     .required("Student mother email field is required"),
-
+  mother_profile_image: Yup.string().required(
+    "Mother profile image field is required"
+  ),
   in_case_of_guardian_please_specify_the_relationship: Yup.string().required(
     "Guardian relationship field is required"
   ),
@@ -308,6 +312,13 @@ export const otpInitialValues = {
   otp3: "",
   otp4: "",
 };
+export const searchInitialValues = {
+  search_bar: "",
+};
+
+export const searchSchema = Yup.object({
+  search_bar: Yup.string(),
+});
 export const studentInitialValues = {
   student_school: "",
   student_programs: "",
@@ -349,10 +360,12 @@ export const studentInitialValues = {
   student_father_occupation: "",
   student_father_number: "",
   student_father_email: "",
+  father_profile_image: null,
   student_mother_name: "",
   student_mother_occupation: "",
   student_mother_number: "",
   student_mother_email: "",
+  mother_profile_image: null,
   in_case_of_guardian_please_specify_the_relationship: "",
   statement_of_purpose: "",
 };
@@ -428,10 +441,12 @@ export const studentDumyInitialValues = {
   student_father_occupation: "Business",
   student_father_number: "9892306284",
   student_father_email: "izancode11@gmail.com",
+  father_profile_image: null,
   student_mother_name: "Mother Shaikh",
   student_mother_occupation: "Housewife",
   student_mother_number: "9987394168",
   student_mother_email: "ishanashaikh2007@gmail.com",
+  mother_profile_image: null,
   in_case_of_guardian_please_specify_the_relationship: "No",
   statement_of_purpose:
     "I am deeply passionate about the transformative potential of computer science ssand its ability to solve complex real-world problems. My academic journey has been driven by an insatiable curiosity for technology and a desire to contribute meaningfully to society through innovative solutions.\n\nDuring my undergraduate studies, I developed a strong foundation in programming, data structures, and algorithms, which fueled my interest in areas like Artificial Intelligence, Data Science, and Software Development. Working on projects such as [mention a specific project] allowed me to combine theoretical knowledge with practical applications, honing my problem-solving and teamwork skills.\n\nBeyond academics, I have pursued internships and research opportunities to deepen my understanding of [specific interests]. For instance, during my internship at [company/institution], I contributed to [specific achievement]. These experiences solidified my passion for continuous learning and innovation.\n\nI am particularly drawn to [mention the university/program] for its cutting-edge research, esteemed faculty, and emphasis on interdisciplinary collaboration. I am eager to contribute to ongoing projects, especially in [specific areas], and to develop a comprehensive understanding of advanced concepts in computer science.\n\nMy long-term goal is to contribute to the development of technology that addresses global challenges, such as improving healthcare systems, optimizing energy efficiency, or enhancing digital security. I am confident that the rigorous training and vibrant academic environment at [university name] will provide the ideal platform for me to achieve these aspirations.",
@@ -1018,7 +1033,17 @@ export const arrayStudentField = [
     fieldClassName:
       "block h-14  font-bold rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm  bg-[#F0F0F0] appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer ",
   },
+  {
+    type: "file",
+    name: "father_profile_image",
+    profileImage: "Father Profile image",
+    divclassName: "w-full lg:w-1/3 lg:px-4",
 
+    fieldClassName:
+      "absolute block h-14 opacity-0 cursor-pointer w-full px-2.5 py-2.5 text-sm",
+    buttonClassName:
+      "block h-14 flex items-center font-semibold rounded-lg text-left px-2.5 py-2.5 w-full cursor-pointer text-sm bg-[#F0F0F0] appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer z-0",
+  },
   {
     type: "input",
     name: "student_mother_name",
@@ -1068,6 +1093,17 @@ export const arrayStudentField = [
       "cursor-text absolute  appearance-none  text-sm text-black font-semibold duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-black peer-focus:font-semibold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[.85] peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto",
     fieldClassName:
       "block h-14  font-bold rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm  bg-[#F0F0F0] appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer ",
+  },
+  {
+    type: "file",
+    name: "mother_profile_image",
+    profileImage: "Mother Profile image",
+    divclassName: "w-full lg:w-1/3 lg:px-4",
+
+    fieldClassName:
+      "absolute block h-14 opacity-0 cursor-pointer w-full px-2.5 py-2.5 text-sm",
+    buttonClassName:
+      "block h-14 flex items-center font-semibold rounded-lg text-left px-2.5 py-2.5 w-full cursor-pointer text-sm bg-[#F0F0F0] appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer z-0",
   },
   {
     type: "textarea",

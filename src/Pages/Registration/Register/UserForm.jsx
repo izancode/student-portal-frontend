@@ -19,24 +19,55 @@ export const StudentForm = ({
   initialValues,
   postData,
   apiFrom,
+  normal_User_Role,
+  userId,
 }) => {
-  const role = useSelector((state) => state.user?.userDetail?.role);
+  const role = useSelector(
+    (state) => normal_User_Role || state.user?.userDetail?.role
+  );
 
   let skipFields = [];
   if (role === "student") {
     skipFields = [
+      "_id",
       "student_father_name",
       "student_father_number",
       "student_father_email",
       "student_mother_name",
       "student_mother_number",
       "student_mother_email",
+
+      "mother_profile_image",
+      "father_profile_image",
       "student_father_occupation",
       "student_mother_occupation",
       "in_case_of_guardian_please_specify_the_relationship",
+      "image_public_id",
+      "__v",
+      "createdAt",
+      "updatedAt",
+    ];
+  } else if (role === "faculty") {
+    skipFields = [
+      "_id",
+      "profile_image",
+      "image_public_id",
+      "__v",
+      "createdAt",
+      "updatedAt",
+    ];
+  } else if (role === "admin") {
+    skipFields = [
+      "_id",
+      "profile_image",
+      "image_public_id",
+      "__v",
+      "createdAt",
+      "updatedAt",
     ];
   } else if (role === "father") {
     skipFields = [
+      "_id",
       "student_school",
       "student_programs",
       "student_degree",
@@ -77,10 +108,15 @@ export const StudentForm = ({
       "student_mother_occupation",
       "student_mother_number",
       "student_mother_email",
+      "mother_profile_image",
       "statement_of_purpose",
+      "__v",
+      "createdAt",
+      "updatedAt",
     ];
   } else if (role === "mother") {
     skipFields = [
+      "_id",
       "student_school",
       "student_programs",
       "student_degree",
@@ -121,7 +157,11 @@ export const StudentForm = ({
       "student_father_occupation",
       "student_father_number",
       "student_father_email",
+      "father_profile_image",
       "statement_of_purpose",
+      "__v",
+      "createdAt",
+      "updatedAt",
     ];
   }
 
@@ -137,7 +177,15 @@ export const StudentForm = ({
     setFieldValue,
     handleInputChange,
     handleKeyDown,
-  } = useDataCustomHook(dumyInitialValues, initialValues, postData, apiFrom);
+  } = useDataCustomHook(
+    dumyInitialValues,
+    initialValues,
+    postData,
+    apiFrom,
+    skipFields,
+    role,
+    userId
+  );
 
   const updatedArray = arrayStudentField.map((material) => {
     const underDate = material.multipleFields;
@@ -185,7 +233,7 @@ export const StudentForm = ({
   const mainArrayForField =
     apiFrom === "post"
       ? arrayStudentField
-      : apiFrom === "update"
+      : apiFrom === "update" || apiFrom === "admin-update"
       ? updatedArray
       : null;
 
@@ -242,12 +290,12 @@ export const StudentForm = ({
                       fieldClassName={field.fieldClassName}
                       buttonClassName={field.buttonClassName}
                       values={values[field.name]}
-                      imageBUrl={values.profile_image}
                       setFieldValue={setFieldValue}
                       handleBlur={handleBlur}
                       error={errors[field.name]}
                       touched={!!touched[field.name]}
                       apiFrom={apiFrom}
+                      query={{ normal_User_Role, userId }}
                     />
                   </div>
                 ) : field.type === "textarea" ? (
@@ -289,7 +337,11 @@ export const StudentForm = ({
                 ) : (
                   <div className={field.className}>
                     <CustomButton
-                      btnname={apiFrom === "update" ? "Save" : field.btnname}
+                      btnname={
+                        apiFrom === "update" || apiFrom === "admin-update"
+                          ? "Save"
+                          : field.btnname
+                      }
                       type={field.btnType}
                     />
                   </div>
@@ -307,6 +359,8 @@ export const FacultyForm = ({
   initialValues,
   postData,
   apiFrom,
+  normal_User_Role,
+  userId,
 }) => {
   const {
     loading,
@@ -320,7 +374,15 @@ export const FacultyForm = ({
     setFieldValue,
     handleInputChange,
     handleKeyDown,
-  } = useDataCustomHook(dumyInitialValues, initialValues, postData, apiFrom);
+  } = useDataCustomHook(
+    dumyInitialValues,
+    initialValues,
+    postData,
+    apiFrom,
+    undefined,
+    normal_User_Role,
+    userId
+  );
 
   return (
     <form onSubmit={handleSubmit}>
@@ -374,12 +436,12 @@ export const FacultyForm = ({
                       fieldClassName={field.fieldClassName}
                       buttonClassName={field.buttonClassName}
                       values={values[field.name]}
-                      imageBUrl={values.profile_image}
                       setFieldValue={setFieldValue}
                       handleBlur={handleBlur}
                       error={errors[field.name]}
                       touched={!!touched[field.name]}
                       apiFrom={apiFrom}
+                      query={{ normal_User_Role, userId }}
                     />
                   </div>
                 ) : field.type === "textarea" ? (
@@ -421,7 +483,11 @@ export const FacultyForm = ({
                 ) : (
                   <div className={field.className}>
                     <CustomButton
-                      btnname={apiFrom === "update" ? "Save" : field.btnname}
+                      btnname={
+                        apiFrom === "update" || apiFrom === "admin-update"
+                          ? "Save"
+                          : field.btnname
+                      }
                       type={field.btnType}
                     />
                   </div>
@@ -440,6 +506,8 @@ export const AdminForm = ({
   initialValues,
   postData,
   apiFrom,
+  normal_User_Role,
+  userId,
 }) => {
   const {
     loading,
@@ -453,7 +521,16 @@ export const AdminForm = ({
     setFieldValue,
     handleInputChange,
     handleKeyDown,
-  } = useDataCustomHook(dumyInitialValues, initialValues, postData, apiFrom);
+  } = useDataCustomHook(
+    dumyInitialValues,
+    initialValues,
+    postData,
+    apiFrom,
+    undefined,
+    normal_User_Role,
+    userId
+  );
+  console.log("AdminForm", values);
   return (
     <form onSubmit={handleSubmit}>
       {loading ? (
@@ -506,12 +583,12 @@ export const AdminForm = ({
                       fieldClassName={field.fieldClassName}
                       buttonClassName={field.buttonClassName}
                       values={values[field.name]}
-                      imageBUrl={values.profile_image}
                       setFieldValue={setFieldValue}
                       handleBlur={handleBlur}
                       error={errors[field.name]}
                       touched={!!touched[field.name]}
                       apiFrom={apiFrom}
+                      query={{ normal_User_Role, userId }}
                     />
                   </div>
                 ) : field.type === "textarea" ? (
@@ -553,7 +630,11 @@ export const AdminForm = ({
                 ) : (
                   <div className={field.className}>
                     <CustomButton
-                      btnname={apiFrom === "update" ? "Save" : field.btnname}
+                      btnname={
+                        apiFrom === "update" || apiFrom === "admin-update"
+                          ? "Save"
+                          : field.btnname
+                      }
                       type={field.btnType}
                     />
                   </div>
@@ -572,16 +653,22 @@ StudentForm.propTypes = {
   initialValues: PropTypes.object.isRequired,
   postData: PropTypes.func,
   apiFrom: PropTypes.string.isRequired,
+  normal_User_Role: PropTypes.string.isRequired,
+  userId: PropTypes.string,
 };
 FacultyForm.propTypes = {
   dumyInitialValues: PropTypes.object.isRequired,
   initialValues: PropTypes.object.isRequired,
   postData: PropTypes.func,
   apiFrom: PropTypes.string.isRequired,
+  normal_User_Role: PropTypes.string.isRequired,
+  userId: PropTypes.string,
 };
 AdminForm.propTypes = {
   dumyInitialValues: PropTypes.object.isRequired,
   initialValues: PropTypes.object.isRequired,
   postData: PropTypes.func,
   apiFrom: PropTypes.string.isRequired,
+  normal_User_Role: PropTypes.string.isRequired,
+  userId: PropTypes.string,
 };

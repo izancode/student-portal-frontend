@@ -12,12 +12,13 @@ const ChooseFile = ({
   type,
   fieldClassName,
   buttonClassName,
-  imageBUrl,
+  values,
+  setFieldValue,
   handleBlur,
   error,
   touched,
-  setFieldValue,
   apiFrom,
+  query,
 }) => {
   const [imageUrl, setImageUrl] = useState(
     "https://res.cloudinary.com/dlqylweq6/image/upload/v1738059447/image_5_yfieap.png"
@@ -42,7 +43,7 @@ const ChooseFile = ({
 
     setFieldValue(name, file);
 
-    if (apiFrom === "update") {
+    if (apiFrom === "update" || apiFrom === "admin-update") {
       setUpdateApiFile(true);
       updateImage(file);
     }
@@ -51,8 +52,11 @@ const ChooseFile = ({
   const updateImage = async (file) => {
     try {
       const formData = new FormData();
-      formData.append("profile_image", file);
-      const fileUploaded = await dispatch(studentImageUpdateData(formData));
+      formData.append(name, file);
+      const fileUploaded = await dispatch(
+        studentImageUpdateData({ formData, query })
+      );
+      console.log("fileUploaded", fileUploaded);
       const dataPass = unwrapResult(fileUploaded);
       if (dataPass) {
         customToast("success", dataPass.message);
@@ -63,10 +67,12 @@ const ChooseFile = ({
       customToast("error", error.message);
     }
   };
-
-  if (typeof imageBUrl === "object") {
-    imageBUrl = null;
+  console.log("values", values);
+  console.log("imageUrl", imageUrl);
+  if (typeof values === "object") {
+    values = null;
   }
+
   return (
     <div className="relative mb-5">
       {updateApiFile ? (
@@ -74,7 +80,7 @@ const ChooseFile = ({
       ) : (
         <div className="font-bold relative">
           <img
-            src={imageBUrl ? imageBUrl : imageUrl}
+            src={values ? values : imageUrl}
             alt=""
             className="w-[45px] h-[45px] rounded-[50%] right-[1%] top-[8%] absolute"
           />
@@ -98,11 +104,13 @@ ChooseFile.propTypes = {
   type: PropTypes.string,
   fieldClassName: PropTypes.string,
   buttonClassName: PropTypes.string,
-  imageBUrl: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  values: PropTypes.string,
+
   error: PropTypes.string,
   setFieldValue: PropTypes.func,
   handleBlur: PropTypes.func,
   touched: PropTypes.bool,
   apiFrom: PropTypes.string,
+  query: PropTypes.object,
 };
 export default ChooseFile;

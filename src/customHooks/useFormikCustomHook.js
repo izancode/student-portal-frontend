@@ -4,19 +4,19 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import { customToast } from "../utils/CustomAlert/cutomToast";
 import { useNavigate } from "react-router-dom";
 import { userGetDataThunk } from "../Redux/ReduxThunk/fetchDataThunks";
-import { useSelector } from "react-redux";
 
 export const useFormikSignHook = (
   signUpSchema,
   initialValues,
   postData,
   setLoading,
-  apiFrom
+  apiFrom,
+  skipFields,
+  role,
+  userId
 ) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const role = useSelector((state) => state.user?.userRole);
 
   const {
     values,
@@ -33,144 +33,11 @@ export const useFormikSignHook = (
     initialValues: initialValues,
     onSubmit: async (values) => {
       try {
+       
         setLoading(true);
-
-        let skipFields = [];
-        if (role === "student") {
-          skipFields = [
-            "_id",
-            "student_father_name",
-            "student_father_number",
-            "student_father_email",
-            "student_mother_name",
-            "student_mother_number",
-            "student_mother_email",
-            "profile_image",
-            "student_father_occupation",
-            "student_mother_occupation",
-            "in_case_of_guardian_please_specify_the_relationship",
-            "image_public_id",
-            "__v",
-            "createdAt",
-            "updatedAt",
-          ];
-        } else if (role === "faculty") {
-          skipFields = [
-            "_id",
-            "profile_image",
-            "image_public_id",
-            "__v",
-            "createdAt",
-            "updatedAt",
-          ];
-        } else if (role === "admin") {
-          skipFields = [
-            "_id",
-            "profile_image",
-            "image_public_id",
-            "__v",
-            "createdAt",
-            "updatedAt",
-          ];
-        } else if (role === "father") {
-          skipFields = [
-            "_id",
-            "student_school",
-            "student_programs",
-            "student_degree",
-            "student_specialisation",
-            "student_how_did_you_hear_about_us",
-            "profile_image",
-            "first_name",
-            "middle_name",
-            "last_name",
-            "nationality",
-            "address",
-            "apartment",
-            "country",
-            "state",
-            "city",
-            "postal_code",
-            "phone_number",
-            "email",
-            "DD",
-            "MM",
-            "YYYY",
-            "gender",
-            "student_blood_group",
-            "student_caste_category",
-            "instagram_url",
-            "linkedin_url",
-            "previous_college_grade_10_details",
-            "previous_college_percentage_grade_secured",
-            "previous_college_marks_secured",
-            "previous_college_marks_out_of",
-            "previous_college_academic_year",
-            "previous_college_examination_board",
-            "previous_college_state",
-            "previous_college_city",
-            "previous_college_grade_12th_school_details",
-            "previous_college_name",
-            "student_mother_name",
-            "student_mother_occupation",
-            "student_mother_number",
-            "student_mother_email",
-            "statement_of_purpose",
-            "__v",
-            "createdAt",
-            "updatedAt",
-          ];
-        } else if (role === "mother") {
-          skipFields = [
-            "_id",
-            "student_school",
-            "student_programs",
-            "student_degree",
-            "student_specialisation",
-            "student_how_did_you_hear_about_us",
-            "profile_image",
-            "first_name",
-            "middle_name",
-            "last_name",
-            "nationality",
-            "address",
-            "apartment",
-            "country",
-            "state",
-            "city",
-            "postal_code",
-            "phone_number",
-            "email",
-            "DD",
-            "MM",
-            "YYYY",
-            "gender",
-            "student_blood_group",
-            "student_caste_category",
-            "instagram_url",
-            "linkedin_url",
-            "previous_college_grade_10_details",
-            "previous_college_percentage_grade_secured",
-            "previous_college_marks_secured",
-            "previous_college_marks_out_of",
-            "previous_college_academic_year",
-            "previous_college_examination_board",
-            "previous_college_state",
-            "previous_college_city",
-            "previous_college_grade_12th_school_details",
-            "previous_college_name",
-            "student_father_name",
-            "student_father_occupation",
-            "student_father_number",
-            "student_father_email",
-            "statement_of_purpose",
-            "__v",
-            "createdAt",
-            "updatedAt",
-          ];
-        }
+        
         const UpdatedValue = Object.keys(values)
-          .filter((key) => !skipFields.includes(key))
+          .filter((key) => !skipFields?.includes(key))
           .reduce((acc, key) => {
             acc[key] = values[key];
             return acc;
@@ -179,7 +46,7 @@ export const useFormikSignHook = (
         const comeFrom =
           apiFrom === "post"
             ? values
-            : apiFrom === "update"
+            : apiFrom === "update" || apiFrom === "admin-update"
             ? UpdatedValue
             : null;
 
@@ -198,7 +65,14 @@ export const useFormikSignHook = (
           }
         }
 
-        const actionResult = await dispatch(postData(formData));
+        let actionResult;
+        if (apiFrom === "admin-update") {
+          const query = { userId: userId, role: role };
+          actionResult = await dispatch(postData({ formData, query }));
+        } else {
+          actionResult = await dispatch(postData(formData));
+        }
+
         const dataPass = unwrapResult(actionResult);
         if (dataPass) {
           customToast("success", dataPass.message);
@@ -207,6 +81,8 @@ export const useFormikSignHook = (
             ? navigate("/")
             : apiFrom === "update"
             ? navigate("/profile")
+            : apiFrom === "admin-update"
+            ? navigate("/user")
             : null;
           setLoading(false);
         }
@@ -330,6 +206,34 @@ export const useFormikOtpHook = (
         customToast("error", error.message);
       }
     },
+  });
+
+  return {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldError,
+    setFieldValue,
+  };
+};
+
+export const useFormikSearchUserHook = (searchSchema, searchInitialValues) => {
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldError,
+    setFieldValue,
+  } = useFormik({
+    validationSchema: searchSchema,
+    initialValues: searchInitialValues,
+    onSubmit: async () => {},
   });
 
   return {

@@ -3,7 +3,8 @@ import axios from "axios";
 
 export const userUpdateData = createAsyncThunk(
   "user/updateUserData",
-  async (formData, thunkAPI) => {
+  async ({ formData, query }, thunkAPI) => {
+    console.log("userUpdateData thunk", query);
     try {
       const response = await axios.patch(
         import.meta.env.VITE_USER_THUNKS_UPDATE_API,
@@ -11,6 +12,10 @@ export const userUpdateData = createAsyncThunk(
         {
           headers: { "Content-Type": "multipart/form-data" },
           withCredentials: true,
+          params: {
+            userId: query?.userId,
+            role: query?.role,
+          },
         }
       );
 
@@ -23,6 +28,7 @@ export const userUpdateData = createAsyncThunk(
         message: error.response.data.message || "Internal Server Error",
         status: error.response.data.status || 500,
       };
+      console.log(error);
       return thunkAPI.rejectWithValue(errorPayload);
     }
   }
@@ -30,7 +36,10 @@ export const userUpdateData = createAsyncThunk(
 
 export const studentImageUpdateData = createAsyncThunk(
   "student/updateImageStudentData",
-  async (formData, thunkAPI) => {
+  async ({ formData, query }, thunkAPI) => {
+    console.log("formData", formData);
+    console.log("query", query);
+
     try {
       const response = await axios.patch(
         import.meta.env.VITE_USER_THUNKS_IMAGE_UPDATE_API,
@@ -38,6 +47,10 @@ export const studentImageUpdateData = createAsyncThunk(
         {
           headers: { "Content-Type": "multipart/form-data" },
           withCredentials: true,
+          params: {
+            userId: query?.userId,
+            role: query?.normal_User_Role,
+          },
         }
       );
       return {

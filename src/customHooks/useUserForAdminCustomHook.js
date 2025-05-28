@@ -1,19 +1,30 @@
 import { useEffect, useState } from "react";
 import { allUserGetDataThunk } from "../Redux/ReduxThunk/fetchDataThunks";
 import { customToast } from "../utils/CustomAlert/cutomToast";
-//useUserForAdmin
+
 export const useUserForAdminCustomHook = () => {
   const [pageNo, setPageNo] = useState(1);
-  const [allUserdata, setallUserdata] = useState("");
+  const [limit, setLimit] = useState(2);
+  const [key, setKey] = useState(null);
   const [loading, setLoading] = useState(false);
-  const limit = 2;
+  const [allUserdata, setallUserdata] = useState("");
+
+  const searchKeyFunction = (keyword) => {
+    setKey(keyword);
+  };
 
   useEffect(() => {
     let isMounted = true;
     const fetchData = async () => {
       try {
+        setLimit(2);
         setLoading(true);
-        const AllUserDataForAdmin = await allUserGetDataThunk(pageNo, limit);
+
+        const AllUserDataForAdmin = await allUserGetDataThunk(
+          pageNo,
+          limit,
+          key
+        );
 
         if (isMounted) {
           setallUserdata(AllUserDataForAdmin.data);
@@ -29,13 +40,10 @@ export const useUserForAdminCustomHook = () => {
     return () => {
       isMounted = false;
     };
-  }, [pageNo]);
+  }, [key, pageNo, limit]);
 
-  const displayPageNo = Math.ceil(
-    allUserdata?.number_Of_Login_User?.length / limit
-  );
+  const displayPageNo = Math.ceil(allUserdata?.only_Login_User_length / limit);
 
-  const displayPageNoInBox = Array.from({ length: displayPageNo });
   const paginationClick = async (id) => {
     if (id < 1 || id > displayPageNo) {
       return;
@@ -45,9 +53,10 @@ export const useUserForAdminCustomHook = () => {
   return {
     loading,
     allUserdata,
-    displayPageNoInBox,
     paginationClick,
     pageNo,
     displayPageNo,
+    searchKeyFunction,
+    key,
   };
 };
