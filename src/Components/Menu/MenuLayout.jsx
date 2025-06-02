@@ -1,9 +1,25 @@
 import { MenuBox, MenuList } from "./MenuItem.jsx";
 import { menuItems } from "../../utils/Array/menuArray.jsx";
+import { allMenuGetDataThunk } from "../../Redux/ReduxThunk/fetchDataThunks.jsx";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 export const HomeMenu = () => {
   const user = useSelector((state) => state.user?.userDetail?.data);
   const role = useSelector((state) => state.user?.userDetail?.role);
+  useEffect(() => {
+    try {
+      const fetchData = async () => {
+        const data = await allMenuGetDataThunk();
+        console.log(data);
+      };
+
+      fetchData();
+    } catch (error) {
+      console.log(error);
+    }
+
+    return () => {};
+  }, []);
 
   return (
     <div className=" px-2 lg:max-w-[1200px] mx-auto h-[calc(100vh-50px)] sm:h-[calc(100vh-60px)] flex items-center">

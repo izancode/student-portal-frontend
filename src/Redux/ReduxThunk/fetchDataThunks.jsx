@@ -77,3 +77,21 @@ export const allSingleUserGetDataThunk = async (userId) => {
     return errorMessage;
   }
 };
+
+export const allMenuGetDataThunk = async () => {
+  try {
+    const response = await axios.get(import.meta.env.VITE_MENU_THUNKS_GET_API, {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    });
+
+    return {
+      data: response.data.menuModelStore,
+    };
+  } catch (error) {
+    const errorMessage = error.response
+      ? error.response.data
+      : { message: error.message };
+    return errorMessage;
+  }
+};
