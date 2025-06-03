@@ -530,7 +530,7 @@ export const AdminForm = ({
     normal_User_Role,
     userId
   );
-  console.log("AdminForm", values);
+
   return (
     <form onSubmit={handleSubmit}>
       {loading ? (

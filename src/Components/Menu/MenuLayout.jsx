@@ -2,25 +2,24 @@ import { MenuBox, MenuList } from "./MenuItem.jsx";
 import { menuItems } from "../../utils/Array/menuArray.jsx";
 import { allMenuGetDataThunk } from "../../Redux/ReduxThunk/fetchDataThunks.jsx";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 export const HomeMenu = () => {
   const user = useSelector((state) => state.user?.userDetail?.data);
   const role = useSelector((state) => state.user?.userDetail?.role);
-  useEffect(() => {
-    try {
-      const fetchData = async () => {
-        const data = await allMenuGetDataThunk();
-        console.log(data);
-      };
+  const [menu, setMenu] = useState([]);
 
-      fetchData();
-    } catch (error) {
-      console.log(error);
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await allMenuGetDataThunk();
+      // console.log("data inner", data);
+      setMenu(data);
+    };
+
+    fetchData();
 
     return () => {};
   }, []);
-
+  // console.log(menu);
   return (
     <div className=" px-2 lg:max-w-[1200px] mx-auto h-[calc(100vh-50px)] sm:h-[calc(100vh-60px)] flex items-center">
       <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-y-[15px] gap-x-[10px]  sm:gap-y-[10px] sm:gap-x-[30px] lg:gap-y-[10px] lg:gap-x-[4rem] w-full">

@@ -201,6 +201,14 @@ const router = createBrowserRouter([
     element: <NotFoundPage />,
   },
 ]);
+
+if (import.meta.env.VITE_NODE_ENV === "development") {
+  const whyDidYouRender = await import("@welldone-software/why-did-you-render");
+  const React = await import("react");
+  whyDidYouRender.default(React, {
+    trackAllPureComponents: true,
+  });
+}
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>

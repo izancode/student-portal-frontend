@@ -56,7 +56,7 @@ const ChooseFile = ({
       const fileUploaded = await dispatch(
         studentImageUpdateData({ formData, query })
       );
-      console.log("fileUploaded", fileUploaded);
+
       const dataPass = unwrapResult(fileUploaded);
       if (dataPass) {
         customToast("success", dataPass.message);
@@ -67,8 +67,7 @@ const ChooseFile = ({
       customToast("error", error.message);
     }
   };
-  console.log("values", values);
-  console.log("imageUrl", imageUrl);
+
   if (typeof values === "object") {
     values = null;
   }

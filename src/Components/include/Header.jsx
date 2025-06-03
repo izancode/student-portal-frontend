@@ -12,7 +12,8 @@ const Header = () => {
   }, [dispatch]);
   const user = useSelector((state) => state.user?.userDetail?.data);
   const role = useSelector((state) => state.user?.userDetail?.role);
- 
+
+  console.log("Header render");
 
   return (
     <>
@@ -100,4 +101,5 @@ const Header = () => {
   );
 };
 
+Header.whyDidYouRender = true;
 export default Header;
