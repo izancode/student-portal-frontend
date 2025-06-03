@@ -42,7 +42,6 @@ export const Rcontent = ({ children }) => {
   );
 };
 export const MenuPage = () => {
-  console.log("MenuPage render");
   return (
     <HeaderLayout>
       <HomeMenu />

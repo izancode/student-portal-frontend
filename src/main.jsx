@@ -10,6 +10,7 @@ import { LoginForm, OtpForm } from "./Pages/Registration/Login/LoginForm.jsx";
 import {
   Profile,
   User,
+  MenuControlled,
   ClassLabTools,
   CourseSchedule,
   ClassTimings,
@@ -83,6 +84,16 @@ const router = createBrowserRouter([
       {
         path: "/user",
         element: <User />,
+      },
+    ],
+  },
+  {
+    path: "/menu-control",
+    element: <HomeProtectRoute />,
+    children: [
+      {
+        path: "/menu-control",
+        element: <MenuControlled />,
       },
     ],
   },

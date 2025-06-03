@@ -2,6 +2,7 @@ import { Rcontent } from "../../Components/Layout/Layout";
 import { RProfile } from "./RProfile";
 import { Ruser } from "./Ruser";
 import { useState } from "react";
+import { MenuAccessed } from "./MenuAccessed";
 export const Profile = () => {
   return (
     <Rcontent>
@@ -25,6 +26,14 @@ export const User = () => {
       ) : (
         <RProfile userId={id} role={role} />
       )}
+    </Rcontent>
+  );
+};
+
+export const MenuControlled = () => {
+  return (
+    <Rcontent>
+      <MenuAccessed />
     </Rcontent>
   );
 };

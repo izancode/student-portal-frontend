@@ -33,9 +33,8 @@ export const useFormikSignHook = (
     initialValues: initialValues,
     onSubmit: async (values) => {
       try {
-       
         setLoading(true);
-        
+
         const UpdatedValue = Object.keys(values)
           .filter((key) => !skipFields?.includes(key))
           .reduce((acc, key) => {
@@ -234,6 +233,36 @@ export const useFormikSearchUserHook = (searchSchema, searchInitialValues) => {
     validationSchema: searchSchema,
     initialValues: searchInitialValues,
     onSubmit: async () => {},
+  });
+
+  return {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldError,
+    setFieldValue,
+  };
+};
+
+export const useFormikMenuHook = (menuSchema, menuInitialValues) => {
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldError,
+    setFieldValue,
+  } = useFormik({
+    validationScehma: menuSchema,
+    initialValues: menuInitialValues,
+    onSubmit: async () => {
+      console.log(values);
+    },
   });
 
   return {

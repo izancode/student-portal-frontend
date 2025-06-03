@@ -302,6 +302,14 @@ export const otpSchema = Yup.object({
     .typeError("Must be a number"),
 });
 
+export const searchSchema = Yup.object({
+  search_bar: Yup.string(),
+});
+
+export const menuSchema = Yup.object({
+  select_role_for_menu: Yup.string().required("Select Role field is required"),
+});
+
 export const loginInitialValues = {
   login_with_email_phone: "",
 };
@@ -316,9 +324,10 @@ export const searchInitialValues = {
   search_bar: "",
 };
 
-export const searchSchema = Yup.object({
-  search_bar: Yup.string(),
-});
+export const menuInitialValues = {
+  select_role_for_menu: "",
+};
+
 export const studentInitialValues = {
   student_school: "",
   student_programs: "",

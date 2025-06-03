@@ -244,6 +244,7 @@ export const StudentForm = ({
       ) : (
         <div className="flex flex-wrap ">
           {mainArrayForField.map((field, fieldIndex) => {
+            console.log(field.options);
             return (
               <React.Fragment key={`${field.name}-${fieldIndex}`}>
                 {field.type === "heading" ? (

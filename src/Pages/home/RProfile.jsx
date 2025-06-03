@@ -53,7 +53,7 @@ export const RProfile = ({ userId, role }) => {
   return (
     <>
       <div className="grid grid-cols-12 h-[calc(100vh-169px)] lg:h-[calc(100vh-179px)] overflow-auto scrollbar-style-2">
-        <div className="col-span-12 px-2 lg:px-0">
+        <div className="col-span-12 px-2 lg:px-0 mt-5">
           {normal_User_Role === "student" ||
           normal_User_Role === "mother" ||
           normal_User_Role === "father" ? (

@@ -13,8 +13,6 @@ const Header = () => {
   const user = useSelector((state) => state.user?.userDetail?.data);
   const role = useSelector((state) => state.user?.userDetail?.role);
 
-  console.log("Header render");
-
   return (
     <>
       <nav className=" bg-[#342B7C] fixed top-0 left-0 z-50 w-full ">

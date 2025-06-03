@@ -1,25 +1,13 @@
 import { MenuBox, MenuList } from "./MenuItem.jsx";
-import { menuItems } from "../../utils/Array/menuArray.jsx";
-import { allMenuGetDataThunk } from "../../Redux/ReduxThunk/fetchDataThunks.jsx";
+
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+
+import { useFetchMenuCustomHooks } from "../../customHooks/useFetchMenuCustomHooks.js";
 export const HomeMenu = () => {
   const user = useSelector((state) => state.user?.userDetail?.data);
   const role = useSelector((state) => state.user?.userDetail?.role);
-  const [menu, setMenu] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await allMenuGetDataThunk();
-      // console.log("data inner", data);
-      setMenu(data);
-    };
-
-    fetchData();
-
-    return () => {};
-  }, []);
-  console.log(menu);
+  const { menu } = useFetchMenuCustomHooks();
   return (
     <div className=" px-2 lg:max-w-[1200px] mx-auto h-[calc(100vh-50px)] sm:h-[calc(100vh-60px)] flex items-center">
       <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-y-[15px] gap-x-[10px]  sm:gap-y-[10px] sm:gap-x-[30px] lg:gap-y-[10px] lg:gap-x-[4rem] w-full">
@@ -37,8 +25,8 @@ export const HomeMenu = () => {
             </span>
           </h2>
         </div>
-        {menuItems.map((item) => (
-          <MenuBox key={item.id} imgSrc={item.imgSrc} title={item.title} />
+        {menu.map((item) => (
+          <MenuBox key={item._id} imgSrc={item.imgSrc} title={item.title} />
         ))}
       </div>
     </div>
@@ -49,7 +37,7 @@ export const SideBarMenu = () => {
   const isSideBarOpen = useSelector((state) => state.sideBar.isSideBarOpen);
   const user = useSelector((state) => state.user?.userDetail?.data);
   const role = useSelector((state) => state.user?.userDetail?.role);
-
+  const { menu } = useFetchMenuCustomHooks();
   return (
     <div
       className={`col-span-1  lg:col-span-2 bg-[#5A538D] absolute top-0 transition-all duration-300 ease-in-out ${
@@ -143,8 +131,8 @@ export const SideBarMenu = () => {
       </div>
       <div className="flex h-screen lg:h-[calc(100vh-179px)] lg:px-1 text-white overflow-auto scrollbar-style-2">
         <ul className="w-[90px] lg:w-full">
-          {menuItems.map((item) => (
-            <MenuList key={item.id} imgSrc={item.imgSrc} title={item.title} />
+          {menu.map((item) => (
+            <MenuList key={item._id} imgSrc={item.imgSrc} title={item.title} />
           ))}
         </ul>
       </div>
