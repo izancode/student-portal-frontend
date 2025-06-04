@@ -29,11 +29,19 @@ export const MenuAccessed = () => {
         <p>Check For Make the Menu visible</p>
         <div className="grid grid-cols-12">
           {menu.map((item) => (
-            <div className="col-span-3 p-5" key={item._id}>
+            <div
+              className={`col-span-3 m-5 p-1 ${
+                item._id === "683c26f2ec71a511fc6b7467" ||
+                item._id === "683c26e2ec71a511fc6b7465"
+                  ? "bg-[#342b7c] text-white"
+                  : ""
+              }`}
+              key={item._id}
+            >
               <CheckBox
                 name={item.title}
                 img={item.imgSrc}
-                className="w-full h-full absolute top-0"
+                className="w-full h-full absolute top-0 left-0 opacity-0"
               />
             </div>
           ))}

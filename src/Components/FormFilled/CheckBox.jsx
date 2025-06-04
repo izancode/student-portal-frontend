@@ -4,8 +4,8 @@ const CheckBox = (props) => {
   const { name, img, className } = props;
 
   return (
-    <div className="relative">
-      <img className="w-50" src={img} alt="" />
+    <div className="relative text-center">
+      <img className="w-[55px] h-[55px] mx-auto" src={img} alt="" />
       <input
         type="checkbox"
         className={className}
@@ -13,7 +13,10 @@ const CheckBox = (props) => {
         name={name}
         value={name}
       />
-      <label htmlFor={name}> {name}</label>
+      <label className={`text-xs `} htmlFor={name}>
+        {" "}
+        {name}
+      </label>
     </div>
   );
 };
