@@ -95,3 +95,27 @@ export const allMenuGetDataThunk = async () => {
     return errorMessage;
   }
 };
+
+export const allAdminMenuGetDataThunk = async (selectRole) => {
+  try {
+    const response = await axios.get(
+      import.meta.env.VITE_ADMIN_MENU_THUNKS_GET_API,
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+        params: {
+          role: selectRole,
+        },
+      }
+    );
+    console.log("response", response);
+    return {
+      data: response.data,
+    };
+  } catch (error) {
+    const errorMessage = error.response
+      ? error.response.data
+      : { message: error.message };
+    return errorMessage;
+  }
+};

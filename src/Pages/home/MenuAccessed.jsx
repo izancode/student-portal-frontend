@@ -1,17 +1,19 @@
 import SelectBox from "../../Components/FormFilled/SelectBox";
 import CheckBox from "../../Components/FormFilled/CheckBox";
-import { useFormikMenuHook } from "../../customHooks/useFormikCustomHook";
-import { menuSchema, menuInitialValues } from "../../utils/Formik/formik";
 
-import { useFetchMenuCustomHooks } from "../../customHooks/useFetchMenuCustomHooks";
+import { useFetchMenuCustomHooksAdmin } from "../../customHooks/useFetchMenuCustomHooks";
 export const MenuAccessed = () => {
-  const options = ["Admin", "Faculty", "Student", "Father", "Mother"];
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormikMenuHook(menuSchema, menuInitialValues);
-  const { menu } = useFetchMenuCustomHooks();
-  const handleChangeRole = (e) => {
-    console.log("selected Role:", e.target.value);
-  };
+  const {
+    menu,
+    options,
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChangeRole,
+    handleSubmit,
+  } = useFetchMenuCustomHooksAdmin();
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -34,11 +36,11 @@ export const MenuAccessed = () => {
       <div className="col-span-12 lg:col-span-9   p-3 border h-[calc(100vh-169px)] lg:h-[calc(100vh-179px)] overflow-auto scrollbar-style-2">
         <p>Check For Make the Menu visible</p>
         <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6   gap-y-[20px]   w-full">
-          {menu?.adminMenu?.map((item) => {
+          {menu?.MenuList?.map((item) => {
             const isSelected = menu?.userMenu?.some(
               (selected) => selected._id === item._id
             );
-            // console.log("isSelected", isSelected);
+
             return (
               <div
                 className={`relative w-[120px] h-[120px]  rounded-2xl flex flex-col justify-center border text-center ${
