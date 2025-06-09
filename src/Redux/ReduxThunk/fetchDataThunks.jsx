@@ -86,7 +86,7 @@ export const allMenuGetDataThunk = async () => {
     });
 
     return {
-      data: response.data.menuModelStore,
+      data: response.data,
     };
   } catch (error) {
     const errorMessage = error.response

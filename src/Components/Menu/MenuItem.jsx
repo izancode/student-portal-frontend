@@ -56,4 +56,5 @@ MenuBox.propTypes = {
 MenuList.propTypes = {
   imgSrc: PropTypes.string,
   title: PropTypes.string,
+  role: PropTypes.array,
 };

@@ -12,7 +12,7 @@ const SelectBox = (props) => {
     error,
     touched,
   } = props;
-  console.log(values);
+
   return (
     <div className="relative mb-5">
       <select
