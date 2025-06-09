@@ -42,7 +42,7 @@ export const useFetchMenuCustomHooksAdmin = () => {
     errors,
     touched,
     handleBlur,
-    handleChangeRole,
+
     handleSubmit,
   } = useFormikMenuHook(menuSchema, menuInitialValues);
   const handleChangeRole = async (e) => {
@@ -79,6 +79,5 @@ export const useFetchMenuCustomHooksAdmin = () => {
     handleBlur,
     handleChangeRole,
     handleSubmit,
-    handleChangeRole,
   };
 };
