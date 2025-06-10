@@ -96,7 +96,7 @@ export const allMenuGetDataThunk = async () => {
   }
 };
 
-export const allAdminMenuGetDataThunk = async () => {
+export const allAdminMenuGetDataThunk = async (selectedRole) => {
   try {
     const response = await axios.get(
       import.meta.env.VITE_ADMIN_MENU_THUNKS_GET_API,
@@ -104,14 +104,37 @@ export const allAdminMenuGetDataThunk = async () => {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
         params: {
-          role: "admin",
+          role: selectedRole,
         },
       }
     );
-    console.log("response", response);
+    // console.log("response", response);
     return {
       data: response.data,
     };
+  } catch (error) {
+    const errorMessage = error.response
+      ? error.response.data
+      : { message: error.message };
+    return errorMessage;
+  }
+};
+export const updateAdminMenuGetDataThunk = async (menuData) => {
+  console.log(menuData);
+  try {
+    const response = await axios.patch(
+      import.meta.env.VITE_UPDATE_ADMIN_MENU_THUNKS_GET_API,
+      menuData,
+
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
+    // console.log("response", response);
+    // return {
+    //   data: response.data,
+    // };
   } catch (error) {
     const errorMessage = error.response
       ? error.response.data

@@ -9,14 +9,15 @@ export const MenuAccessed = () => {
     values,
     errors,
     touched,
-    handleChange,
+    handleRoleChange,
     handleBlur,
     handleSubmit,
+    handleCheck,
   } = useFetchMenuCustomHooksAdmin();
-  console.log(menu);
+
   return (
     <form
-      onChange={handleSubmit}
+      onSubmit={handleSubmit}
       className="grid grid-cols-12 h-[calc(100vh-169px)] lg:h-[calc(100vh-179px)] overflow-auto scrollbar-style-2 "
     >
       <div className="col-span-12 lg:col-span-3  p-3 border">
@@ -27,7 +28,7 @@ export const MenuAccessed = () => {
           options={options}
           fieldClassName="w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           values={values.select_role_for_menu}
-          handleChange={handleChange}
+          handleChange={handleRoleChange}
           handleBlur={handleBlur}
           error={errors.select_role_for_menu}
           touched={touched.select_role_for_menu}
@@ -56,7 +57,9 @@ export const MenuAccessed = () => {
                 <CheckBox
                   name={item.title}
                   img={item.imgSrc}
-                  className={`min-w-full min-h-full top-0 left-0  opacity-0 cursor-[url('https://res.cloudinary.com/dlqylweq6/image/upload/v1749019567/download_1_gyjokj.png')_14_14,_auto]`}
+                  className={`min-w-full min-h-full top-0 left-0  opacity-25 cursor-[url('https://res.cloudinary.com/dlqylweq6/image/upload/v1749019567/download_1_gyjokj.png')_14_14,_auto] `}
+                  checked={isSelected}
+                  onChange={() => handleCheck(item)}
                 />
                 <label
                   className={`text-[10px]  lg:text-xs mt-2`}
