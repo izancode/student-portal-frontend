@@ -4,7 +4,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import { customToast } from "../utils/CustomAlert/cutomToast";
 import { useNavigate } from "react-router-dom";
 import { userGetDataThunk } from "../Redux/ReduxThunk/fetchDataThunks";
-
+import { allAdminMenuGetDataThunk } from "../Redux/ReduxThunk/fetchDataThunks";
 export const useFormikSignHook = (
   signUpSchema,
   initialValues,
@@ -253,15 +253,20 @@ export const useFormikMenuHook = (menuSchema, menuInitialValues) => {
     errors,
     touched,
     handleBlur,
-    handleChangeRole,
+    handleChange,
     handleSubmit,
     setFieldError,
     setFieldValue,
   } = useFormik({
     validationScehma: menuSchema,
     initialValues: menuInitialValues,
-    onSubmit: async () => {
-      console.log(values);
+    onChange: async () => {
+      console.log("values", values);
+      try {
+        // const data = await allAdminMenuGetDataThunk(values);
+      } catch (error) {
+        console.log("error", error);
+      }
     },
   });
 
@@ -270,7 +275,7 @@ export const useFormikMenuHook = (menuSchema, menuInitialValues) => {
     errors,
     touched,
     handleBlur,
-    handleChangeRole,
+    handleChange,
     handleSubmit,
     setFieldError,
     setFieldValue,

@@ -34,27 +34,16 @@ export const useFetchMenuCustomHooks = () => {
 };
 export const useFetchMenuCustomHooksAdmin = () => {
   const [menu, setMenu] = useState([]);
-  const [selectRole, setSelectRole] = useState("faculty");
 
   const options = ["Admin", "Faculty", "Student", "Father", "Mother"];
-  const {
-    values,
-    errors,
-    touched,
-    handleBlur,
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormikMenuHook(menuSchema, menuInitialValues);
 
-    handleSubmit,
-  } = useFormikMenuHook(menuSchema, menuInitialValues);
-  const handleChangeRole = async (e) => {
-    console.log("selected Role:", e.target.value.toLowerCase());
-    setSelectRole(e.target.value.toLowerCase());
-  };
   useEffect(() => {
     let isMounted = true;
     const fetchData = async () => {
       try {
-        console.log("selectRoleeee", selectRole);
-        const data = await allAdminMenuGetDataThunk(selectRole);
+        const data = await allAdminMenuGetDataThunk();
 
         if (isMounted) {
           setMenu(data.data);
@@ -76,8 +65,8 @@ export const useFetchMenuCustomHooksAdmin = () => {
     values,
     errors,
     touched,
+    handleChange,
     handleBlur,
-    handleChangeRole,
     handleSubmit,
   };
 };

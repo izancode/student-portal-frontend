@@ -9,14 +9,14 @@ export const MenuAccessed = () => {
     values,
     errors,
     touched,
+    handleChange,
     handleBlur,
-    handleChangeRole,
     handleSubmit,
   } = useFetchMenuCustomHooksAdmin();
-
+  console.log(menu);
   return (
     <form
-      onSubmit={handleSubmit}
+      onChange={handleSubmit}
       className="grid grid-cols-12 h-[calc(100vh-169px)] lg:h-[calc(100vh-179px)] overflow-auto scrollbar-style-2 "
     >
       <div className="col-span-12 lg:col-span-3  p-3 border">
@@ -27,7 +27,7 @@ export const MenuAccessed = () => {
           options={options}
           fieldClassName="w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           values={values.select_role_for_menu}
-          handleChange={handleChangeRole}
+          handleChange={handleChange}
           handleBlur={handleBlur}
           error={errors.select_role_for_menu}
           touched={touched.select_role_for_menu}

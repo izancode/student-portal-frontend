@@ -96,7 +96,7 @@ export const allMenuGetDataThunk = async () => {
   }
 };
 
-export const allAdminMenuGetDataThunk = async (selectRole) => {
+export const allAdminMenuGetDataThunk = async () => {
   try {
     const response = await axios.get(
       import.meta.env.VITE_ADMIN_MENU_THUNKS_GET_API,
@@ -104,7 +104,7 @@ export const allAdminMenuGetDataThunk = async (selectRole) => {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
         params: {
-          role: selectRole,
+          role: "admin",
         },
       }
     );
