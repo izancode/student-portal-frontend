@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 const CheckBox = (props) => {
-  const { name, className, checked, onChange } = props;
+  const { name, className, checked, handleChange } = props;
 
   return (
     <div className="absolute w-full h-full">
@@ -12,7 +12,7 @@ const CheckBox = (props) => {
         name={name}
         value={name}
         checked={checked}
-        onChange={onChange}
+        onChange={handleChange}
       />
     </div>
   );
@@ -22,6 +22,6 @@ CheckBox.propTypes = {
   img: PropTypes.string,
   className: PropTypes.string,
   checked: PropTypes.bool,
-  onChange: PropTypes.func,
+  handleChange: PropTypes.func,
 };
 export default CheckBox;

@@ -6,6 +6,7 @@ import {
 } from "../Redux/ReduxThunk/fetchDataThunks.jsx";
 import { useFormikMenuHook } from "../customHooks/useFormikCustomHook.js";
 import { menuSchema, menuInitialValues } from "../utils/Formik/formik.jsx";
+import { customToast } from "../utils/CustomAlert/cutomToast.jsx";
 
 export const useFetchMenuCustomHooks = () => {
   const [menu, setMenu] = useState([]);
@@ -41,7 +42,6 @@ export const useFetchMenuCustomHooksAdmin = () => {
 
   const handleRoleChange = async (e) => {
     const role = e.target.value.toLowerCase();
-    console.log("eee", e.target.name);
 
     handleChange(e);
 
@@ -49,8 +49,10 @@ export const useFetchMenuCustomHooksAdmin = () => {
   };
 
   const handleCheck = async (item) => {
-    console.log("handleCheck", item._id);
-    console.log("selectedRole", selectedRole);
+    console.log("clecked.................");
+    if (!selectedRole) {
+      return customToast("error", "Please select a role first");
+    }
 
     try {
       const data = await updateAdminMenuGetDataThunk({
@@ -58,7 +60,13 @@ export const useFetchMenuCustomHooksAdmin = () => {
         role: selectedRole,
       });
 
-      console.log(data);
+      console.log("data.status", data.data.status);
+      if (data.data.status) {
+        const updateData = await allAdminMenuGetDataThunk(selectedRole);
+        console.log("updateData", updateData);
+        setMenu(updateData.data);
+        customToast("success", data.data.message);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -72,6 +80,7 @@ export const useFetchMenuCustomHooksAdmin = () => {
     const fetchData = async () => {
       try {
         const data = await allAdminMenuGetDataThunk(selectedRole);
+        console.log("data", data);
 
         if (isMounted) {
           setMenu(data.data);

@@ -26,7 +26,7 @@ export const MenuAccessed = () => {
           name="select_role_for_menu"
           placeholder="Select Role for Menu"
           options={options}
-          fieldClassName="w-full bg-[#F0F0F0] font-semibold h-14 rounded-lg px-2.5 text-sm appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          fieldClassName="w-full bg-[#F0F0F0] font-semibold h-10 rounded-lg px-2.5 text-[12px] appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           values={values.select_role_for_menu}
           handleChange={handleRoleChange}
           handleBlur={handleBlur}
@@ -44,7 +44,7 @@ export const MenuAccessed = () => {
 
             return (
               <div
-                className={`relative w-[80px] h-[80px]   md:w-[90px] md:h-[90px] rounded-2xl flex flex-col justify-center border text-center  ${
+                className={`relative w-[80px] h-[80px]   md:w-[90px] md:h-[90px] rounded-2xl flex flex-col justify-center border text-center hover:bg-[#342b7c] hover:text-white ${
                   isSelected ? "bg-[#342b7c] text-white" : ""
                 }`}
                 key={item._id}
@@ -59,12 +59,9 @@ export const MenuAccessed = () => {
                   img={item.imgSrc}
                   className={`min-w-full min-h-full top-0 left-0  opacity-0 cursor-[url('https://res.cloudinary.com/dlqylweq6/image/upload/v1749019567/download_1_gyjokj.png')_14_14,_auto] `}
                   checked={isSelected}
-                  onChange={() => handleCheck(item)}
+                  handleChange={() => handleCheck(item)}
                 />
-                <label
-                  className={`text-[10px]  md:text-xs mt-2`}
-                  htmlFor={item.title}
-                >
+                <label className={`text-[10px] mt-2`} htmlFor={item.title}>
                   {item.title}
                 </label>
               </div>

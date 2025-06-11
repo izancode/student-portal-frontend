@@ -108,7 +108,7 @@ export const allAdminMenuGetDataThunk = async (selectedRole) => {
         },
       }
     );
-    // console.log("response", response);
+    console.log("allAdminMenuGetDataThunk response", response);
     return {
       data: response.data,
     };
@@ -120,7 +120,6 @@ export const allAdminMenuGetDataThunk = async (selectedRole) => {
   }
 };
 export const updateAdminMenuGetDataThunk = async (menuData) => {
-  console.log(menuData);
   try {
     const response = await axios.patch(
       import.meta.env.VITE_UPDATE_ADMIN_MENU_THUNKS_GET_API,
@@ -131,10 +130,10 @@ export const updateAdminMenuGetDataThunk = async (menuData) => {
         withCredentials: true,
       }
     );
-    // console.log("response", response);
-    // return {
-    //   data: response.data,
-    // };
+    console.log("updateAdminMenuGetDataThunk response", response);
+    return {
+      data: response.data,
+    };
   } catch (error) {
     const errorMessage = error.response
       ? error.response.data
