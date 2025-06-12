@@ -78,6 +78,18 @@ export const allSingleUserGetDataThunk = async (userId) => {
   }
 };
 
+//menu fetching thunks
+
+
+
+
+
+
+
+
+
+
+
 export const allMenuGetDataThunk = async () => {
   try {
     const response = await axios.get(import.meta.env.VITE_MENU_THUNKS_GET_API, {
