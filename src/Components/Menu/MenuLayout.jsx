@@ -2,12 +2,10 @@ import { MenuBox, MenuList } from "./MenuItem.jsx";
 
 import { useSelector } from "react-redux";
 
-import { useFetchMenuCustomHooks } from "../../customHooks/useFetchMenuCustomHooks.js";
 export const HomeMenu = () => {
   const user = useSelector((state) => state.user?.userDetail?.data);
   const role = useSelector((state) => state.user?.userDetail?.role);
-
-  const { menu } = useFetchMenuCustomHooks();
+  const menu = useSelector((state) => state.user?.menuItems);
 
   return (
     <div className=" px-2 lg:max-w-[1200px] mx-auto h-[calc(100vh-50px)] sm:h-[calc(100vh-60px)] flex items-center">
@@ -26,7 +24,7 @@ export const HomeMenu = () => {
             </span>
           </h2>
         </div>
-        {menu?.userMenu?.map((item) => (
+        {menu.map((item) => (
           <MenuBox key={item._id} imgSrc={item.imgSrc} title={item.title} />
         ))}
       </div>
@@ -38,8 +36,7 @@ export const SideBarMenu = () => {
   const isSideBarOpen = useSelector((state) => state.sideBar.isSideBarOpen);
   const user = useSelector((state) => state.user?.userDetail?.data);
   const role = useSelector((state) => state.user?.userDetail?.role);
-
-  const { menu } = useFetchMenuCustomHooks();
+  const menu = useSelector((state) => state.user?.menuItems);
 
   return (
     <div
@@ -134,7 +131,7 @@ export const SideBarMenu = () => {
       </div>
       <div className="flex h-screen lg:h-[calc(100vh-179px)] lg:px-1 text-white overflow-auto scrollbar-style-2">
         <ul className="w-[90px] lg:w-full">
-          {menu?.userMenu?.map((item) => {
+          {menu.map((item) => {
             return (
               <MenuList
                 key={item._id}

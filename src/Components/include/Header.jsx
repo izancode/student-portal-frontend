@@ -2,16 +2,20 @@ import { useLogoutCustomHook } from "../../customHooks/useHeaderCustomHook";
 import { toggleSideBar } from "../../Redux/Slice/toggleSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { userGetDataThunk } from "../../Redux/ReduxThunk/fetchDataThunks";
+import {
+  userGetDataThunk,
+  menuGetDataThunk,
+} from "../../Redux/ReduxThunk/fetchDataThunks";
 const Header = () => {
+  const user = useSelector((state) => state.user?.userDetail?.data);
+  const role = useSelector((state) => state.user?.userDetail?.role);
   const { isModalOpen, openModal, closeModal, handleLogout } =
     useLogoutCustomHook();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(userGetDataThunk());
+    dispatch(menuGetDataThunk());
   }, [dispatch]);
-  const user = useSelector((state) => state.user?.userDetail?.data);
-  const role = useSelector((state) => state.user?.userDetail?.role);
 
   return (
     <>

@@ -80,33 +80,56 @@ export const allSingleUserGetDataThunk = async (userId) => {
 
 //menu fetching thunks
 
-
-
-
-
-
-
-
-
-
-
-export const allMenuGetDataThunk = async () => {
-  try {
-    const response = await axios.get(import.meta.env.VITE_MENU_THUNKS_GET_API, {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    });
-
-    return {
-      data: response.data,
-    };
-  } catch (error) {
-    const errorMessage = error.response
-      ? error.response.data
-      : { message: error.message };
-    return errorMessage;
+export const menuGetDataThunk = createAsyncThunk(
+  "menu/getMenuData",
+  async (thunkAPI) => {
+    try {
+      const response = await axios.get(
+        import.meta.env.VITE_MENU_THUNKS_GET_API,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      // console.log("menuGetDataThunk responce", response.data);
+      return {
+        data: response.data,
+      };
+    } catch (error) {
+      const errorMessage = error.response
+        ? error.response.data
+        : { message: error.message };
+      return thunkAPI.rejectWithValue(errorMessage);
+    }
   }
-};
+);
+
+export const allAdminMenuGetDataThunk2 = createAsyncThunk(
+  "menu/getAllMenuData",
+  async (selectedRole, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        import.meta.env.VITE_ADMIN_MENU_THUNKS_GET_API,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+          params: {
+            role: selectedRole,
+          },
+        }
+      );
+      // console.log("allAdminMenuGetDataThunk2 responce", response.data);
+      return {
+        data: response.data,
+      };
+    } catch (error) {
+      const errorMessage = error.response
+        ? error.response.data
+        : { message: error.message };
+      return thunkAPI.rejectWithValue(errorMessage);
+    }
+  }
+);
 
 export const allAdminMenuGetDataThunk = async (selectedRole) => {
   try {
