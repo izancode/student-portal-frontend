@@ -7,6 +7,7 @@ import {
 import { useFormikMenuHook } from "../customHooks/useFormikCustomHook.js";
 import { menuSchema, menuInitialValues } from "../utils/Formik/formik.jsx";
 import { customToast } from "../utils/CustomAlert/cutomToast.jsx";
+import { menuGetDataThunk } from "../Redux/ReduxThunk/fetchDataThunks.jsx";
 export const useFetchMenuCustomHooksAdmin = () => {
   const [selectedRole, setSelectedRole] = useState("");
   const dispatch = useDispatch();
@@ -30,6 +31,8 @@ export const useFetchMenuCustomHooksAdmin = () => {
       console.log("data.status", data.data.status);
       if (data.data.status) {
         dispatch(allAdminMenuGetDataThunk2(selectedRole));
+        dispatch(menuGetDataThunk());
+
         customToast("success", data.data.message);
       }
     } catch (error) {
@@ -38,6 +41,7 @@ export const useFetchMenuCustomHooksAdmin = () => {
   };
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
     useFormikMenuHook(menuSchema, menuInitialValues);
+
   useEffect(() => {
     let isMounted = true;
     const fetchData = async () => {
