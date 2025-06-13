@@ -14,11 +14,6 @@ import {
   facultyPostData,
 } from "../../../Redux/ReduxThunk/registerationThunks";
 
-
-
-
-
-
 const RegisterPages = () => {
   const [tab, setTab] = useState("student");
   const tabChange = (getTab) => {
@@ -66,6 +61,7 @@ const RegisterPages = () => {
             initialValues={studentInitialValues}
             postData={studentPostData}
             apiFrom="post"
+            normal_User_Role=""
           />
         ) : (
           <FacultyForm
@@ -73,6 +69,7 @@ const RegisterPages = () => {
             initialValues={facultyInitialValues}
             postData={facultyPostData}
             apiFrom="post"
+            normal_User_Role=""
           />
         )}
         <p className="text-xs mb-5">
