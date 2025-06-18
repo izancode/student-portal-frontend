@@ -4,7 +4,8 @@ import axios from "axios";
 export const userUpdateData = createAsyncThunk(
   "user/updateUserData",
   async ({ formData, query }, thunkAPI) => {
-    console.log("userUpdateData thunk", query);
+    console.log("userUpdateData formData", formData);
+
     try {
       const response = await axios.patch(
         import.meta.env.VITE_USER_THUNKS_UPDATE_API,

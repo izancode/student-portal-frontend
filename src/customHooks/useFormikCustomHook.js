@@ -32,6 +32,7 @@ export const useFormikSignHook = (
     validationSchema: signUpSchema,
     initialValues: initialValues,
     onSubmit: async (values) => {
+      console.log(values);
       try {
         setLoading(true);
 
@@ -63,13 +64,19 @@ export const useFormikSignHook = (
             formData.append("dob", dateOfBirth.toISOString());
           }
         }
-
+        console.log(formData);
+        for (let [key, value] of formData.entries()) {
+          console.log(`${key}: ${value}`);
+        }
         let actionResult;
+        console.log("apiFrom", apiFrom);
         if (apiFrom === "admin-update") {
           const query = { userId: userId, role: role };
           actionResult = await dispatch(postData({ formData, query }));
+          console.log("query", query);
         } else {
-          actionResult = await dispatch(postData(formData));
+          actionResult = await dispatch(postData({ formData }));
+          console.log("query no");
         }
 
         const dataPass = unwrapResult(actionResult);
